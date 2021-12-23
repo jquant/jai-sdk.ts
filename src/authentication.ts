@@ -4,7 +4,7 @@ import {MissingApiKeyException} from "./exceptions/authentication/MissingApiKeyE
 
 import {ApiKeyRequestSchema} from "./validation/schemas";
 
-export class Authenticator extends Service<any> {
+export class Authenticator {
 
     private client: RequestParser = new RequestParser(this.rootUrl(), {
         headers: new Headers({
