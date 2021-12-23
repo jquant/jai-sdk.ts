@@ -1,21 +1,35 @@
 import {RequestParser, Service} from 'http-service-ts';
-import {AuthenticationKeyUpdateRequest} from "./models/authentication/AuthenticationKeyUpdateRequest.interface";
+import {ApiKeyRequest} from "./models/authentication/AuthenticationKeyUpdateRequest.interface";
 import {MissingApiKeyException} from "./exceptions/authentication/MissingApiKeyException";
 
-export class Authenticator {
+import {ApiKeyRequestSchema} from "./validation/schemas";
 
-    private client: RequestParser =  new RequestParser( 'https://mycelia.azure-api.net/', {
+export class Authenticator extends Service<any> {
+
+    private client: RequestParser = new RequestParser(this.rootUrl(), {
         headers: new Headers({
             Accept: 'application/json'
         }),
         appendSlash: true
     });
 
-    public async updateAuthKey(request: AuthenticationKeyUpdateRequest): Promise<string> {
+    rootUrl(): string {
+        return 'https://mycelia.azure-api.net/';
+    }
 
-        this.throwExceptionIfNotAuthenticated();
+    /**
+     * Requests an API key and sends the new api key to your email address.
+     * @param request
+     */
+    public async getApiKey(request: ApiKeyRequest): Promise<string> {
 
-this.client.request(request);
+        ApiKeyRequestSchema.validate(request);
+
+        return await this.client.request<string>({
+            url: 'auth',
+            method: 'get',
+            ...request
+        });
     }
 
     throwExceptionIfNotAuthenticated() {
@@ -37,16 +51,7 @@ this.client.request(request);
 
     init() {
         console.debug('Initializing JAI Authenticator...');
-        console.debug(`Endpoint:${this.rootUrl}`);
+        console.debug(`Endpoint:${this.rootUrl()}`);
     }
 
 }
-
-
-// export const authenticator = {
-//     getAuthKey(): Promise<string> {
-//
-//
-//
-//     }
-// }

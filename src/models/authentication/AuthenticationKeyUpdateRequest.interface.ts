@@ -1,4 +1,4 @@
-export interface AuthenticationKeyUpdateRequest {
+export interface ApiKeyRequest {
     readonly email: string;
     readonly firstName: string;
     readonly lastName: string;
