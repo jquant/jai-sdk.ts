@@ -4,13 +4,18 @@ import {MissingApiKeyException} from "./exceptions/authentication/MissingApiKeyE
 
 export class Authenticator {
 
-    private rootUrl: string = 'https://mycelia.azure-api.net/';
-    private client: RequestParser = new RequestParser();
+    private client: RequestParser =  new RequestParser( 'https://mycelia.azure-api.net/', {
+        headers: new Headers({
+            Accept: 'application/json'
+        }),
+        appendSlash: true
+    });
 
     public async updateAuthKey(request: AuthenticationKeyUpdateRequest): Promise<string> {
+
         this.throwExceptionIfNotAuthenticated();
 
-
+this.client.request(request);
     }
 
     throwExceptionIfNotAuthenticated() {
@@ -24,12 +29,8 @@ export class Authenticator {
     }
 
     authenticate(apiKey: string): Authenticator {
-
         this.client.config.headers.delete('Auth');
         this.client.config.headers.append('Auth', apiKey)
-
-        // this.client.config.headers.append('Content-Type', 'application/json');
-
 
         return this;
     }
