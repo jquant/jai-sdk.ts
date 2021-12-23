@@ -1,4 +1,7 @@
 #!/usr/bin/env node
-import { foo } from './main'
 
-foo()
+import {  Authenticator } from './authentication';
+
+const authenticator = new Authenticator();
+
+authenticator.init();
