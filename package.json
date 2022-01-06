@@ -49,6 +49,7 @@
   },
   "dependencies": {
     "http-service-ts": "^1.0.10",
-    "joi": "^17.5.0"
+    "joi": "^17.5.0",
+    "ts-command-line-args": "^2.2.0"
   }
 }
