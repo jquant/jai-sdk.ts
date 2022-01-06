@@ -1,9 +1,5 @@
-import {RequestParser} from 'http-service-ts';
-import {ApiKeyRequest} from "../models/authentication/AuthenticationKeyUpdateRequest.interface";
-import {MissingApiKeyException} from "../exceptions/authentication/MissingApiKeyException";
-
-import {ApiKeyRequestSchema} from "../validation/schemas";
 import {HttpJaiClientInterface} from "../client/http-jai-client.interface";
+import {MissingApiKeyException} from "../exceptions/authentication/MissingApiKeyException";
 
 export class Authenticator {
 
@@ -11,50 +7,40 @@ export class Authenticator {
         private readonly httpClient: HttpJaiClientInterface) {
     }
 
-    private client: RequestParser = new RequestParser(this.rootUrl(), {
-        headers: new Headers({
-            Accept: 'application/json'
-        }),
-        appendSlash: true
-    });
-
-    rootUrl(): string {
-        return 'https://mycelia.azure-api.net/';
-    }
 
     /**
      * Requests an API key and sends the new api key to your email address.
      * @param request
      */
-    public async getApiKey(request: ApiKeyRequest): Promise<string> {
-
-        ApiKeyRequestSchema.validate(request);
-
-        return await this.client.request<string>({
-            url: 'auth',
-            method: 'get',
-            ...request
-        });
-    }
-
-    throwExceptionIfNotAuthenticated() {
-        if (!this.client.config.headers.has('Auth')) {
+    // public async getApiKey(request: ApiKeyRequest): Promise<string> {
+    //
+    //     ApiKeyRequestSchema.validate(request);
+    //
+    //     return await this.client.request<string>({
+    //         url: 'auth',
+    //         method: 'get',
+    //         ...request
+    //     });
+    // }
+    //
+    throwExceptionIfNotAuthenticated(): void {
+        if (!this.httpClient.authenticated) {
             throw new MissingApiKeyException();
         }
     }
 
-    getAuthenticatedHttpClient(): RequestParser {
-        return this.client;
-    }
+    // getAuthenticatedHttpClient(): RequestParser {
+    //     return this.client;
+    // }
 
     authenticate(apiKey: string): Authenticator {
         this.httpClient.registerApiKeyOnAllHeaders(apiKey);
         return this;
     }
 
-    init() {
-        console.debug('Initializing JAI Authenticator...');
-        console.debug(`Endpoint:${this.rootUrl()}`);
-    }
+    // init() {
+    //     console.debug('Initializing JAI Authenticator...');
+    //     console.debug(`Endpoint:${this.rootUrl()}`);
+    // }
 
 }
