@@ -1,10 +1,15 @@
-import {RequestParser, Service} from 'http-service-ts';
-import {ApiKeyRequest} from "./models/authentication/AuthenticationKeyUpdateRequest.interface";
-import {MissingApiKeyException} from "./exceptions/authentication/MissingApiKeyException";
+import {RequestParser} from 'http-service-ts';
+import {ApiKeyRequest} from "../models/authentication/AuthenticationKeyUpdateRequest.interface";
+import {MissingApiKeyException} from "../exceptions/authentication/MissingApiKeyException";
 
-import {ApiKeyRequestSchema} from "./validation/schemas";
+import {ApiKeyRequestSchema} from "../validation/schemas";
+import {HttpJaiClientInterface} from "../client/http-jai-client.interface";
 
 export class Authenticator {
+
+    constructor(
+        private readonly httpClient: HttpJaiClientInterface) {
+    }
 
     private client: RequestParser = new RequestParser(this.rootUrl(), {
         headers: new Headers({
@@ -43,9 +48,7 @@ export class Authenticator {
     }
 
     authenticate(apiKey: string): Authenticator {
-        this.client.config.headers.delete('Auth');
-        this.client.config.headers.append('Auth', apiKey)
-
+        this.httpClient.registerApiKeyOnAllHeaders(apiKey);
         return this;
     }
 
