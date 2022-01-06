@@ -5,9 +5,14 @@ class ClientSpy implements HttpJaiClientInterface {
 
     registeredApiKey = '';
     authenticated = false;
+    postApiKeyRequestData: any
 
     registerApiKeyOnAllHeaders(key: string) {
         this.registeredApiKey = key
+    }
+
+    async postApiKeyRequest(body: any): Promise<void> {
+        this.postApiKeyRequestData = body;
     }
 }
 
@@ -49,3 +54,29 @@ test('Should throw not authenticated exception', () => {
         .toThrow("Your JAI key haven't been registered. " +
             "Please, invoke 'authenticate' method inside an Authenticator instance to do so.");
 });
+
+test('Should now throw authenticated exception', () => {
+
+    const {sut, clientSpy} = makeSutInstance();
+
+    clientSpy.authenticated = true;
+
+    expect(() => sut.throwExceptionIfNotAuthenticated());
+});
+
+test('Should post an api key request to Jai client', async () => {
+
+    const {sut, clientSpy} = makeSutInstance();
+
+    const dummyRequest = {
+        email: 'myemail@email.com',
+        firstName: 'First',
+        lastName: 'Last',
+        company: 'My Company'
+    };
+
+    await sut.requestApiKey(dummyRequest);
+
+     expect(clientSpy.postApiKeyRequestData).toBe(dummyRequest);
+});
+
