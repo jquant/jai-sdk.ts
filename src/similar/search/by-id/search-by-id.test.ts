@@ -1,5 +1,5 @@
 import {SearchById} from "./search-by-id";
-import {HttpJaiClientPutInterface} from "../../../client/http-jai-client.interface";
+import {HttpJaiClientPutInterface} from "../../../client/http-jai-client-put.interface";
 
 const dummyCollectionName = 'my-collection-name';
 

@@ -1,9 +1,12 @@
-import {HttpJaiClientPutInterface} from "../../../client/http-jai-client.interface";
+import "reflect-metadata"
+import {inject, injectable} from "tsyringe";
+import {HttpJaiClientPutInterface} from "../../../client/http-jai-client-put.interface";
 
+@injectable()
 export class SearchById {
 
     constructor(
-        private readonly client: HttpJaiClientPutInterface
+        @inject("ClientPutInterface") private readonly client: HttpJaiClientPutInterface
     ) {
     }
 

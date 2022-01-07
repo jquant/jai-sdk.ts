@@ -50,6 +50,9 @@
   "dependencies": {
     "@types/yargs": "^17.0.8",
     "http-service-ts": "^1.0.10",
-    "joi": "^17.5.0"
+    "import": "^0.0.6",
+    "joi": "^17.5.0",
+    "reflect-metadata": "^0.1.13",
+    "tsyringe": "^4.6.0"
   }
 }

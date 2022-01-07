@@ -1,10 +1,5 @@
-export const delayMillis = (delayMs: number): Promise<void> => new Promise(resolve => setTimeout(resolve, delayMs));
+import {container} from "tsyringe";
+import {HttpJaiClientPutInterface} from "./client/http-jai-client-put.interface";
+import {JaiHttpServiceImplementation} from "./client/JaiHttpServiceImplementation";
 
-export const greet = (name: string): string => `Hello ${name}`
-
-export const foo = async (): Promise<boolean> => {
-  console.log(greet('World'))
-  await delayMillis(1000)
-  console.log('done')
-  return true
-}
+container.register<HttpJaiClientPutInterface>("ClientPutInterface", {useClass: JaiHttpServiceImplementation});
