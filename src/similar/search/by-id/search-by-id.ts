@@ -24,6 +24,6 @@ export class SearchById {
         if (ids.some(x => isNaN(x)) || ids.some(x => x == null || false))
             throw new Error('All the ids must be a number');
 
-        await this.client.put(`similar/id/${collectionName}?top_k=${topK}`, ids);
+        return await this.client.put(`similar/id/${collectionName}?top_k=${topK}`, ids);
     }
 }

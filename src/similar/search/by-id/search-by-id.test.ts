@@ -7,10 +7,18 @@ class ClientSpy implements HttpJaiClientPutInterface {
 
     urlCalled = ''
     bodyCalled = null
+    calls = 0;
+
+    putDummyResult = {
+        super:true
+    }
 
     async put(url: string, body: any): Promise<any> {
         this.urlCalled = url;
         this.bodyCalled = body;
+        this.calls += 1;
+
+        return this.putDummyResult;
     }
 }
 
@@ -69,13 +77,58 @@ test('should reject any non integer value - null', async () => {
         .toThrow(Error)
 });
 
-test('should perform a request with the right url', () => {
+test('should perform a request with the right url', async () => {
 
     const {sut, client} = makeSut();
     const value: Array<any> = [1, 2, 3];
-    const topk = 123;
+    const topK = 123;
 
-    sut.search(dummyCollectionName, value, topk);
+    await sut.search(dummyCollectionName, value, topK);
 
-    expect(client.urlCalled).toBe(`similar/id/${dummyCollectionName}?top_k=${topk}`);
+    expect(client.urlCalled).toBe(`similar/id/${dummyCollectionName}?top_k=${topK}`);
+});
+
+test('should perform a request with body as the same object', async () => {
+
+    const {sut, client} = makeSut();
+    const value: Array<any> = [1, 2, 3];
+
+    const topK = 123;
+
+    await sut.search(dummyCollectionName, value, topK);
+
+    expect(client.bodyCalled).toBe(value);
+});
+
+test('should perform a request with body unchanged', async () => {
+
+    const {sut, client} = makeSut();
+    const value: Array<any> = [1, 2, 3];
+    const original: Array<any> = [1, 2, 3];
+
+    const topK = 123;
+
+    await sut.search(dummyCollectionName, value, topK);
+
+    expect(new Set(client.bodyCalled)).toEqual(new Set(original));
+});
+
+test('should perform a request once', async () => {
+
+    const {sut, client} = makeSut();
+    const value: Array<any> = [1, 2, 3];
+
+    await sut.search(dummyCollectionName, value);
+
+    expect(client.calls).toBe(1);
+});
+
+test('should return client received data', async () => {
+
+    const {sut, client} = makeSut();
+    const value: Array<any> = [1, 2, 3];
+
+   const received =  await sut.search(dummyCollectionName, value);
+
+    expect(received).toEqual(client.putDummyResult);
 });
