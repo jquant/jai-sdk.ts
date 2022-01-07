@@ -1,82 +1,63 @@
+import axios from "axios";
 import {Authenticator} from "./authentication";
-import {HttpJaiClientInterface} from "../client/http-jai-client.interface";
 
-class ClientSpy implements HttpJaiClientInterface {
-
-    registeredApiKey = '';
-    authenticated = false;
-    postApiKeyRequestData: any
-
-    registerApiKeyOnAllHeaders(key: string) {
-        this.registeredApiKey = key
-    }
-
-    async postApiKeyRequest(body: any): Promise<void> {
-        this.postApiKeyRequestData = body;
-    }
-}
+const apiKeyValue = '00000000000000000000000000000000';
 
 const makeSutInstance = () => {
-    const client = new ClientSpy()
-    const target = new Authenticator(client);
+    const target = new Authenticator();
 
     return {
-        clientSpy: client,
         sut: target
     };
 }
 
-test('authenticate should register apikey on client instance', () => {
+test('should throw invalid api key exception', () => {
 
-    const apiKeyValue = 'custom_api_key';
+    const {sut} = makeSutInstance();
+    const invalidKey: any = null;
 
-    const {sut, clientSpy} = makeSutInstance();
+    expect(() => {
+        sut.authenticate(invalidKey);
+    }).toThrow()
+});
+
+test('should throw invalid api key exception', () => {
+
+    const {sut} = makeSutInstance();
+    const invalidKey: any = null;
+
+    expect(() => {
+        sut.authenticate(invalidKey);
+    }).toThrow()
+});
+
+test('should set apikey on axios default settings', () => {
+
+    const {sut} = makeSutInstance();
 
     sut.authenticate(apiKeyValue);
 
-    expect(clientSpy.registeredApiKey).toBe(apiKeyValue)
+    expect(axios.defaults.headers.common['Authorization']).toBe(apiKeyValue)
 });
 
-test('authenticate should returns itself', () => {
+test('should throw an error for JAI_API_KEY not set', () => {
 
     const {sut} = makeSutInstance();
 
-    const result = sut.authenticate('custom_api_key');
-
-    expect(result).toBe(sut);
+    expect(() => {
+        sut.authenticateFromEnvironmentVariable();
+    }).toThrow()
 });
 
-test('Should throw not authenticated exception', () => {
+test('should set api on axios using environment variable', () => {
 
     const {sut} = makeSutInstance();
+    const expectedKey = 'my test jai key';
 
-    expect(() => sut.throwExceptionIfNotAuthenticated())
-        .toThrow("Your JAI key haven't been registered. " +
-            "Please, invoke 'authenticate' method inside an Authenticator instance to do so.");
-});
+    process.env.JAI_API_KEY = expectedKey;
 
-test('Should now throw authenticated exception', () => {
+    sut.authenticateFromEnvironmentVariable();
 
-    const {sut, clientSpy} = makeSutInstance();
-
-    clientSpy.authenticated = true;
-
-    expect(() => sut.throwExceptionIfNotAuthenticated());
-});
-
-test('Should post an api key request to Jai client', async () => {
-
-    const {sut, clientSpy} = makeSutInstance();
-
-    const dummyRequest = {
-        email: 'myemail@email.com',
-        firstName: 'First',
-        lastName: 'Last',
-        company: 'My Company'
-    };
-
-    await sut.requestApiKey(dummyRequest);
-
-     expect(clientSpy.postApiKeyRequestData).toBe(dummyRequest);
+    expect(axios.defaults.headers.common['Authorization']).toBe(expectedKey)
 });
 

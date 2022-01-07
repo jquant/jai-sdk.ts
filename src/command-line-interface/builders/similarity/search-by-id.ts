@@ -1,8 +1,6 @@
 import "reflect-metadata";
 import {container} from "tsyringe";
-
 import yargs from "yargs";
-
 import {SearchById} from "../../../similar/search/by-id/search-by-id";
 
 export const buildSearchByIdCommand = () => {
