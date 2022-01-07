@@ -1,33 +1,22 @@
-// import {RequestParser} from "http-service-ts";
 import {HttpJaiClientPutInterface} from "./http-jai-client-put.interface";
+import axios from "axios";
 
 export class JaiHttpServiceImplementation implements HttpJaiClientPutInterface {
 
+    instance = axios.create({
+        baseURL: this.rootUrl(),
+        // timeout: 1000,
+        headers: {'Auth': 'd1cd1f0c532544699088cf4fad8e3222'}
+    });
+
     async put(url: string, body: any): Promise<any> {
-
-        console.debug(url);
-
-        return [];
-
-        // return this.client.request({
-        //     url,
-        //     method: "put",
-        //     obj: body
-        // });
+        const {data} = await this.instance.put(url, body);
+        return data;
     }
-    //
-    // private client: RequestParser = new RequestParser(this.rootUrl(), {
-    //     headers: new Headers({
-    //         Accept: 'application/json'
-    //     }),
-    //     appendSlash: true
-    // });
 
     rootUrl(): string {
         return 'https://mycelia.azure-api.net/';
     }
-
-
 }
 
 
