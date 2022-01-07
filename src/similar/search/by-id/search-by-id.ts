@@ -1,6 +1,11 @@
-// import {HttpJaiClientPutInterface} from "../../../client/http-jai-client.interface";
+import {HttpJaiClientPutInterface} from "../../../client/http-jai-client.interface";
 
 export class SearchById {
+
+    constructor(
+        private readonly client: HttpJaiClientPutInterface
+    ) {
+    }
 
     async search(collectionName: string, ids: Array<number>, topK = 5): Promise<void> {
 
@@ -19,10 +24,6 @@ export class SearchById {
         if (ids.some(x => isNaN(x)) || ids.some(x => x == null || false))
             throw new Error('All the ids must be a number');
 
-
-        // console.log(this.client)
-
-        // await this.client.put(`similar/id/${collectionName}?top_k=${topK}`, ids);
+        await this.client.put(`similar/id/${collectionName}?top_k=${topK}`, ids);
     }
-
 }
