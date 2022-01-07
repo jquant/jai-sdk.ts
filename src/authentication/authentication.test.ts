@@ -1,7 +1,7 @@
 import axios from "axios";
 import {Authenticator} from "./authentication";
 
-const apiKeyValue = '00000000000000000000000000000000';
+const validApiKey = '00000000000000000000000000000000';
 
 const makeSutInstance = () => {
     const target = new Authenticator();
@@ -21,7 +21,7 @@ test('should throw invalid api key exception', () => {
     }).toThrow()
 });
 
-test('should throw invalid api key exception', () => {
+test('should throw invalid api key exception for parameter key', () => {
 
     const {sut} = makeSutInstance();
     const invalidKey: any = null;
@@ -31,13 +31,14 @@ test('should throw invalid api key exception', () => {
     }).toThrow()
 });
 
+
 test('should set apikey on axios default settings', () => {
 
     const {sut} = makeSutInstance();
 
-    sut.authenticate(apiKeyValue);
+    sut.authenticate(validApiKey);
 
-    expect(axios.defaults.headers.common['Authorization']).toBe(apiKeyValue)
+    expect(axios.defaults.headers.common['Authorization']).toBe(validApiKey)
 });
 
 test('should throw an error for JAI_API_KEY not set', () => {
@@ -49,15 +50,26 @@ test('should throw an error for JAI_API_KEY not set', () => {
     }).toThrow()
 });
 
+test('should throw invalid api key exception for environment variable', () => {
+
+    const {sut} = makeSutInstance();
+
+    process.env.JAI_API_KEY = 'my test jai key';
+
+    expect(() => sut.authenticateFromEnvironmentVariable())
+        .toThrow();
+});
+
+
 test('should set api on axios using environment variable', () => {
 
     const {sut} = makeSutInstance();
-    const expectedKey = 'my test jai key';
 
-    process.env.JAI_API_KEY = expectedKey;
+    process.env.JAI_API_KEY = validApiKey;
 
     sut.authenticateFromEnvironmentVariable();
 
-    expect(axios.defaults.headers.common['Authorization']).toBe(expectedKey)
+    expect(axios.defaults.headers.common['Authorization'])
+        .toBe(validApiKey)
 });
 

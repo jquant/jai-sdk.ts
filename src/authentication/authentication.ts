@@ -1,19 +1,25 @@
 import axios from "axios";
 
 export class Authenticator {
+
+    apiKey: string = '';
+
     authenticate(apiKey: string) {
-
-        if (!apiKey)
-            throw new Error('Api Key cannot be null')
-
-        if (apiKey.length !== 32)
-            throw new Error('Api Key must be 36 characters long')
-
-        Authenticator.setClientHeader(apiKey);
+        this.apiKey = apiKey;
+        this.validateApiKey();
+        this.setClientHeader();
     }
 
-    private static setClientHeader(apiKey: string) {
-        axios.defaults.headers.common['Authorization'] = apiKey;
+    private validateApiKey() {
+        if (!this.apiKey)
+            throw new Error('Api Key cannot be null')
+
+        if (this.apiKey.length !== 32)
+            throw new Error('Api Key must be 36 characters long')
+    }
+
+    private setClientHeader() {
+        axios.defaults.headers.common['Authorization'] = this.apiKey;
     }
 
     authenticateFromEnvironmentVariable() {
@@ -23,6 +29,8 @@ export class Authenticator {
         if (!JAI_API_KEY)
             throw new Error('JAI_API_KEY environment variable is not set');
 
-        Authenticator.setClientHeader(JAI_API_KEY);
+        this.apiKey = JAI_API_KEY;
+        this.validateApiKey();
+        this.setClientHeader();
     }
 }
