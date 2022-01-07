@@ -3,9 +3,8 @@ import axios from "axios";
 
 export class JaiHttpServiceImplementation implements HttpJaiClientPutInterface {
 
-    instance = axios.create({
+    private readonly instance = axios.create({
         baseURL: this.rootUrl(),
-        // timeout: 1000,
         headers: {'Auth': 'd1cd1f0c532544699088cf4fad8e3222'}
     });
 

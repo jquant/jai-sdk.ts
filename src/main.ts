@@ -1,5 +1,3 @@
-import {container} from "tsyringe";
-import {HttpJaiClientPutInterface} from "./client/http-jai-client-put.interface";
-import {JaiHttpServiceImplementation} from "./client/JaiHttpServiceImplementation";
+import {Initializer} from "./ioc/register";
 
-container.register<HttpJaiClientPutInterface>("ClientPutInterface", {useClass: JaiHttpServiceImplementation});
+Initializer.initializeInversionOfControl();

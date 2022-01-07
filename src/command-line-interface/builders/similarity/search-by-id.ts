@@ -2,6 +2,7 @@ import "reflect-metadata";
 import {container} from "tsyringe";
 
 import yargs from "yargs";
+
 import {SearchById} from "../../../similar/search/by-id/search-by-id";
 
 export const buildSearchByIdCommand = () => {
@@ -23,16 +24,15 @@ export const buildSearchByIdCommand = () => {
             const instance = container.resolve(SearchById);
 
             const collectionName: string = <string>argv.collectionName;
-            const arrayOfIds: Array<any> =  JSON.parse(`[${argv.arrayOfIds}]`) ;
+            const arrayOfIds: Array<any> = JSON.parse(`[${argv.arrayOfIds}]`);
 
-            console.log(collectionName);
-            console.log(arrayOfIds);
+            console.log(argv.key);
 
-             const result = await instance.search(collectionName, arrayOfIds);
-            //
-             console.log(result)
+            const result = await instance.search(collectionName, arrayOfIds);
 
+            const stringParsedResponse = JSON.stringify(result);
 
+            console.log(stringParsedResponse);
         }
     }
 };
