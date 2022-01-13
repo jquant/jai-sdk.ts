@@ -1,3 +1,5 @@
+// noinspection DuplicatedCode
+
 import "reflect-metadata"
 import {HttpJaiClientPutInterface} from "../../../client/http-jai-client-put.interface";
 import {SearchByData} from "./search-by-data";
@@ -30,7 +32,7 @@ class GetTableFieldsClientSpy implements GetTableFieldsClient {
     fieldsResult = {
         'id': 'number',
         'title': 'string',
-        'firstname' : 'string'
+        'firstname': 'string'
     }
 
     fields(collectionName: string): Promise<any> {
@@ -48,6 +50,14 @@ const makeSut = () => {
 
     return {client, sut, getTableFieldsClient: getTableFieldsClient};
 }
+
+const makeDummySearchCriteria = () => [{
+    'id': 2,
+    'title': 'Mr.'
+}, {
+    'id': 3,
+    'firstname': 'John Doe'
+}];
 
 describe('similarity - search by data', () => {
 
@@ -150,14 +160,7 @@ describe('similarity - search by data', () => {
     test('should not throw exception if fields match', async () => {
 
         const {sut} = makeSut();
-
-        const dummySearchCriteria: Array<any> = [{
-            'id': 2,
-            'title': 'Mr.'
-        },{
-            'id': 3,
-            'firstname': 'John Doe'
-        }];
+        const dummySearchCriteria = makeDummySearchCriteria();
 
         await sut.search(dummyCollectionName, dummySearchCriteria);
     });
@@ -175,5 +178,37 @@ describe('similarity - search by data', () => {
         expect(getTableFieldsClient.calls).toBe(0);
     });
 
+    test('should call the expected url', async () => {
+
+        const {sut, client} = makeSut();
+
+        const dummySearchCriteria: Array<any> = makeDummySearchCriteria();
+
+        await sut.search(dummyCollectionName, dummySearchCriteria);
+
+        expect(client.urlCalled).toBe(`similar/data/${dummyCollectionName}?top_k=${5}`);
+    });
+
+    test('should call the expected url with custom topK', async () => {
+
+        const {sut, client} = makeSut();
+
+        const dummySearchCriteria: Array<any> = makeDummySearchCriteria();
+
+        await sut.search(dummyCollectionName, dummySearchCriteria, 20);
+
+        expect(client.urlCalled).toBe(`similar/data/${dummyCollectionName}?top_k=${20}`);
+    });
+
+    test('should call the expected body', async () => {
+
+        const {sut, client} = makeSut();
+
+        const dummySearchCriteria: Array<any> = makeDummySearchCriteria();
+
+        await sut.search(dummyCollectionName, dummySearchCriteria, 20);
+
+        expect(client.bodyCalled).toBe(dummySearchCriteria);
+    });
 
 })

@@ -34,7 +34,7 @@ export class SearchByData {
         if (this.fieldCheckEnabled)
             await this.throwIfAnyUnknownField(collectionName, criteria);
 
-        return await this.client.put(`similar/id/${collectionName}?top_k=${topK}`, criteria);
+        return await this.client.put(`similar/data/${collectionName}?top_k=${topK}`, criteria);
     }
 
     disableFieldCheck() {
