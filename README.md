@@ -1,5 +1,6 @@
 # JAI NPM cli
 
+https://jai-sdk.readthedocs.io/en/latest/
 https://documenter.getpostman.com/view/11432617/UVJcmxB1#0053601f-0014-4754-b917-347783ec4866
 
 [![Build and test status](https://github.com/metachris/typescript-boilerplate/workflows/Lint%20and%20test/badge.svg)](https://github.com/metachris/typescript-boilerplate/actions?query=workflow%3A%22Build+and+test%22)

@@ -10,7 +10,7 @@ class ClientSpy implements HttpJaiClientPutInterface {
     calls = 0;
 
     putDummyResult = {
-        super:true
+        super: true
     }
 
     async put(url: string, body: any): Promise<any> {
@@ -29,106 +29,109 @@ const makeSut = () => {
     return {client, sut};
 }
 
-test('should reject an empty collection name', async () => {
+describe('similarity - search by id', () => {
 
-    const {sut} = makeSut();
+    test('should reject an empty collection name', async () => {
 
-    await expect(sut.search('', []))
-        .rejects
-        .toThrow(Error)
+        const {sut} = makeSut();
 
-});
+        await expect(sut.search('', []))
+            .rejects
+            .toThrow(Error)
 
-test('should reject topK lesser than 1', async () => {
+    });
 
-    const {sut} = makeSut();
+    test('should reject topK lesser than 1', async () => {
 
-    await expect(sut.search('', [], 0))
-        .rejects
-        .toThrow(Error)
-});
+        const {sut} = makeSut();
 
-test('should reject a negative topK', async () => {
+        await expect(sut.search('', [], 0))
+            .rejects
+            .toThrow(Error)
+    });
 
-    const {sut} = makeSut();
+    test('should reject a negative topK', async () => {
 
-    await expect(sut.search('', [], -10))
-        .rejects
-        .toThrow(Error)
-});
+        const {sut} = makeSut();
 
-test('should reject any non integer value - string', async () => {
+        await expect(sut.search('', [], -10))
+            .rejects
+            .toThrow(Error)
+    });
 
-    const {sut} = makeSut();
-    const value: Array<any> = ['home'];
+    test('should reject any non integer value - string', async () => {
 
-    await expect(sut.search(dummyCollectionName, value))
-        .rejects
-        .toThrow(Error)
-});
+        const {sut} = makeSut();
+        const value: Array<any> = ['home'];
 
-test('should reject any non integer value - null', async () => {
+        await expect(sut.search(dummyCollectionName, value))
+            .rejects
+            .toThrow(Error)
+    });
 
-    const {sut} = makeSut();
-    const value: Array<any> = [null];
+    test('should reject any non integer value - null', async () => {
 
-    await expect(sut.search(dummyCollectionName, value))
-        .rejects
-        .toThrow(Error)
-});
+        const {sut} = makeSut();
+        const value: Array<any> = [null];
 
-test('should perform a request with the right url', async () => {
+        await expect(sut.search(dummyCollectionName, value))
+            .rejects
+            .toThrow(Error)
+    });
 
-    const {sut, client} = makeSut();
-    const value: Array<any> = [1, 2, 3];
-    const topK = 123;
+    test('should perform a request with the right url', async () => {
 
-    await sut.search(dummyCollectionName, value, topK);
+        const {sut, client} = makeSut();
+        const value: Array<any> = [1, 2, 3];
+        const topK = 123;
 
-    expect(client.urlCalled).toBe(`similar/id/${dummyCollectionName}?top_k=${topK}`);
-});
+        await sut.search(dummyCollectionName, value, topK);
 
-test('should perform a request with body as the same object', async () => {
+        expect(client.urlCalled).toBe(`similar/id/${dummyCollectionName}?top_k=${topK}`);
+    });
 
-    const {sut, client} = makeSut();
-    const value: Array<any> = [1, 2, 3];
+    test('should perform a request with body as the same object', async () => {
 
-    const topK = 123;
+        const {sut, client} = makeSut();
+        const value: Array<any> = [1, 2, 3];
 
-    await sut.search(dummyCollectionName, value, topK);
+        const topK = 123;
 
-    expect(client.bodyCalled).toBe(value);
-});
+        await sut.search(dummyCollectionName, value, topK);
 
-test('should perform a request with body unchanged', async () => {
+        expect(client.bodyCalled).toBe(value);
+    });
 
-    const {sut, client} = makeSut();
-    const value: Array<any> = [1, 2, 3];
-    const original: Array<any> = [1, 2, 3];
+    test('should perform a request with body unchanged', async () => {
 
-    const topK = 123;
+        const {sut, client} = makeSut();
+        const value: Array<any> = [1, 2, 3];
+        const original: Array<any> = [1, 2, 3];
 
-    await sut.search(dummyCollectionName, value, topK);
+        const topK = 123;
 
-    expect(new Set(client.bodyCalled)).toEqual(new Set(original));
-});
+        await sut.search(dummyCollectionName, value, topK);
 
-test('should perform a request once', async () => {
+        expect(new Set(client.bodyCalled)).toEqual(new Set(original));
+    });
 
-    const {sut, client} = makeSut();
-    const value: Array<any> = [1, 2, 3];
+    test('should perform a request once', async () => {
 
-    await sut.search(dummyCollectionName, value);
+        const {sut, client} = makeSut();
+        const value: Array<any> = [1, 2, 3];
 
-    expect(client.calls).toBe(1);
-});
+        await sut.search(dummyCollectionName, value);
 
-test('should return client received data', async () => {
+        expect(client.calls).toBe(1);
+    });
 
-    const {sut, client} = makeSut();
-    const value: Array<any> = [1, 2, 3];
+    test('should return client received data', async () => {
 
-   const received =  await sut.search(dummyCollectionName, value);
+        const {sut, client} = makeSut();
+        const value: Array<any> = [1, 2, 3];
 
-    expect(received).toEqual(client.putDummyResult);
+        const received = await sut.search(dummyCollectionName, value);
+
+        expect(received).toEqual(client.putDummyResult);
+    });
 });
