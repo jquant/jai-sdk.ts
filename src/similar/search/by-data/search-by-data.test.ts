@@ -1,10 +1,11 @@
 import "reflect-metadata"
 import {HttpJaiClientPutInterface} from "../../../client/http-jai-client-put.interface";
 import {SearchByData} from "./search-by-data";
+import {GetTableFieldsClient} from "../../../collection-management/get-table-fields";
 
 const dummyCollectionName = 'my-collection-name';
 
-class ClientSpy implements HttpJaiClientPutInterface {
+class SearchByDataClientSpy implements HttpJaiClientPutInterface {
 
     urlCalled = ''
     bodyCalled = null
@@ -23,11 +24,29 @@ class ClientSpy implements HttpJaiClientPutInterface {
     }
 }
 
-const makeSut = () => {
-    const client = new ClientSpy();
-    const sut = new SearchByData(client);
+class GetTableFieldsClientSpy implements GetTableFieldsClient {
+    calledCollectionName = ''
+    calls = 0;
+    fieldsResult = {
+        'id': 'number',
+        'title': 'string',
+        'firstname' : 'string'
+    }
 
-    return {client, sut};
+    fields(collectionName: string): Promise<any> {
+        this.calls++;
+        this.calledCollectionName = collectionName;
+        return Promise.resolve(this.fieldsResult);
+    }
+}
+
+const makeSut = () => {
+    const client = new SearchByDataClientSpy();
+    const getTableFieldsClient = new GetTableFieldsClientSpy();
+
+    const sut = new SearchByData(getTableFieldsClient, client);
+
+    return {client, sut, getTableFieldsClient: getTableFieldsClient};
 }
 
 describe('similarity - search by data', () => {
@@ -102,4 +121,59 @@ describe('similarity - search by data', () => {
             .rejects
             .toThrow(Error)
     });
+
+    test('should call GetTableFieldsClient', async () => {
+
+        const {sut, getTableFieldsClient} = makeSut();
+
+        const dummySearchCriteria: Array<any> = [];
+
+        await sut.search(dummyCollectionName, dummySearchCriteria);
+
+        expect(getTableFieldsClient.calls).toBe(1);
+    });
+
+    test('should throw exception if fields don\'t match', async () => {
+
+        const {sut} = makeSut();
+
+        const dummySearchCriteria: Array<any> = [{
+            'id': 2,
+            'name': 'John Doe'
+        }];
+
+        await expect(sut.search(dummyCollectionName, dummySearchCriteria))
+            .rejects
+            .toThrow();
+    });
+
+    test('should not throw exception if fields match', async () => {
+
+        const {sut} = makeSut();
+
+        const dummySearchCriteria: Array<any> = [{
+            'id': 2,
+            'title': 'Mr.'
+        },{
+            'id': 3,
+            'firstname': 'John Doe'
+        }];
+
+        await sut.search(dummyCollectionName, dummySearchCriteria);
+    });
+
+    test('should not call GetTableFieldsClient if field check is disabled', async () => {
+
+        const {sut, getTableFieldsClient} = makeSut();
+
+        const dummySearchCriteria: Array<any> = [];
+
+        await sut
+            .disableFieldCheck()
+            .search(dummyCollectionName, dummySearchCriteria);
+
+        expect(getTableFieldsClient.calls).toBe(0);
+    });
+
+
 })
