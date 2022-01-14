@@ -37,7 +37,6 @@ describe('AxiosHttpClientAuthenticator tests', () => {
         }).toThrow()
     });
 
-
     test('should set apikey on axios default settings', () => {
 
         const {sut} = makeSutInstance();

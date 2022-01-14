@@ -4,6 +4,7 @@ import {JaiApiKeyAuthenticator} from "../authentication/jai-api-key-authenticato
 import {HttpJaiClientGetInterface} from "../client/http-jai-client-get.interface";
 import {JaiHttpServiceImplementation} from "../client/JaiHttpServiceImplementation";
 import {AxiosHttpClientAuthenticator} from "../authentication/authentication";
+import {GetTableFields, GetTableFieldsClient} from "../collection-management/get-table-fields";
 
 export class Initializer {
     static initializeInversionOfControl() {
@@ -13,6 +14,9 @@ export class Initializer {
 
         container.register<HttpJaiClientGetInterface>("ClientGetInterface",
             {useClass: JaiHttpServiceImplementation});
+
+        container.register<GetTableFieldsClient>("GetTableFieldsClient",
+            {useClass: GetTableFields});
 
         container.register<JaiApiKeyAuthenticator>("JaiApiKeyAuthenticator",
             {useClass: AxiosHttpClientAuthenticator});

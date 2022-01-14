@@ -6,7 +6,7 @@ import {AuthenticatorArgumentParser} from "../../argument-parsers/authenticator-
 
 export const buildSearchByIdCommand = () => {
     return {
-        command: 'similarity search-by-id [collectionName] [arrayOfIds]',
+        command: 'similarity-search-by-id [collectionName] [arrayOfIds]',
         description: 'search by similarity an array of ids',
         builder: (yargs: yargs.Argv) => {
             return yargs
@@ -30,8 +30,6 @@ export const buildSearchByIdCommand = () => {
 
             const collectionName: string = <string>argv.collectionName;
             const arrayOfIds: Array<any> = JSON.parse(`[${argv.arrayOfIds}]`);
-
-            console.log(argv.key);
 
             const result = await searchById.search(collectionName, arrayOfIds);
 

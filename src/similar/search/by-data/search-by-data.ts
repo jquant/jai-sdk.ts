@@ -1,7 +1,9 @@
-import {inject} from "tsyringe";
+import "reflect-metadata"
+import {inject, injectable} from "tsyringe";
 import {HttpJaiClientPutInterface} from "../../../client/http-jai-client-put.interface";
 import {GetTableFieldsClient} from "../../../collection-management/get-table-fields";
 
+@injectable()
 export class SearchByData {
 
     constructor(
