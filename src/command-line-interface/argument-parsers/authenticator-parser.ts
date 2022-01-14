@@ -1,12 +1,16 @@
-import {JaiApiKeyAuthenticator} from "../../authentication/authentication";
+import "reflect-metadata";
+import {inject, injectable} from "tsyringe";
+import {JaiApiKeyAuthenticator} from "../../authentication/jai-api-key-authenticator.interface";
 
+@injectable()
 export class AuthenticatorArgumentParser {
 
     constructor(
+        @inject("JaiApiKeyAuthenticator")
         private readonly authenticator: JaiApiKeyAuthenticator) {
     }
 
-    authenticateFromCommandArgs(args: any) {
+    public authenticateFromCommandArgs(args: any): void {
 
         const {key} = args;
 
