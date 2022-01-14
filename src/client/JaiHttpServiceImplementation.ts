@@ -1,7 +1,12 @@
 import {HttpJaiClientPutInterface} from "./http-jai-client-put.interface";
 import axios from "axios";
+import {HttpJaiClientGetInterface} from "./http-jai-client-get.interface";
 
-export class JaiHttpServiceImplementation implements HttpJaiClientPutInterface {
+export class JaiHttpServiceImplementation implements HttpJaiClientPutInterface, HttpJaiClientGetInterface {
+
+    defaultBaseUrl(): string {
+        return 'https://mycelia.azure-api.net/';
+    }
 
     // private readonly instance = axios.create({
     //     baseURL: this.rootUrl(),
@@ -12,14 +17,16 @@ export class JaiHttpServiceImplementation implements HttpJaiClientPutInterface {
         axios.defaults.baseURL = this.defaultBaseUrl();
     }
 
+    async get(url: string): Promise<any> {
+        const {data} = await axios.get(url);
+        return data;
+    }
+
     async put(url: string, body: any): Promise<any> {
         const {data} = await axios.put(url, body);
         return data;
     }
 
-    defaultBaseUrl(): string {
-        return 'https://mycelia.azure-api.net/';
-    }
 }
 
 
