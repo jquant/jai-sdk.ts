@@ -3,7 +3,7 @@ import {HttpJaiClientPutInterface} from "../client/http-jai-client-put.interface
 import {JaiApiKeyAuthenticator} from "../authentication/jai-api-key-authenticator.interface";
 import {HttpJaiClientGetInterface} from "../client/http-jai-client-get.interface";
 import {JaiHttpServiceImplementation} from "../client/JaiHttpServiceImplementation";
-import {Authenticator} from "../authentication/authentication";
+import {AxiosHttpClientAuthenticator} from "../authentication/authentication";
 
 export class Initializer {
     static initializeInversionOfControl() {
@@ -15,7 +15,7 @@ export class Initializer {
             {useClass: JaiHttpServiceImplementation});
 
         container.register<JaiApiKeyAuthenticator>("JaiApiKeyAuthenticator",
-            {useClass: Authenticator});
+            {useClass: AxiosHttpClientAuthenticator});
 
 
     }

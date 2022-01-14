@@ -1,7 +1,7 @@
 import axios from "axios";
 import {JaiApiKeyAuthenticator} from "./jai-api-key-authenticator.interface";
 
-export class Authenticator implements JaiApiKeyAuthenticator {
+export class AxiosHttpClientAuthenticator implements JaiApiKeyAuthenticator {
 
     apiKey: string = '';
 
@@ -20,7 +20,7 @@ export class Authenticator implements JaiApiKeyAuthenticator {
     }
 
     private setClientHeader() {
-        axios.defaults.headers.common['Authorization'] = this.apiKey;
+        axios.defaults.headers.common['Auth'] = this.apiKey;
     }
 
     authenticateFromEnvironmentVariable() {
