@@ -1,5 +1,5 @@
-import {HttpJaiClientPutInterface} from "./http-jai-client-put.interface";
 import axios from "axios";
+import {HttpJaiClientPutInterface} from "./http-jai-client-put.interface";
 import {HttpJaiClientGetInterface} from "./http-jai-client-get.interface";
 
 export class JaiHttpServiceImplementation implements HttpJaiClientPutInterface, HttpJaiClientGetInterface {

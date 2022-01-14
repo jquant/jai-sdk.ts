@@ -1,6 +1,7 @@
 import axios from "axios";
+import {JaiApiKeyAuthenticator} from "./jai-api-key-authenticator.interface";
 
-export class Authenticator {
+export class Authenticator implements JaiApiKeyAuthenticator {
 
     apiKey: string = '';
 
