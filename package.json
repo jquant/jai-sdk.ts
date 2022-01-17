@@ -1,5 +1,5 @@
 {
-  "name": "jai-sdk",
+  "name": "jai-sdk-testing",
   "version": "0.1.0",
   "description": "JAI is the easiest way for developers to build, publish and integrate AI solutions",
   "author": "Felipe Gouveia <felipegouveiae@gmail.com>",
@@ -8,7 +8,9 @@
   "keywords": [
     "typescript",
     "boilerplate",
-    "esbuild"
+    "esbuild",
+    "JAI-SDK",
+    "JAI"
   ],
   "main": "./dist/tsc/main.js",
   "types": "./dist/tsc/main.d.ts",
@@ -44,7 +46,7 @@
     "joi-to-typescript": "^2.3.0",
     "ts-jest": "^26.5.4",
     "ts-node": "^9.1.1",
-    "typedoc": "^0.20.35",
+    "typedoc": "^0.20.37",
     "typescript": "^4.2.3"
   },
   "dependencies": {

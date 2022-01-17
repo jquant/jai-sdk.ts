@@ -28,7 +28,7 @@ export const buildSearchByDataCommand = () => {
             const instance = container.resolve(SearchByData);
 
             const collectionName: string = <string>argv.collectionName;
-            const data: Array<any> = JSON.parse(argv.data);
+            const data: Array<any> = JSON.parse(<string>argv.data);
 
             const result = await instance.search(collectionName, data);
 
