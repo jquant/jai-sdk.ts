@@ -1,11 +1,7 @@
 import axios from "axios";
-import {AxiosHttpClientAuthenticator} from "./authentication";
+import { AxiosHttpClientAuthenticator } from "./authentication";
 
 describe('AxiosHttpClientAuthenticator tests', () => {
-
-    beforeEach(() => {
-
-    })
 
     const validApiKey = '00000000000000000000000000000000';
 
@@ -19,7 +15,7 @@ describe('AxiosHttpClientAuthenticator tests', () => {
 
     test('should throw invalid api key exception', () => {
 
-        const {sut} = makeSutInstance();
+        const { sut } = makeSutInstance();
         const invalidKey: any = null;
 
         expect(() => {
@@ -29,7 +25,7 @@ describe('AxiosHttpClientAuthenticator tests', () => {
 
     test('should throw invalid api key exception for parameter key', () => {
 
-        const {sut} = makeSutInstance();
+        const { sut } = makeSutInstance();
         const invalidKey: any = null;
 
         expect(() => {
@@ -39,7 +35,7 @@ describe('AxiosHttpClientAuthenticator tests', () => {
 
     test('should set apikey on axios default settings', () => {
 
-        const {sut} = makeSutInstance();
+        const { sut } = makeSutInstance();
 
         sut.authenticate(validApiKey);
 
@@ -48,7 +44,7 @@ describe('AxiosHttpClientAuthenticator tests', () => {
 
     test('should throw an error for JAI_API_KEY not set', () => {
 
-        const {sut} = makeSutInstance();
+        const { sut } = makeSutInstance();
 
         expect(() => {
             sut.authenticateFromEnvironmentVariable();
@@ -57,7 +53,7 @@ describe('AxiosHttpClientAuthenticator tests', () => {
 
     test('should throw invalid api key exception for environment variable', () => {
 
-        const {sut} = makeSutInstance();
+        const { sut } = makeSutInstance();
 
         process.env.JAI_API_KEY = 'my test jai key';
 
@@ -68,7 +64,7 @@ describe('AxiosHttpClientAuthenticator tests', () => {
 
     test('should set api on axios using environment variable', () => {
 
-        const {sut} = makeSutInstance();
+        const { sut } = makeSutInstance();
 
         process.env.JAI_API_KEY = validApiKey;
 
