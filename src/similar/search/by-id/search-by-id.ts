@@ -1,5 +1,6 @@
 import "reflect-metadata"
 import {inject, injectable} from "tsyringe";
+
 import {HttpJaiClientPutInterface} from "../../../client/http-jai-client-put.interface";
 
 @injectable()
@@ -19,7 +20,7 @@ export class SearchById {
             throw new Error('Parameter topK cannot be null');
 
         if (topK < 1)
-            throw new Error('Parameter topK must be greather than 0');
+            throw new Error('Parameter topK must be greater than 0');
 
         if (!ids || ids.length === 0)
             throw new Error('The ids are required to perform the search');

@@ -1,9 +1,10 @@
 import "reflect-metadata"
-import {inject} from "tsyringe";
+import {inject, injectable} from "tsyringe";
 
 import {GetTableFieldsClient} from "../collection-management/get-table-fields";
 import {HttpJaiClientPutInterface} from "../client/http-jai-client-put.interface";
 
+@injectable()
 export class Predict {
 
     constructor(

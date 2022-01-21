@@ -7,6 +7,7 @@ import {Initializer} from "./ioc/register";
 import {buildRequestApiKeyCommand} from "./command-line-interface/builders/request-api-key-builder";
 import {buildSearchByIdCommand} from "./command-line-interface/builders/similarity/search-by-id";
 import {buildSearchByDataCommand} from "./command-line-interface/builders/similarity/search-by-data";
+import {buildPredictCommand} from "./command-line-interface/builders/model-interface/predict";
 
 Initializer.initializeInversionOfControl();
 
@@ -15,6 +16,7 @@ const args = process.argv.slice(2);
 const requestApiCommand = buildRequestApiKeyCommand();
 const similarSearchByIdCommand = buildSearchByIdCommand();
 const similarSearchByDataCommand = buildSearchByDataCommand();
+const predictCommand = buildPredictCommand();
 
 yargs(args)
     .command(
@@ -32,6 +34,11 @@ yargs(args)
         similarSearchByDataCommand.description,
         similarSearchByDataCommand.builder,
         similarSearchByDataCommand.handler)
+    .command(
+        predictCommand.command,
+        predictCommand.description,
+        predictCommand.builder,
+        predictCommand.handler)
     .option('verbose', {
         alias: 'v',
         type: 'boolean',
