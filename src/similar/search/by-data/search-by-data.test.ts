@@ -12,6 +12,7 @@ class SearchByDataClientSpy implements HttpJaiClientPutInterface {
     urlCalled = ''
     bodyCalled = null
     calls = 0;
+    shouldThrow = false
 
     putDummyResult = {
         super: true
@@ -21,6 +22,9 @@ class SearchByDataClientSpy implements HttpJaiClientPutInterface {
         this.urlCalled = url;
         this.bodyCalled = body;
         this.calls += 1;
+
+        if(this.shouldThrow)
+            throw new Error();
 
         return this.putDummyResult;
     }
@@ -209,6 +213,17 @@ describe('similarity - search by data', () => {
         await sut.search(dummyCollectionName, dummySearchCriteria, 20);
 
         expect(client.bodyCalled).toBe(dummySearchCriteria);
+    });
+
+    test('should throw clients exception', async () => {
+        const {sut, client} = makeSut();
+        const dummySearchCriteria: Array<any> = makeDummySearchCriteria();
+
+        client.shouldThrow = true
+
+        await expect(sut.search(dummyCollectionName, dummySearchCriteria))
+            .rejects
+            .toThrow();
     });
 
 })

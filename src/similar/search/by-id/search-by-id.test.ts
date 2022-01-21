@@ -10,6 +10,7 @@ class ClientSpy implements HttpJaiClientPutInterface {
     urlCalled = ''
     bodyCalled = null
     calls = 0;
+    shouldThrow = false
 
     putDummyResult = {
         super: true
@@ -19,6 +20,9 @@ class ClientSpy implements HttpJaiClientPutInterface {
         this.urlCalled = url;
         this.bodyCalled = body;
         this.calls += 1;
+
+        if (this.shouldThrow)
+            throw new Error()
 
         return this.putDummyResult;
     }
@@ -82,7 +86,6 @@ describe('similarity - search by id', () => {
     });
 
     test('should perform a request with the right url', async () => {
-
         const {sut, client} = makeSut();
         const value: Array<any> = [1, 2, 3];
         const topK = 123;
@@ -93,10 +96,8 @@ describe('similarity - search by id', () => {
     });
 
     test('should perform a request with body as the same object', async () => {
-
         const {sut, client} = makeSut();
         const value: Array<any> = [1, 2, 3];
-
         const topK = 123;
 
         await sut.search(dummyCollectionName, value, topK);
@@ -105,11 +106,9 @@ describe('similarity - search by id', () => {
     });
 
     test('should perform a request with body unchanged', async () => {
-
         const {sut, client} = makeSut();
         const value: Array<any> = [1, 2, 3];
         const original: Array<any> = [1, 2, 3];
-
         const topK = 123;
 
         await sut.search(dummyCollectionName, value, topK);
@@ -118,7 +117,6 @@ describe('similarity - search by id', () => {
     });
 
     test('should perform a request once', async () => {
-
         const {sut, client} = makeSut();
         const value: Array<any> = [1, 2, 3];
 
@@ -128,12 +126,22 @@ describe('similarity - search by id', () => {
     });
 
     test('should return client received data', async () => {
-
         const {sut, client} = makeSut();
         const value: Array<any> = [1, 2, 3];
 
         const received = await sut.search(dummyCollectionName, value);
 
         expect(received).toEqual(client.putDummyResult);
+    });
+
+    test('should throw client\'s exception', async () => {
+        const {sut, client} = makeSut();
+        const value: Array<any> = [1, 2, 3];
+
+        client.shouldThrow = true;
+
+        await expect(sut.search(dummyCollectionName, value))
+            .rejects
+            .toThrow();
     });
 });

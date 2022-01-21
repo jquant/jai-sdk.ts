@@ -1,11 +1,10 @@
 import "reflect-metadata"
-import {inject, injectable} from "tsyringe";
+import {inject} from "tsyringe";
 
-import {HttpJaiClientPutInterface} from "../../../client/http-jai-client-put.interface";
-import {GetTableFieldsClient} from "../../../collection-management/get-table-fields";
+import {GetTableFieldsClient} from "../collection-management/get-table-fields";
+import {HttpJaiClientPutInterface} from "../client/http-jai-client-put.interface";
 
-@injectable()
-export class SearchByData {
+export class Predict {
 
     constructor(
         @inject("GetTableFieldsClient") private readonly getTableFieldsClient: GetTableFieldsClient,
@@ -15,16 +14,9 @@ export class SearchByData {
 
     private fieldCheckEnabled = true;
 
-    async search(collectionName: string, criteria: Array<any>, topK = 5): Promise<void> {
-
+    async predict(collectionName: string, criteria: Array<any>, predictProbability = false) {
         if (!collectionName)
             throw new Error('You must provide e collectionName');
-
-        if (!topK)
-            throw new Error('Parameter topK cannot be null');
-
-        if (topK < 1)
-            throw new Error('Parameter topK must be greater than 0');
 
         if (!criteria)
             throw new Error('Parameter data cannot be null');
@@ -35,7 +27,7 @@ export class SearchByData {
         if (this.fieldCheckEnabled)
             await this.throwIfAnyUnknownField(collectionName, criteria);
 
-        return await this.client.put(`similar/data/${collectionName}?top_k=${topK}`, criteria);
+        return await this.client.put(`predict/${collectionName}?predict_proba=${predictProbability}`, criteria);
     }
 
     disableFieldCheck() {
