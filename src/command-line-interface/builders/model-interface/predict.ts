@@ -23,7 +23,6 @@ export const buildPredictCommand = () => {
                     description: 'if true returns the probability of the predicts (if model is classification)'
                 });
         },
-
         handler: async (argv: yargs.ArgumentsCamelCase<string>) => {
 
             const auth = container
@@ -37,7 +36,12 @@ export const buildPredictCommand = () => {
             const databaseName: string = <string>argv.databaseName;
             const predictProbability: boolean = !!argv['predict-probability']
 
-            const result = await instance.predict(databaseName, data, predictProbability);
+            if (argv.verbose) {
+                console.log({databaseName, predictProbability})
+            }
+
+            const result = await instance
+                .predict(databaseName, data, predictProbability);
 
             const stringParsedResponse = JSON.stringify(result);
 
