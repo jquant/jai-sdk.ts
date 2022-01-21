@@ -43,3 +43,13 @@ npx jai-sdk-ts similarity-search-by-data \
   "petal width (cm)": 2.4
 }]
 ```
+
+## Prediction
+
+```bash
+npx jai-sdk-testing predict \
+    --databaseName YOUR_COLLECTION_NAME_HERE \
+    --data "$(cat ./data-file-body.json)" \
+    --predict-probability true \
+    --key YOUR_JAY_API_KEY
+```

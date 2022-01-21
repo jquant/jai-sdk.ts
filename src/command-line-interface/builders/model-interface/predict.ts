@@ -7,7 +7,7 @@ import {Predict} from "../../../model-interface/predict";
 
 export const buildPredictCommand = () => {
     return {
-        command: 'predict [databaseName]',
+        command: 'predict [databaseName] [data]',
         description: 'Return the predict of the supervised model.',
         builder: (yargs: yargs.Argv) => {
             return yargs
@@ -37,7 +37,7 @@ export const buildPredictCommand = () => {
             const predictProbability: boolean = !!argv['predict-probability']
 
             if (argv.verbose) {
-                console.log({databaseName, predictProbability})
+                console.log({databaseName, predictProbability, data})
             }
 
             const result = await instance

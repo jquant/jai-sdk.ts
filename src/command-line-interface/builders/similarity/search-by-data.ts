@@ -30,6 +30,10 @@ export const buildSearchByDataCommand = () => {
             const collectionName: string = <string>argv.collectionName;
             const data: Array<any> = JSON.parse(<string>argv.data);
 
+            if (argv.verbose) {
+                console.log({collectionName, data})
+            }
+
             const result = await instance.search(collectionName, data);
 
             const stringParsedResponse = JSON.stringify(result);

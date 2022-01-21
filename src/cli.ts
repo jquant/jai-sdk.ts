@@ -46,6 +46,7 @@ yargs(args)
     })
     .option('key', {
         type: 'string',
+        alias: 'k',
         description: 'api key'
     })
     .parse()
