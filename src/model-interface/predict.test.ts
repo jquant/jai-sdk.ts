@@ -13,9 +13,9 @@ class GetTableFieldsClientSpy implements GetTableFieldsClient {
         'firstname': 'string'
     }
 
-    fields(collectionName: string): Promise<any> {
+    fields(databaseName: string): Promise<any> {
         this.calls++;
-        this.calledCollectionName = collectionName;
+        this.calledCollectionName = databaseName;
         return Promise.resolve(this.fieldsResult);
     }
 }

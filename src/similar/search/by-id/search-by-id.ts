@@ -11,10 +11,10 @@ export class SearchById {
     ) {
     }
 
-    async search(collectionName: string, ids: Array<number>, topK = 5): Promise<void> {
+    async search(databaseName: string, ids: Array<number>, topK = 5): Promise<void> {
 
-        if (!collectionName)
-            throw new Error('You must provide e collectionName');
+        if (!databaseName)
+            throw new Error('You must provide e databaseName');
 
         if (!topK)
             throw new Error('Parameter topK cannot be null');
@@ -28,6 +28,6 @@ export class SearchById {
         if (ids.some(x => isNaN(x)) || ids.some(x => x == null || false))
             throw new Error('All the ids must be a number');
 
-        return await this.client.put(`similar/id/${collectionName}?top_k=${topK}`, ids);
+        return await this.client.put(`similar/id/${databaseName}?top_k=${topK}`, ids);
     }
 }

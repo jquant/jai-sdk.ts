@@ -6,11 +6,11 @@ import {AuthenticatorArgumentParser} from "../../argument-parsers/authenticator-
 
 export const buildSearchByDataCommand = () => {
     return {
-        command: 'similarity-search-by-data [collectionName] [data]',
+        command: 'similarity-search-by-data [databaseName] [data]',
         description: 'search by data an array of data',
         builder: (yargs: yargs.Argv) => {
             return yargs
-                .positional('collectionName', {
+                .positional('databaseName', {
                     describe: 'Collection Name'
                 })
                 .positional('data', {
@@ -27,14 +27,14 @@ export const buildSearchByDataCommand = () => {
 
             const instance = container.resolve(SearchByData);
 
-            const collectionName: string = <string>argv.collectionName;
+            const databaseName: string = <string>argv.databaseName;
             const data: Array<any> = JSON.parse(<string>argv.data);
 
             if (argv.verbose) {
-                console.log({collectionName, data})
+                console.log({databaseName, data})
             }
 
-            const result = await instance.search(collectionName, data);
+            const result = await instance.search(databaseName, data);
 
             const stringParsedResponse = JSON.stringify(result);
 

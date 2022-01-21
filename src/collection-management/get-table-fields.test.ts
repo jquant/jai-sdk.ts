@@ -49,19 +49,19 @@ describe('get table fields', () => {
     test('should call the expected url', async () => {
 
         const {sut, client} = makeSut();
-        const collectionName: any = 'my-collection'
+        const databaseName: any = 'my-collection'
 
-        await sut.fields(collectionName);
+        await sut.fields(databaseName);
 
-        await expect(client.urlCalled).toBe(`fields/${collectionName}`)
+        await expect(client.urlCalled).toBe(`fields/${databaseName}`)
     })
 
     test('should return the raw received data', async () => {
 
         const {sut, client} = makeSut();
-        const collectionName: any = 'my-collection'
+        const databaseName: any = 'my-collection'
 
-       const data = await sut.fields(collectionName);
+       const data = await sut.fields(databaseName);
 
         await expect(data).toBe(client.mockedData)
     })

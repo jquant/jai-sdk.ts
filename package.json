@@ -1,6 +1,6 @@
 {
   "name": "jai-sdk-testing",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "JAI is the easiest way for developers to build, publish and integrate AI solutions",
   "author": "Felipe Gouveia <felipegouveiae@gmail.com>",
   "repository": "https://github.com/jquant/jai-sdk.ts",
@@ -21,6 +21,7 @@
   "scripts": {
     "cli": "ts-node src/cli.ts",
     "lint": "eslint src/ --ext .js,.jsx,.ts,.tsx",
+    "link-local": "yarn build-all && npm link",
     "test": "jest",
     "test:watch": "jest --watch",
     "clean": "rm -rf dist build package",

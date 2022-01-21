@@ -18,7 +18,7 @@ npm i jai-sdk-ts
 
 ```bash
 npx jai-sdk-ts similarity-search-by-id \
-    --collectionName YOUR_COLLECTION_NAME_HERE \
+    --databaseName YOUR_COLLECTION_NAME_HERE \
     --arrayOfIds IDS_COMMA_SEPARETED \
     --key YOUR_JAY_API_KEY
 ```
@@ -27,7 +27,7 @@ npx jai-sdk-ts similarity-search-by-id \
 
 ```bash
 npx jai-sdk-ts similarity-search-by-data \
-    --collectionName YOUR_COLLECTION_NAME_HERE \
+    --databaseName YOUR_COLLECTION_NAME_HERE \
     --data "$(cat ./data-file-body.json)" \
     --key YOUR_JAY_API_KEY
 ```

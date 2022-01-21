@@ -6,11 +6,11 @@ import {AuthenticatorArgumentParser} from "../../argument-parsers/authenticator-
 
 export const buildSearchByIdCommand = () => {
     return {
-        command: 'similarity-search-by-id [collectionName] [arrayOfIds]',
+        command: 'similarity-search-by-id [databaseName] [arrayOfIds]',
         description: 'search by similarity an array of ids',
         builder: (yargs: yargs.Argv) => {
             return yargs
-                .positional('collectionName', {
+                .positional('databaseName', {
                     describe: 'Collection Name'
                 })
                 .positional('arrayOfIds', {
@@ -28,10 +28,10 @@ export const buildSearchByIdCommand = () => {
             const searchById = container
                 .resolve(SearchById);
 
-            const collectionName: string = <string>argv.collectionName;
+            const databaseName: string = <string>argv.databaseName;
             const arrayOfIds: Array<any> = JSON.parse(`[${argv.arrayOfIds}]`);
 
-            const result = await searchById.search(collectionName, arrayOfIds);
+            const result = await searchById.search(databaseName, arrayOfIds);
 
             const stringParsedResponse = JSON.stringify(result);
 

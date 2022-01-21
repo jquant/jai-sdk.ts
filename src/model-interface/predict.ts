@@ -17,7 +17,7 @@ export class Predict {
 
     async predict(databaseName: string, criteria: Array<any>, predictProbability = false) {
         if (!databaseName)
-            throw new Error('You must provide e collectionName');
+            throw new Error('You must provide e databaseName');
 
         if (!criteria)
             throw new Error('Parameter data cannot be null');
@@ -38,8 +38,8 @@ export class Predict {
         return this;
     }
 
-    private async throwIfAnyUnknownField(collectionName: string, criteria: any[]) {
-        const collectionFields = await this.getTableFieldsClient.fields(collectionName);
+    private async throwIfAnyUnknownField(databaseName: string, criteria: any[]) {
+        const collectionFields = await this.getTableFieldsClient.fields(databaseName);
         const collectionKeys = Object.keys(collectionFields);
 
         criteria.forEach(item => {

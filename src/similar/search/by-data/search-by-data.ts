@@ -15,10 +15,10 @@ export class SearchByData {
 
     private fieldCheckEnabled = true;
 
-    async search(collectionName: string, criteria: Array<any>, topK = 5): Promise<void> {
+    async search(databaseName: string, criteria: Array<any>, topK = 5): Promise<void> {
 
-        if (!collectionName)
-            throw new Error('You must provide e collectionName');
+        if (!databaseName)
+            throw new Error('You must provide e databaseName');
 
         if (!topK)
             throw new Error('Parameter topK cannot be null');
@@ -33,9 +33,9 @@ export class SearchByData {
             throw new Error('Parameter data must be an array');
 
         if (this.fieldCheckEnabled)
-            await this.throwIfAnyUnknownField(collectionName, criteria);
+            await this.throwIfAnyUnknownField(databaseName, criteria);
 
-        return await this.client.put(`similar/data/${collectionName}?top_k=${topK}`, criteria);
+        return await this.client.put(`similar/data/${databaseName}?top_k=${topK}`, criteria);
     }
 
     disableFieldCheck() {
@@ -43,8 +43,8 @@ export class SearchByData {
         return this;
     }
 
-    private async throwIfAnyUnknownField(collectionName: string, criteria: any[]) {
-        const collectionFields = await this.getTableFieldsClient.fields(collectionName);
+    private async throwIfAnyUnknownField(databaseName: string, criteria: any[]) {
+        const collectionFields = await this.getTableFieldsClient.fields(databaseName);
         const collectionKeys = Object.keys(collectionFields);
 
         criteria.forEach(item => {
