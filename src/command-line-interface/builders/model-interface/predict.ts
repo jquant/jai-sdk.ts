@@ -17,18 +17,14 @@ export const buildPredictCommand = () => {
                 .positional('data', {
                     describe: 'Data to compare similarity'
                 })
-                // .option('predict-probability', {
-                //     alias: 'p',
-                //     type: 'boolean',
-                //     description: 'if true returns the probability of the predicts (if model is classification)'
-                // })
-                ;
+                .option('predict-probability', {
+                    alias: 'p',
+                    type: 'boolean',
+                    description: 'if true returns the probability of the predicts (if model is classification)'
+                });
         },
 
         handler: async (argv: yargs.ArgumentsCamelCase<string>) => {
-
-            console.log(JSON.stringify(argv))
-            return;
 
             const auth = container
                 .resolve(AuthenticatorArgumentParser);

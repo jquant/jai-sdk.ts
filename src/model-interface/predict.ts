@@ -15,8 +15,8 @@ export class Predict {
 
     private fieldCheckEnabled = true;
 
-    async predict(collectionName: string, criteria: Array<any>, predictProbability = false) {
-        if (!collectionName)
+    async predict(databaseName: string, criteria: Array<any>, predictProbability = false) {
+        if (!databaseName)
             throw new Error('You must provide e collectionName');
 
         if (!criteria)
@@ -26,9 +26,11 @@ export class Predict {
             throw new Error('Parameter data must be an array');
 
         if (this.fieldCheckEnabled)
-            await this.throwIfAnyUnknownField(collectionName, criteria);
+            await this.throwIfAnyUnknownField(databaseName, criteria);
 
-        return await this.client.put(`predict/${collectionName}?predict_proba=${predictProbability}`, criteria);
+        const url=`predict/${databaseName}?predict_proba=${predictProbability}`
+
+        return await this.client.put(url, criteria);
     }
 
     disableFieldCheck() {
