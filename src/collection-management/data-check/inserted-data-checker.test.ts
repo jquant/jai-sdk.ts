@@ -1,4 +1,4 @@
-import {CheckInsertedData} from "./check-inserted-data";
+import {InsertedDataChecker} from "./inserted-data-checker";
 import {HttpJaiClientGetInterface} from "../../client/http-jai-client-get.interface";
 
 class GetClientSpy implements HttpJaiClientGetInterface {
@@ -19,7 +19,7 @@ describe('collection - status check', () => {
 
     const makeSut = () => {
         const client = new GetClientSpy();
-        const sut = new CheckInsertedData(client);
+        const sut = new InsertedDataChecker(client);
         return {sut, client};
     }
 

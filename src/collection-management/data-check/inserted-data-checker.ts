@@ -5,7 +5,7 @@ import {HttpJaiClientGetInterface} from "../../client/http-jai-client-get.interf
 
 export type CheckInsertedDataMode = "simple" | "summarized" | "complete";
 
-export class CheckInsertedData {
+export class InsertedDataChecker {
 
     constructor(
         @inject("ClientGetInterface") private readonly client: HttpJaiClientGetInterface
