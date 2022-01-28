@@ -1,31 +1,51 @@
 import {Creator} from "./creator";
+import {HttpJaiClientPostInterface} from "../../client/http-jai-client-post-interface";
 
+class PostDataClientSpy implements HttpJaiClientPostInterface {
+    post(url: string, body: any): Promise<any> {
+
+        if (this.shouldThrow)
+            throw new Error('This is a test exception');
+
+        this.calls++;
+        this.urlCalled = url;
+        this.postedData = body;
+        return Promise.resolve({url, body});
+    }
+
+    calls = 0;
+    urlCalled = '';
+    postedData = {};
+    shouldThrow = false;
+}
 
 describe('create collection', () => {
 
     const makeSut = () => {
-        const creator = new Creator();
+        const client = new PostDataClientSpy();
+        const sut = new Creator(client);
 
-        return {
-            sut: creator
-        }
+        return {sut, client}
     }
 
     const dummyCollectionName = 'my-collection-name';
 
-    // const makeDummySearchCriteria = () => [{
-    //     'id': 2,
-    //     'title': 'Mr.'
-    // }, {
-    //     'id': 3,
-    //     'firstname': 'John Doe'
-    // }];
-
+    const makeDummyData = () => [{
+        'id': 2,
+        'title': 'Mr.',
+        value1: 100,
+        value2: 200,
+    }, {
+        'id': 3,
+        value1: 100,
+        value3: 321,
+        'firstname': 'John Doe'
+    }];
 
     test('should reject null collection name', async () => {
 
-         const {sut} = makeSut();
-         const nullCollectionName: any = null
+        const {sut} = makeSut();
+        const nullCollectionName: any = null
 
         await expect(sut.insert(nullCollectionName, []))
             .rejects
@@ -90,7 +110,7 @@ describe('create collection', () => {
         const {sut} = makeSut();
 
         const objectData = [{
-            key:1,
+            key: 1,
             value1: 100
         }];
 
@@ -104,10 +124,10 @@ describe('create collection', () => {
         const {sut} = makeSut();
 
         const objectData = [{
-            id:1,
+            id: 1,
             value1: 100
-        },{
-            id:2,
+        }, {
+            id: 2,
         }];
 
         await expect(sut.insert(dummyCollectionName, objectData))
@@ -115,5 +135,71 @@ describe('create collection', () => {
             .toThrow(Error)
     });
 
+    test('should call Post Client', async () => {
+
+        const {sut, client} = makeSut();
+
+        await sut.insert(dummyCollectionName, makeDummyData());
+
+        expect(client.calls).toBe(1);
+    });
+
+    test('should call the expected url', async () => {
+
+        const {sut, client} = makeSut();
+        const dummyFilterName = '_my_filter_name';
+        const dummyData = makeDummyData();
+
+        await sut.insert(dummyCollectionName, dummyData, dummyFilterName);
+
+        expect(client.urlCalled).toBe(`data/${dummyCollectionName}?filter_name=${dummyFilterName}`);
+    });
+
+    test('should encode filter_name', async () => {
+
+        const {sut, client} = makeSut();
+        const dummyData = makeDummyData();
+
+        const dummyFilterName = '_Un Encoded my_filter_name';
+        const expectedFilterName = encodeURIComponent(dummyFilterName);
+
+        await sut.insert(dummyCollectionName, dummyData, dummyFilterName);
+
+        expect(client.urlCalled).toContain(expectedFilterName);
+    });
+
+    test('should encode database name', async () => {
+
+        const {sut, client} = makeSut();
+        const dummyData = makeDummyData();
+
+        const unencodedDataName = '_Un Encoded my_ ! collection _name';
+        const expectedDatabaseName = encodeURIComponent(unencodedDataName);
+
+        await sut.insert(unencodedDataName, dummyData);
+
+        expect(client.urlCalled).toContain(expectedDatabaseName);
+    });
+
+    test('should post data', async () => {
+
+        const {sut, client} = makeSut();
+        const dummyData = makeDummyData();
+
+        await sut.insert(dummyCollectionName, dummyData);
+
+        expect(client.postedData).toBe(dummyData);
+    });
+
+    test('should throw clients exception', async () => {
+        const {sut, client} = makeSut();
+        const dummyData = makeDummyData();
+
+        client.shouldThrow = true
+
+        await expect(sut.insert(dummyCollectionName, dummyData))
+            .rejects
+            .toThrow();
+    });
 
 })

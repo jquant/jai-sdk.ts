@@ -1,5 +1,15 @@
+import "reflect-metadata"
+import {inject} from "tsyringe";
+import {HttpJaiClientPostInterface} from "../../client/http-jai-client-post-interface";
+
 export class Creator {
-    async insert(databaseName: string, data: Array<any>) {
+
+    constructor(
+        @inject("ClientPostInterface") private readonly client: HttpJaiClientPostInterface
+    ) {
+    }
+
+    async insert(databaseName: string, data: Array<any>, filterName:string = '') {
 
         if (!databaseName)
             throw new Error('You must provide e databaseName');
@@ -12,7 +22,10 @@ export class Creator {
 
         this.throwIfAnyRequiredFieldsAreNotPresent(data);
 
-        console.debug(data)
+        const encodedFilterName = encodeURIComponent(filterName);
+        const encodedDatabaseName= encodeURIComponent(databaseName);
+
+        return await this.client.post(`data/${encodedDatabaseName}?filter_name=${encodedFilterName}`, data);
     }
 
     private throwIfAnyRequiredFieldsAreNotPresent(data: Array<any>) {

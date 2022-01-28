@@ -2,7 +2,7 @@ import "reflect-metadata"
 import {inject, injectable} from "tsyringe";
 
 import {HttpJaiClientPutInterface} from "../../../client/http-jai-client-put.interface";
-import {GetTableFieldsClient} from "../../../collection-management/get-table-fields";
+import {GetTableFieldsClient} from "../../../collection-management/table-fields/get-table-fields";
 
 @injectable()
 export class SearchByData {
