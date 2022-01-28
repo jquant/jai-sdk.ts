@@ -3,7 +3,7 @@
 import "reflect-metadata"
 import {HttpJaiClientPutInterface} from "../../../client/http-jai-client-put.interface";
 import {SearchByData} from "./search-by-data";
-import {GetTableFieldsClient} from "../../../collection-management/get-table-fields";
+import {GetTableFieldsClient} from "../../../collection-management/table-fields/get-table-fields";
 
 const dummyCollectionName = 'my-collection-name';
 
