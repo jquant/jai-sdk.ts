@@ -49,6 +49,17 @@ describe('collection - status check', () => {
         expect(client.urlCalled).toBe(`setup/ids/${dummyCollectionName}?mode=${mode}`);
     });
 
+    test('should encode database name', async () => {
+
+        const {sut, client} = makeSut();
+        const unencodedDatabaseName = '!my _- unencoded DB #$ name';
+        const expected = encodeURIComponent(unencodedDatabaseName);
+
+        await sut.check(unencodedDatabaseName);
+
+        expect(client.urlCalled).toContain(expected);
+    });
+
     test('should call server once', async () => {
 
         const {sut, client} = makeSut();
