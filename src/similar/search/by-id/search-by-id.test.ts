@@ -95,6 +95,17 @@ describe('similarity - search by id', () => {
         expect(client.urlCalled).toBe(`similar/id/${dummyCollectionName}?top_k=${topK}`);
     });
 
+    test('should encode collection name', async () => {
+
+        const {sut, client} = makeSut();
+        const unencoded = 'mY_1 Unenc&%oded collection Nam3';
+        const expected = encodeURIComponent(unencoded);
+
+        await sut.search(unencoded, [0]);
+
+        expect(client.urlCalled).toContain(expected);
+    });
+
     test('should perform a request with body as the same object', async () => {
         const {sut, client} = makeSut();
         const value: Array<any> = [1, 2, 3];

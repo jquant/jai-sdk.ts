@@ -35,7 +35,9 @@ export class SearchByData {
         if (this.fieldCheckEnabled)
             await this.throwIfAnyUnknownField(databaseName, criteria);
 
-        return await this.client.put(`similar/data/${databaseName}?top_k=${topK}`, criteria);
+        const encodedDatabaseName = encodeURIComponent(databaseName);
+
+        return await this.client.put(`similar/data/${encodedDatabaseName}?top_k=${topK}`, criteria);
     }
 
     disableFieldCheck() {

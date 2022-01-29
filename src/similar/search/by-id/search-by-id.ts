@@ -28,6 +28,8 @@ export class SearchById {
         if (ids.some(x => isNaN(x)) || ids.some(x => x == null || false))
             throw new Error('All the ids must be a number');
 
-        return await this.client.put(`similar/id/${databaseName}?top_k=${topK}`, ids);
+        const encodedDatabaseName = encodeURIComponent(databaseName);
+
+        return await this.client.put(`similar/id/${encodedDatabaseName}?top_k=${topK}`, ids);
     }
 }

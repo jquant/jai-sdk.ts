@@ -204,6 +204,18 @@ describe('similarity - search by data', () => {
         expect(client.urlCalled).toBe(`similar/data/${dummyCollectionName}?top_k=${20}`);
     });
 
+    test('should encode collection name', async () => {
+
+        const {sut, client} = makeSut();
+        const unencoded = 'mY_1 Unenc&%oded collection Nam3';
+        const expected = encodeURIComponent(unencoded);
+        const dummySearchCriteria: Array<any> = makeDummySearchCriteria();
+
+        await sut.search(unencoded, dummySearchCriteria);
+
+        expect(client.urlCalled).toContain(expected);
+    });
+
     test('should call the expected body', async () => {
 
         const {sut, client} = makeSut();
