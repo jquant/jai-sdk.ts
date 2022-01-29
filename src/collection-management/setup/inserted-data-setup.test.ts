@@ -124,7 +124,6 @@ describe('inserted data setup', () => {
     test('should post the correct quick test as true with invalid value', async () => {
 
         const {sut, client} = makeSut();
-
         const quickTest: any = 'other'
 
         await sut.setup(dummyCollectionName, dummySetupSettings, quickTest);
@@ -160,7 +159,6 @@ describe('inserted data setup', () => {
     test('should encode collection name', async () => {
 
         const {sut, client} = makeSut();
-
         const unencoded = 'mY_1 Unenc&%oded collection Nam3';
         const expected = encodeURIComponent(unencoded);
 
@@ -172,7 +170,6 @@ describe('inserted data setup', () => {
     test('should post the correct overwrite as true with invalid value', async () => {
 
         const {sut, client} = makeSut();
-
         const overwrite: any = 'other'
 
         await sut.setup(dummyCollectionName, dummySetupSettings, false, overwrite);
@@ -181,6 +178,7 @@ describe('inserted data setup', () => {
     });
 
     test('should post the correct overwrite as false', async () => {
+
         const {sut, client} = makeSut();
 
         await sut.setup(dummyCollectionName, dummySetupSettings, false, false);
