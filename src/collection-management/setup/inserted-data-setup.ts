@@ -1,3 +1,5 @@
+import {HttpJaiClientPostInterface} from "../../client/http-jai-client-post-interface";
+
 export type ImageHyperParams = {
     model_name: "torchvision" | "other";
     mode?: string;
@@ -39,6 +41,11 @@ export type SetupSettings = {
 }
 
 export class InsertedDataSetup {
+    constructor(
+        private readonly client: HttpJaiClientPostInterface,
+    ) {
+    }
+
     async setup(databaseName: string, settings: SetupSettings,
                 quickTest: boolean = false, overwrite: boolean = false) {
 
@@ -51,6 +58,13 @@ export class InsertedDataSetup {
         if (Array.isArray(settings) || typeof settings !== "object")
             throw new Error('Parameter settings must be an object');
 
-        return Promise.resolve({databaseName, settings, quickTest, overwrite});
+        const checkedQuickTest = !!quickTest;
+        const checkedOverwrite = !!overwrite;
+
+        const encodedDatabaseName = encodeURIComponent(databaseName);
+
+        const url = `setup/${encodedDatabaseName}?quick_test=${checkedQuickTest}&overwrite=${checkedOverwrite}`
+
+        await this.client.post(url, settings);
     }
 }
