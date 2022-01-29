@@ -9,8 +9,10 @@ import {HttpJaiHttpJaiClientDeleteInterface} from "../client/http-jai-delete-cli
 import {JaiHttpServiceImplementation} from "../client/JaiHttpServiceImplementation";
 import {AxiosHttpClientAuthenticator} from "../authentication/authentication";
 import {GetTableFields, GetTableFieldsClient} from "../collection-management/table-fields/get-table-fields";
+import {HttpJaiClientInterface} from "../client/http-jai-client.interface";
 
 export class Initializer {
+
     static initializeInversionOfControl() {
 
         container.register<HttpJaiHttpJaiClientPutInterface>("HttpJaiClientPutInterface",
@@ -25,13 +27,13 @@ export class Initializer {
         container.register<HttpJaiHttpJaiClientDeleteInterface>("HttpJaiClientDeleteInterface",
             {useClass: JaiHttpServiceImplementation});
 
+        container.register<HttpJaiClientInterface>("HttpJaiClientInterface",
+            {useClass: JaiHttpServiceImplementation});
+
         container.register<GetTableFieldsClient>("GetTableFieldsClient",
             {useClass: GetTableFields});
 
         container.register<JaiApiKeyAuthenticator>("JaiApiKeyAuthenticator",
             {useClass: AxiosHttpClientAuthenticator});
-
-
-
     }
 }

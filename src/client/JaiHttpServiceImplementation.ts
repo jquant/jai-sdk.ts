@@ -1,11 +1,7 @@
 import axios from "axios";
-import {HttpJaiHttpJaiClientPutInterface} from "./http-jai-client-put.interface";
-import {HttpJaiHttpJaiClientGetInterface} from "./http-jai-client-get.interface";
-import {HttpJaiHttpJaiClientPostInterface} from "./http-jai-client-post-interface";
-import {HttpJaiHttpJaiClientDeleteInterface} from "./http-jai-delete-client.interface";
+import {HttpJaiClientInterface} from "./http-jai-client.interface";
 
-export class JaiHttpServiceImplementation implements HttpJaiHttpJaiClientPutInterface, HttpJaiHttpJaiClientGetInterface,
-    HttpJaiHttpJaiClientPostInterface, HttpJaiHttpJaiClientDeleteInterface {
+export class JaiHttpServiceImplementation implements HttpJaiClientInterface {
 
     defaultBaseUrl(): string {
         return 'https://mycelia.azure-api.net/';
