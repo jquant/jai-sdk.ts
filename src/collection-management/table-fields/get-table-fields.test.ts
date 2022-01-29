@@ -1,7 +1,7 @@
 import {GetTableFields} from "./get-table-fields";
-import {HttpJaiClientGetInterface} from "../../client/http-jai-client-get.interface";
+import {HttpJaiHttpJaiClientGetInterface} from "../../client/http-jai-client-get.interface";
 
-class HttpGetClientSpy implements HttpJaiClientGetInterface {
+class HttpGetClientSpy implements HttpJaiHttpJaiClientGetInterface {
 
     urlCalled = ''
     mockedData = {

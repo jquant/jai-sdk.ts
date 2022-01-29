@@ -2,14 +2,14 @@ import "reflect-metadata"
 import {inject, injectable} from "tsyringe";
 
 import {GetTableFieldsClient} from "../collection-management/table-fields/get-table-fields";
-import {HttpJaiClientPutInterface} from "../client/http-jai-client-put.interface";
+import {HttpJaiHttpJaiClientPutInterface} from "../client/http-jai-client-put.interface";
 
 @injectable()
 export class Predict {
 
     constructor(
         @inject("GetTableFieldsClient") private readonly getTableFieldsClient: GetTableFieldsClient,
-        @inject("ClientPutInterface") private readonly client: HttpJaiClientPutInterface,
+        @inject("HttpJaiClientPutInterface") private readonly client: HttpJaiHttpJaiClientPutInterface,
     ) {
     }
 
@@ -30,7 +30,7 @@ export class Predict {
 
         const encodedDatabaseName = encodeURIComponent(databaseName);
         const checkedPredictProbability = !!predictProbability;
-    
+
         const url = `predict/${encodedDatabaseName}?predict_proba=${checkedPredictProbability}`
 
         return await this.client.put(url, criteria);

@@ -1,7 +1,11 @@
 import {container} from "tsyringe";
-import {HttpJaiClientPutInterface} from "../client/http-jai-client-put.interface";
 import {JaiApiKeyAuthenticator} from "../authentication/jai-api-key-authenticator.interface";
-import {HttpJaiClientGetInterface} from "../client/http-jai-client-get.interface";
+
+import {HttpJaiHttpJaiClientPutInterface} from "../client/http-jai-client-put.interface";
+import {HttpJaiHttpJaiClientGetInterface} from "../client/http-jai-client-get.interface";
+import {HttpJaiHttpJaiClientPostInterface} from "../client/http-jai-client-post-interface";
+import {HttpJaiHttpJaiClientDeleteInterface} from "../client/http-jai-delete-client.interface";
+
 import {JaiHttpServiceImplementation} from "../client/JaiHttpServiceImplementation";
 import {AxiosHttpClientAuthenticator} from "../authentication/authentication";
 import {GetTableFields, GetTableFieldsClient} from "../collection-management/table-fields/get-table-fields";
@@ -9,10 +13,16 @@ import {GetTableFields, GetTableFieldsClient} from "../collection-management/tab
 export class Initializer {
     static initializeInversionOfControl() {
 
-        container.register<HttpJaiClientPutInterface>("ClientPutInterface",
+        container.register<HttpJaiHttpJaiClientPutInterface>("HttpJaiClientPutInterface",
             {useClass: JaiHttpServiceImplementation});
 
-        container.register<HttpJaiClientGetInterface>("ClientGetInterface",
+        container.register<HttpJaiHttpJaiClientGetInterface>("HttpJaiClientGetInterface",
+            {useClass: JaiHttpServiceImplementation});
+
+        container.register<HttpJaiHttpJaiClientPostInterface>("HttpJaiClientPostInterface",
+            {useClass: JaiHttpServiceImplementation});
+
+        container.register<HttpJaiHttpJaiClientDeleteInterface>("HttpJaiClientDeleteInterface",
             {useClass: JaiHttpServiceImplementation});
 
         container.register<GetTableFieldsClient>("GetTableFieldsClient",
@@ -20,6 +30,7 @@ export class Initializer {
 
         container.register<JaiApiKeyAuthenticator>("JaiApiKeyAuthenticator",
             {useClass: AxiosHttpClientAuthenticator});
+
 
 
     }

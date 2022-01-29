@@ -1,13 +1,13 @@
 // noinspection DuplicatedCode
 
 import "reflect-metadata"
-import {HttpJaiClientPutInterface} from "../../../client/http-jai-client-put.interface";
+import {HttpJaiHttpJaiClientPutInterface} from "../../../client/http-jai-client-put.interface";
 import {SearchByData} from "./search-by-data";
 import {GetTableFieldsClient} from "../../../collection-management/table-fields/get-table-fields";
 
 const dummyCollectionName = 'my-collection-name';
 
-class SearchByDataClientSpy implements HttpJaiClientPutInterface {
+class SearchByDataClientSpy implements HttpJaiHttpJaiClientPutInterface {
 
     urlCalled = ''
     bodyCalled = null

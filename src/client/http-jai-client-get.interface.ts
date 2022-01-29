@@ -1,3 +1,3 @@
-export interface HttpJaiClientGetInterface {
+export interface HttpJaiHttpJaiClientGetInterface {
     get(url: string): Promise<any>;
 }

@@ -1,7 +1,7 @@
 import {InsertedDataChecker} from "./inserted-data-checker";
-import {HttpJaiClientGetInterface} from "../../client/http-jai-client-get.interface";
+import {HttpJaiHttpJaiClientGetInterface} from "../../client/http-jai-client-get.interface";
 
-class GetClientSpy implements HttpJaiClientGetInterface {
+class GetClientSpy implements HttpJaiHttpJaiClientGetInterface {
     get(url: string): Promise<any> {
         this.urlCalled = url;
         this.urlCalls++;

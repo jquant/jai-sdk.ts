@@ -1,17 +1,15 @@
 import axios from "axios";
-import {HttpJaiClientPutInterface} from "./http-jai-client-put.interface";
-import {HttpJaiClientGetInterface} from "./http-jai-client-get.interface";
+import {HttpJaiHttpJaiClientPutInterface} from "./http-jai-client-put.interface";
+import {HttpJaiHttpJaiClientGetInterface} from "./http-jai-client-get.interface";
+import {HttpJaiHttpJaiClientPostInterface} from "./http-jai-client-post-interface";
+import {HttpJaiHttpJaiClientDeleteInterface} from "./http-jai-delete-client.interface";
 
-export class JaiHttpServiceImplementation implements HttpJaiClientPutInterface, HttpJaiClientGetInterface {
+export class JaiHttpServiceImplementation implements HttpJaiHttpJaiClientPutInterface, HttpJaiHttpJaiClientGetInterface,
+    HttpJaiHttpJaiClientPostInterface, HttpJaiHttpJaiClientDeleteInterface {
 
     defaultBaseUrl(): string {
         return 'https://mycelia.azure-api.net/';
     }
-
-    // private readonly instance = axios.create({
-    //     baseURL: this.rootUrl(),
-    //     headers: {'Auth': 'd1cd1f0c532544699088cf4fad8e3222'}
-    // });
 
     constructor() {
         axios.defaults.baseURL = this.defaultBaseUrl();
@@ -22,11 +20,18 @@ export class JaiHttpServiceImplementation implements HttpJaiClientPutInterface, 
         return data;
     }
 
+    async delete(url: string): Promise<void> {
+        await axios.delete(url);
+    }
+
+    async post(url: string, body: any): Promise<any> {
+        return await axios.post(url, body);
+    }
+
     async put(url: string, body: any): Promise<any> {
         const {data} = await axios.put(url, body);
         return data;
     }
-
 }
 
 

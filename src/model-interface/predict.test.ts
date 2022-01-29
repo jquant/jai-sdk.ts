@@ -1,7 +1,7 @@
 // noinspection DuplicatedCode
 
 import {Predict} from "./predict";
-import {HttpJaiClientPutInterface} from "../client/http-jai-client-put.interface";
+import {HttpJaiHttpJaiClientPutInterface} from "../client/http-jai-client-put.interface";
 import {GetTableFieldsClient} from "../collection-management/table-fields/get-table-fields";
 
 class GetTableFieldsClientSpy implements GetTableFieldsClient {
@@ -20,7 +20,7 @@ class GetTableFieldsClientSpy implements GetTableFieldsClient {
     }
 }
 
-class PredictClientSpy implements HttpJaiClientPutInterface {
+class PredictClientSpy implements HttpJaiHttpJaiClientPutInterface {
 
     urlCalled = ''
     bodyCalled = null

@@ -1,7 +1,7 @@
 import {InsertedDataSetup, SetupSettings} from "./inserted-data-setup";
-import {HttpJaiClientPostInterface} from "../../client/http-jai-client-post-interface";
+import {HttpJaiHttpJaiClientPostInterface} from "../../client/http-jai-client-post-interface";
 
-class ClientSpy implements HttpJaiClientPostInterface {
+class ClientSpy implements HttpJaiHttpJaiClientPostInterface {
     post(url: string, body: any): Promise<any> {
 
         if (this.shouldThrow)

@@ -1,14 +1,14 @@
 import "reflect-metadata"
 import {inject} from "tsyringe";
 
-import {HttpJaiClientGetInterface} from "../../client/http-jai-client-get.interface";
+import {HttpJaiHttpJaiClientGetInterface} from "../../client/http-jai-client-get.interface";
 
 export type CheckInsertedDataMode = "simple" | "summarized" | "complete";
 
 export class InsertedDataChecker {
 
     constructor(
-        @inject("ClientGetInterface") private readonly client: HttpJaiClientGetInterface
+        @inject("HttpJaiClientGetInterface") private readonly client: HttpJaiHttpJaiClientGetInterface
     ) {
     }
 

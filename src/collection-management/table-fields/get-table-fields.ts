@@ -1,6 +1,6 @@
 import "reflect-metadata";
 import {inject, injectable} from "tsyringe";
-import {HttpJaiClientGetInterface} from "../../client/http-jai-client-get.interface";
+import {HttpJaiHttpJaiClientGetInterface} from "../../client/http-jai-client-get.interface";
 
 export interface GetTableFieldsClient {
     fields(databaseName: string): Promise<any>;
@@ -10,8 +10,8 @@ export interface GetTableFieldsClient {
 export class GetTableFields implements GetTableFieldsClient {
 
     constructor(
-        @inject("ClientGetInterface")
-        private readonly client: HttpJaiClientGetInterface
+        @inject("HttpJaiClientGetInterface")
+        private readonly client: HttpJaiHttpJaiClientGetInterface
     ) {
     }
 
