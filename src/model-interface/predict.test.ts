@@ -1,8 +1,8 @@
 // noinspection DuplicatedCode
 
 import {Predict} from "./predict";
-import {GetTableFieldsClient} from "../collection-management/get-table-fields";
 import {HttpJaiClientPutInterface} from "../client/http-jai-client-put.interface";
+import {GetTableFieldsClient} from "../collection-management/table-fields/get-table-fields";
 
 class GetTableFieldsClientSpy implements GetTableFieldsClient {
     calledCollectionName = ''
