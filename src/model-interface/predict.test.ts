@@ -63,7 +63,7 @@ const makeDummyCriteria = () => [{
     'firstname': 'John Doe'
 }];
 
-const dummyCollectionName = 'my dummy collection name';
+const dummyCollectionName = 'my-dummy-collection-name';
 
 describe('predict by data', () => {
     test('should reject an empty collection name', async () => {
@@ -180,6 +180,27 @@ describe('predict by data', () => {
         await sut.predict(dummyCollectionName, dummyCriteria, true);
 
         expect(client.urlCalled).toBe(`predict/${dummyCollectionName}?predict_proba=true`);
+    });
+
+    test('should call the expected url - predict_proba=false with invalid value', async () => {
+        const {sut, client} = makeSut();
+        const dummyCriteria: Array<any> = makeDummyCriteria();
+        const proba: any = 'other';
+
+        await sut.predict(dummyCollectionName, dummyCriteria, proba);
+
+        expect(client.urlCalled).toBe(`predict/${dummyCollectionName}?predict_proba=true`);
+    });
+
+    test('should encode database name', async () => {
+        const {sut, client} = makeSut();
+        const dummyCriteria: Array<any> = makeDummyCriteria();
+        const unencoded = 'mY_1 Unenc&%oded collection Nam3';
+        const expected = encodeURIComponent(unencoded);
+
+        await sut.predict(unencoded, dummyCriteria);
+
+        expect(client.urlCalled).toContain(expected);
     });
 
     test('should call the expected body', async () => {

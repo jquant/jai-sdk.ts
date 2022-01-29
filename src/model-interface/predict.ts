@@ -28,7 +28,10 @@ export class Predict {
         if (this.fieldCheckEnabled)
             await this.throwIfAnyUnknownField(databaseName, criteria);
 
-        const url=`predict/${databaseName}?predict_proba=${predictProbability}`
+        const encodedDatabaseName = encodeURIComponent(databaseName);
+        const checkedPredictProbability = !!predictProbability;
+    
+        const url = `predict/${encodedDatabaseName}?predict_proba=${checkedPredictProbability}`
 
         return await this.client.put(url, criteria);
     }
