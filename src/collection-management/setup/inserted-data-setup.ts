@@ -1,6 +1,5 @@
 import "reflect-metadata"
-import {inject} from "tsyringe";
-
+import {inject, injectable} from "tsyringe";
 import {HttpJaiHttpJaiClientPostInterface} from "../../client/http-jai-client-post-interface";
 
 export type ImageHyperParams = {
@@ -43,6 +42,7 @@ export type SetupSettings = {
     callback_url?: string
 }
 
+@injectable()
 export class InsertedDataSetup {
     constructor(
         @inject("HttpJaiClientPostInterface") private readonly client: HttpJaiHttpJaiClientPostInterface,

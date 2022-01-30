@@ -28,7 +28,17 @@ npx jai-sdk-ts  insert-data \
 
 npx jai-sdk check-inserted-data \
     --databaseName YOUR_COLLECTION_NAME_HERE \
-    [--mode | -m] 'complete' \
+    [--mode | -m] [complete | summarized | simple] \
+    [--verbose | -v] \
+    --key YOUR_JAY_API_KEY
+
+## Setup Inserted Data
+
+npx jai-sdk setup-inserted-data \
+    --databaseName YOUR_COLLECTION_NAME_HERE \
+    --settings "$(cat ./your-settings-file.json)" \
+    [--quick-test | t] [true | false] \
+    [--overwrite | o] [true | false] \
     [--verbose | -v] \
     --key YOUR_JAY_API_KEY
 

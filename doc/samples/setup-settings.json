@@ -1,0 +1,40 @@
+{
+  "db_type": "Image",
+  "hyperparams": {},
+  "num_process": {
+    "embedding_dim": 8,
+    "scaler": "standard",
+    "fill_value": 0
+  },
+  "cat_process": {
+    "embedding_dim": 32,
+    "fill_value": "_other",
+    "min_freq": 3
+  },
+  "datetime_process": {
+    "embedding_dim": 32
+  },
+  "features": {},
+  "mycelia_bases": [
+    {
+      "db_parent": "string",
+      "id_name": "string",
+      "embedding_dim": 128,
+      "aggregation_method": "sum"
+    }
+  ],
+  "label": {
+    "task": "classification",
+    "label_name": "string",
+    "quantiles": [
+      0
+    ]
+  },
+  "split": {
+    "type": "random",
+    "split_column": "",
+    "test_size": 0.2,
+    "gap": 0
+  },
+  "callback_url": "string"
+}
