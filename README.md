@@ -32,6 +32,12 @@ npx jai-sdk check-inserted-data \
     [--verbose | -v] \
     --key YOUR_JAY_API_KEY
 
+## Delete Raw Inserted Data
+
+npx jai-sdk delete-inserted-data \
+    --databaseName YOUR_COLLECTION_NAME_HERE \
+    --key YOUR_JAY_API_KEY
+
 ## Similarity Methods
 
 ### Search By ID

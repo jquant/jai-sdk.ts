@@ -20,6 +20,7 @@ import {
 import {
     buildCollectionCheckDataCommand
 } from "../collection-management/data-check/command-line-interface/command-builder";
+import {buildCollectionDeleteCommand} from "../collection-management/deletion/command-line-interface/command-builder";
 
 const commands = [
     buildPredictCommand(),
@@ -27,6 +28,7 @@ const commands = [
     buildSearchByDataCommand(),
     buildCollectionCreateCommand(),
     buildCollectionCheckDataCommand(),
+    buildCollectionDeleteCommand(),
 ]
 
 export class Initializer {
