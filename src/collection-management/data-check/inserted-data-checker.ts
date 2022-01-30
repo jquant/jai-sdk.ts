@@ -1,10 +1,11 @@
 import "reflect-metadata"
-import {inject} from "tsyringe";
+import {inject, injectable} from "tsyringe";
 
 import {HttpJaiHttpJaiClientGetInterface} from "../../client/http-jai-client-get.interface";
 
 export type CheckInsertedDataMode = "simple" | "summarized" | "complete";
 
+@injectable()
 export class InsertedDataChecker {
 
     constructor(

@@ -17,12 +17,16 @@ import {buildPredictCommand} from "../command-line-interface/builders/model-inte
 import {
     buildCollectionCreateCommand
 } from "../collection-management/collection-creator/command-line-interface/command-builder";
+import {
+    buildCollectionCheckDataCommand
+} from "../collection-management/data-check/command-line-interface/command-builder";
 
 const commands = [
     buildPredictCommand(),
     buildSearchByIdCommand(),
     buildSearchByDataCommand(),
     buildCollectionCreateCommand(),
+    buildCollectionCheckDataCommand(),
 ]
 
 export class Initializer {

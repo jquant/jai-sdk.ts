@@ -24,6 +24,14 @@ npx jai-sdk-ts  insert-data \
    [--verbose | -v] \
     --key YOUR_JAY_API_KEY 
 
+## Check Inserted Data
+
+npx jai-sdk check-inserted-data \
+    --databaseName YOUR_COLLECTION_NAME_HERE \
+    [--mode | -m] 'complete' \
+    [--verbose | -v] \
+    --key YOUR_JAY_API_KEY
+
 ## Similarity Methods
 
 ### Search By ID
