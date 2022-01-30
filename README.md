@@ -13,6 +13,17 @@ https://documenter.getpostman.com/view/11432617/UVJcmxB1#0053601f-0014-4754-b917
 npm i jai-sdk-ts
 ```
 
+## Collection Management
+
+### Insert Data
+
+npx jai-sdk-ts  insert-data \
+    --databaseName YOUR_COLLECTION_NAME_HERE \
+    --data "$(cat ./data-file-body.json)" \
+   [--filter-name | -f] 'your filter here' \
+   [--verbose | -v] \
+    --key YOUR_JAY_API_KEY 
+
 ## Similarity Methods
 
 ### Search By ID
@@ -21,6 +32,7 @@ npm i jai-sdk-ts
 npx jai-sdk-ts similarity-search-by-id \
     --databaseName YOUR_COLLECTION_NAME_HERE \
     --arrayOfIds IDS_COMMA_SEPARETED \
+   [--verbose | -v] \
     --key YOUR_JAY_API_KEY
 ```
 
@@ -30,6 +42,7 @@ npx jai-sdk-ts similarity-search-by-id \
 npx jai-sdk-ts similarity-search-by-data \
     --databaseName YOUR_COLLECTION_NAME_HERE \
     --data "$(cat ./data-file-body.json)" \
+   [--verbose | -v] \
     --key YOUR_JAY_API_KEY
 ```
 
@@ -51,6 +64,7 @@ npx jai-sdk-ts similarity-search-by-data \
 npx jai-sdk-testing predict \
     --databaseName YOUR_COLLECTION_NAME_HERE \
     --data "$(cat ./data-file-body.json)" \
-    --predict-probability true \
+    [--predict-probability | -p] true \
+   [--verbose | -v] \
     --key YOUR_JAY_API_KEY
 ```
