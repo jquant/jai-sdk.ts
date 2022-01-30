@@ -14,11 +14,15 @@ import {YargsCommandSettings} from "../command-line-interface/builders/types";
 import {buildSearchByIdCommand} from "../command-line-interface/builders/similarity/search-by-id";
 import {buildSearchByDataCommand} from "../command-line-interface/builders/similarity/search-by-data";
 import {buildPredictCommand} from "../command-line-interface/builders/model-interface/predict";
+import {
+    buildCollectionCreateCommand
+} from "../collection-management/collection-creator/command-line-interface/command-builder";
 
 const commands = [
     buildPredictCommand(),
     buildSearchByIdCommand(),
     buildSearchByDataCommand(),
+    buildCollectionCreateCommand(),
 ]
 
 export class Initializer {
