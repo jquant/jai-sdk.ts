@@ -17,23 +17,28 @@ npm i jai-sdk-ts
 
 ### Insert Data
 
+```bash
 npx jai-sdk-ts  insert-data \
     --databaseName YOUR_COLLECTION_NAME_HERE \
     --data "$(cat ./data-file-body.json)" \
    [--filter-name | -f] 'your filter here' \
    [--verbose | -v] \
     --key YOUR_JAY_API_KEY 
+```
 
 ## Check Inserted Data
 
+```bash
 npx jai-sdk check-inserted-data \
     --databaseName YOUR_COLLECTION_NAME_HERE \
     [--mode | -m] [complete | summarized | simple] \
     [--verbose | -v] \
     --key YOUR_JAY_API_KEY
+```
 
 ## Setup Inserted Data
 
+```bash
 npx jai-sdk setup-inserted-data \
     --databaseName YOUR_COLLECTION_NAME_HERE \
     --settings "$(cat ./your-settings-file.json)" \
@@ -41,18 +46,23 @@ npx jai-sdk setup-inserted-data \
     [--overwrite | o] [true | false] \
     [--verbose | -v] \
     --key YOUR_JAY_API_KEY
+```
 
 ## Interrupt Data Setup
 
+```bash
 npx jai-sdk interrupt-data-setup \
     --databaseName YOUR_COLLECTION_NAME_HERE \
     --key YOUR_JAY_API_KEY
+```
 
 ## Delete Raw Inserted Data
 
+```bash
 npx jai-sdk delete-inserted-data \
     --databaseName YOUR_COLLECTION_NAME_HERE \
     --key YOUR_JAY_API_KEY
+```
 
 ## Similarity Methods
 
