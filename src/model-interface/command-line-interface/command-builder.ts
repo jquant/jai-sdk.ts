@@ -2,9 +2,9 @@ import "reflect-metadata";
 import {container} from "tsyringe";
 import yargs from "yargs";
 
-import {AuthenticatorArgumentParser} from "../../argument-parsers/authenticator-parser";
-import {Predict} from "../../../model-interface/predict";
-import {YargsCommandSettings} from "../types";
+import {AuthenticatorArgumentParser} from "../../command-line-interface/argument-parsers/authenticator-parser";
+import {Predict} from "../predict";
+import {YargsCommandSettings} from "../../command-line-interface/builders/types";
 
 export const buildPredictCommand = (): YargsCommandSettings => {
     return {

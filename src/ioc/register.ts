@@ -11,9 +11,9 @@ import {JaiHttpServiceImplementation} from "../client/JaiHttpServiceImplementati
 import {AxiosHttpClientAuthenticator} from "../authentication/authentication";
 import {GetTableFields, GetTableFieldsClient} from "../collection-management/table-fields/get-table-fields";
 import {YargsCommandSettings} from "../command-line-interface/builders/types";
-import {buildSearchByIdCommand} from "../command-line-interface/builders/similarity/search-by-id";
-import {buildSearchByDataCommand} from "../command-line-interface/builders/similarity/search-by-data";
-import {buildPredictCommand} from "../command-line-interface/builders/model-interface/predict";
+import {buildSearchByIdCommand} from "../similar/search/by-id/command-line-interface/command-builder";
+import {buildSearchByDataCommand} from "../similar/search/by-data/command-line-interface/command-builder";
+import {buildPredictCommand} from "../model-interface/command-line-interface/command-builder";
 import {
     buildCollectionCreateCommand
 } from "../collection-management/collection-creator/command-line-interface/command-builder";

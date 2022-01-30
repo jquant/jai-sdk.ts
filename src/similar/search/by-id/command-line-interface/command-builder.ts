@@ -1,9 +1,9 @@
 import "reflect-metadata";
 import {container} from "tsyringe";
 import yargs from "yargs";
-import {SearchById} from "../../../similar/search/by-id/search-by-id";
-import {AuthenticatorArgumentParser} from "../../argument-parsers/authenticator-parser";
-import {YargsCommandSettings} from "../types";
+import {SearchById} from "../search-by-id";
+import {AuthenticatorArgumentParser} from "../../../../command-line-interface/argument-parsers/authenticator-parser";
+import {YargsCommandSettings} from "../../../../command-line-interface/builders/types";
 
 export const buildSearchByIdCommand = (): YargsCommandSettings => {
     return {
