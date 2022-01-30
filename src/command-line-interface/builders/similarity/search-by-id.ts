@@ -3,8 +3,9 @@ import {container} from "tsyringe";
 import yargs from "yargs";
 import {SearchById} from "../../../similar/search/by-id/search-by-id";
 import {AuthenticatorArgumentParser} from "../../argument-parsers/authenticator-parser";
+import {YargsCommandSettings} from "../types";
 
-export const buildSearchByIdCommand = () => {
+export const buildSearchByIdCommand = (): YargsCommandSettings => {
     return {
         command: 'similarity-search-by-id [databaseName] [arrayOfIds]',
         description: 'search by similarity an array of ids',

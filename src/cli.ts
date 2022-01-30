@@ -1,44 +1,30 @@
 #!/usr/bin/env node
 
 import "reflect-metadata"
+import {container} from "tsyringe";
 import yargs from "yargs";
 import {Initializer} from "./ioc/register";
 
-import {buildRequestApiKeyCommand} from "./command-line-interface/builders/request-api-key-builder";
-import {buildSearchByIdCommand} from "./command-line-interface/builders/similarity/search-by-id";
-import {buildSearchByDataCommand} from "./command-line-interface/builders/similarity/search-by-data";
-import {buildPredictCommand} from "./command-line-interface/builders/model-interface/predict";
+import {YargsCommandSettings} from "./command-line-interface/builders/types";
 
 Initializer.initializeInversionOfControl();
 
 const args = process.argv.slice(2);
 
-const requestApiCommand = buildRequestApiKeyCommand();
-const similarSearchByIdCommand = buildSearchByIdCommand();
-const similarSearchByDataCommand = buildSearchByDataCommand();
-const predictCommand = buildPredictCommand();
+const commands = container.resolve<Array<YargsCommandSettings>>("commands")
 
-yargs(args)
-    .command(
-        requestApiCommand.command,
-        requestApiCommand.description,
-        requestApiCommand.builder,
-        requestApiCommand.handler)
-    .command(
-        similarSearchByIdCommand.command,
-        similarSearchByIdCommand.description,
-        similarSearchByIdCommand.builder,
-        similarSearchByIdCommand.handler)
-    .command(
-        similarSearchByDataCommand.command,
-        similarSearchByDataCommand.description,
-        similarSearchByDataCommand.builder,
-        similarSearchByDataCommand.handler)
-    .command(
-        predictCommand.command,
-        predictCommand.description,
-        predictCommand.builder,
-        predictCommand.handler)
+let yargsBuilder = yargs(args);
+
+commands.forEach(commandMapping => {
+    yargsBuilder = yargsBuilder
+        .command(
+            commandMapping.command,
+            commandMapping.description,
+            commandMapping.builder,
+            commandMapping.handler);
+});
+
+yargsBuilder
     .option('verbose', {
         alias: 'v',
         type: 'boolean',

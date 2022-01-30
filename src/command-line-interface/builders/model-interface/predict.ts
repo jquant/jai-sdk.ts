@@ -4,8 +4,9 @@ import yargs from "yargs";
 
 import {AuthenticatorArgumentParser} from "../../argument-parsers/authenticator-parser";
 import {Predict} from "../../../model-interface/predict";
+import {YargsCommandSettings} from "../types";
 
-export const buildPredictCommand = () => {
+export const buildPredictCommand = (): YargsCommandSettings => {
     return {
         command: 'predict [databaseName] [data]',
         description: 'Return the predict of the supervised model.',

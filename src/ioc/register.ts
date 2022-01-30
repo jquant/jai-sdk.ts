@@ -5,11 +5,21 @@ import {HttpJaiHttpJaiClientPutInterface} from "../client/http-jai-client-put.in
 import {HttpJaiHttpJaiClientGetInterface} from "../client/http-jai-client-get.interface";
 import {HttpJaiHttpJaiClientPostInterface} from "../client/http-jai-client-post-interface";
 import {HttpJaiHttpJaiClientDeleteInterface} from "../client/http-jai-delete-client.interface";
+import {HttpJaiClientInterface} from "../client/http-jai-client.interface";
 
 import {JaiHttpServiceImplementation} from "../client/JaiHttpServiceImplementation";
 import {AxiosHttpClientAuthenticator} from "../authentication/authentication";
 import {GetTableFields, GetTableFieldsClient} from "../collection-management/table-fields/get-table-fields";
-import {HttpJaiClientInterface} from "../client/http-jai-client.interface";
+import {YargsCommandSettings} from "../command-line-interface/builders/types";
+import {buildSearchByIdCommand} from "../command-line-interface/builders/similarity/search-by-id";
+import {buildSearchByDataCommand} from "../command-line-interface/builders/similarity/search-by-data";
+import {buildPredictCommand} from "../command-line-interface/builders/model-interface/predict";
+
+const commands = [
+    buildPredictCommand(),
+    buildSearchByIdCommand(),
+    buildSearchByDataCommand(),
+]
 
 export class Initializer {
 
@@ -35,5 +45,9 @@ export class Initializer {
 
         container.register<JaiApiKeyAuthenticator>("JaiApiKeyAuthenticator",
             {useClass: AxiosHttpClientAuthenticator});
+
+        container.register<Array<YargsCommandSettings>>("commands", {
+            useValue: commands
+        })
     }
 }

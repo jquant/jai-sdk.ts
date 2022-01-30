@@ -1,10 +1,11 @@
 import "reflect-metadata";
 import {container} from "tsyringe";
 import yargs from "yargs";
+import {YargsCommandSettings} from "../types";
 import {SearchByData} from "../../../similar/search/by-data/search-by-data";
 import {AuthenticatorArgumentParser} from "../../argument-parsers/authenticator-parser";
 
-export const buildSearchByDataCommand = () => {
+export const buildSearchByDataCommand = (): YargsCommandSettings => {
     return {
         command: 'similarity-search-by-data [databaseName] [data]',
         description: 'search by data an array of data',
