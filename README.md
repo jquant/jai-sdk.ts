@@ -42,6 +42,12 @@ npx jai-sdk setup-inserted-data \
     [--verbose | -v] \
     --key YOUR_JAY_API_KEY
 
+## Interrupt Data Setup
+
+npx jai-sdk interrupt-data-setup \
+    --databaseName YOUR_COLLECTION_NAME_HERE \
+    --key YOUR_JAY_API_KEY
+
 ## Delete Raw Inserted Data
 
 npx jai-sdk delete-inserted-data \

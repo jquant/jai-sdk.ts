@@ -22,6 +22,9 @@ import {
 } from "../collection-management/data-check/command-line-interface/command-builder";
 import {buildCollectionDeleteCommand} from "../collection-management/deletion/command-line-interface/command-builder";
 import {buildCollectionSetupCommand} from "../collection-management/setup/command-line-interface/command-builder";
+import {
+    buildCollectionInterruptSetupCommand
+} from "../collection-management/interrupter/command-line-interface/command-builder";
 
 const commands = [
     buildPredictCommand(),
@@ -31,6 +34,7 @@ const commands = [
     buildCollectionCheckDataCommand(),
     buildCollectionDeleteCommand(),
     buildCollectionSetupCommand(),
+    buildCollectionInterruptSetupCommand(),
 ]
 
 export class Initializer {
