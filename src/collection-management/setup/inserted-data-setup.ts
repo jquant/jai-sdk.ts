@@ -36,7 +36,7 @@ export type SupervisedHyperParams = {
 export type SelfSupervisedHyperParams = SupervisedHyperParams & {}
 
 export type SetupSettings = {
-    db_type: "Supervised" | "selfsupervised" | "Image" | "Text" | "FastText";
+    db_type: "Supervised" | "SelfSupervised" | "Image" | "Text" | "FastText";
     hyperparams: ImageHyperParams | FastTextHyperParams | TextHyperParams |
         SupervisedHyperParams | SelfSupervisedHyperParams;
     callback_url?: string
