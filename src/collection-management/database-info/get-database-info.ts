@@ -19,7 +19,7 @@ export class GetDatabaseInfo {
         if (mode !== 'complete' && mode !== 'names')
             throw new Error('Invalid mode. Mode should be either names or complete');
 
-        const url = `ingo?mode=${mode}&get_size=true`
+        const url = `info?mode=${mode}&get_size=true`
 
         return await this.client.get(url);
     }
