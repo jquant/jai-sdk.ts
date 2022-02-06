@@ -1,5 +1,6 @@
-import {InsertedDataChecker} from "./inserted-data-checker";
+import "reflect-metadata"
 import {HttpJaiHttpJaiClientGetInterface} from "../../client/http-jai-client-get.interface";
+import {DescribeDatabase} from "./describe-database";
 
 class GetClientSpy implements HttpJaiHttpJaiClientGetInterface {
     get(url: string): Promise<any> {
@@ -15,38 +16,19 @@ class GetClientSpy implements HttpJaiHttpJaiClientGetInterface {
 
 const dummyCollectionName = 'my-collection-name';
 
-    describe('collection - status check', () => {
+describe('describe database', () => {
 
     const makeSut = () => {
         const client = new GetClientSpy();
-        const sut = new InsertedDataChecker(client);
+        const sut = new DescribeDatabase(client);
         return {sut, client};
     }
 
     test('should reject an empty database name', async () => {
         const {sut} = makeSut();
-        await expect(sut.check(''))
+        await expect(sut.describe(''))
             .rejects
             .toThrow(Error)
-    });
-
-    test('should call the expected url with default mode', async () => {
-
-        const {sut, client} = makeSut();
-
-        await sut.check(dummyCollectionName);
-
-        expect(client.urlCalled).toBe(`setup/ids/${dummyCollectionName}?mode=simple`);
-    });
-
-    test('should call the expected url with custom mode', async () => {
-
-        const {sut, client} = makeSut();
-        const mode = "summarized";
-
-        await sut.check(dummyCollectionName, mode);
-
-        expect(client.urlCalled).toBe(`setup/ids/${dummyCollectionName}?mode=${mode}`);
     });
 
     test('should encode database name', async () => {
@@ -55,7 +37,7 @@ const dummyCollectionName = 'my-collection-name';
         const unencodedDatabaseName = '!my _- unencoded DB #$ name';
         const expected = encodeURIComponent(unencodedDatabaseName);
 
-        await sut.check(unencodedDatabaseName);
+        await sut.describe(unencodedDatabaseName);
 
         expect(client.urlCalled).toContain(expected);
     });
@@ -64,7 +46,7 @@ const dummyCollectionName = 'my-collection-name';
 
         const {sut, client} = makeSut();
 
-        await sut.check(dummyCollectionName);
+        await sut.describe(dummyCollectionName);
 
         expect(client.urlCalls).toBe(1);
     });
@@ -72,15 +54,13 @@ const dummyCollectionName = 'my-collection-name';
     test('should return data from client', async () => {
 
         const {sut, client} = makeSut();
-        const mode = "summarized";
-
         const dummyData = {
             count: 200
         };
 
         client.dataToReturn = dummyData;
 
-        const data = await sut.check(dummyCollectionName, mode);
+        const data = await sut.describe(dummyCollectionName);
 
         expect(data).toBe(dummyData);
     });

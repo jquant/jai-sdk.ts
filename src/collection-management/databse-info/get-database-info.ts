@@ -1,10 +1,13 @@
+import "reflect-metadata"
 import {HttpJaiHttpJaiClientGetInterface} from "../../client/http-jai-client-get.interface";
 import {DatabaseInfo, mode} from "./types";
+import {inject, injectable} from "tsyringe";
 
+@injectable()
 export class GetDatabaseInfo {
 
     constructor(
-        private readonly client: HttpJaiHttpJaiClientGetInterface
+        @inject("HttpJaiClientGetInterface") private readonly client: HttpJaiHttpJaiClientGetInterface
     ) {
     }
 

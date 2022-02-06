@@ -1,3 +1,4 @@
+import "reflect-metadata"
 import {GetDatabaseInfo} from "./get-database-info";
 import {HttpJaiHttpJaiClientGetInterface} from "../../client/http-jai-client-get.interface";
 
