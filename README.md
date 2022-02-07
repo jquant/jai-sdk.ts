@@ -74,6 +74,14 @@ npx jai-sdk add-data \
     --key YOUR_JAY_API_KEY
 ```
 
+## Get Database Description
+
+```bash
+npx jai-sdk get-database-description\
+    --databaseName YOUR_COLLECTION_NAME_HERE \
+    [-v] \
+    --key YOUR_JAY_API_KEY
+```
 
 
 ## Similarity Methods

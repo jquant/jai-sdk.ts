@@ -3,7 +3,7 @@ import {inject, injectable} from "tsyringe";
 import {HttpJaiClientGetInterface} from "../../client/http-jai-client-get.interface";
 
 @injectable()
-export class DescribeDatabase {
+export class DatabaseDescriptor {
 
     constructor(
         @inject("HttpJaiClientGetInterface") private readonly client: HttpJaiClientGetInterface

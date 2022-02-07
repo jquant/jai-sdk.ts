@@ -1,6 +1,6 @@
 import "reflect-metadata"
 import {HttpJaiClientGetInterface} from "../../client/http-jai-client-get.interface";
-import {DescribeDatabase} from "./describe-database";
+import {DatabaseDescriptor} from "./database-descriptor";
 
 class GetClientSpy implements HttpJaiClientGetInterface {
     get(url: string): Promise<any> {
@@ -20,7 +20,7 @@ describe('describe database', () => {
 
     const makeSut = () => {
         const client = new GetClientSpy();
-        const sut = new DescribeDatabase(client);
+        const sut = new DatabaseDescriptor(client);
         return {sut, client};
     }
 
