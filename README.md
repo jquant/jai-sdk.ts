@@ -64,6 +64,14 @@ npx jai-sdk delete-inserted-data \
     --key YOUR_JAY_API_KEY
 ```
 
+## Get Filters
+
+```bash
+npx jai-sdk get-filters \
+    --databaseName YOUR_COLLECTION_NAME_HERE \
+    --key YOUR_JAY_API_KEY
+```
+
 ## Add Data Patch
 
 ```bash
