@@ -4,7 +4,7 @@ import {inject, injectable} from "tsyringe";
 import {HttpJaiClientDeleteInterface} from "../../../client/http-jai-delete-client.interface";
 
 @injectable()
-export class EntityDeleter {
+export class StatusDeleter {
 
     constructor(
         @inject("HttpJaiClientDeleteInterface") private readonly client: HttpJaiClientDeleteInterface
@@ -16,19 +16,13 @@ export class EntityDeleter {
      * @param databaseName Target Database.
      * @param ids IDs to be removed from the database.
      */
-    async delete(databaseName: string, ids: Array<number>): Promise<void> {
+    async delete(databaseName: string): Promise<void> {
 
         if (!databaseName)
             throw new Error('You must provide e databaseName');
 
-        if (!ids || ids.length === 0)
-            throw new Error('The ids are required to perform the search');
-
-        if (ids.some(x => isNaN(x)) || ids.some(x => x == null || false))
-            throw new Error('All the ids must be a number');
-
         const encodedDatabaseName = encodeURIComponent(databaseName);
 
-        await this.client.delete(`entity/${encodedDatabaseName}`, ids);
+        await this.client.delete(`status?db_name=${encodedDatabaseName}`);
     }
 }
