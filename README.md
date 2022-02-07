@@ -83,6 +83,14 @@ npx jai-sdk get-database-description\
     --key YOUR_JAY_API_KEY
 ```
 
+## Get Database Info
+
+```bash
+npx jai-sdk get-database-info \
+    [--mode | -m] [complete | complete | names] \
+    [-v] \
+    --key YOUR_JAY_API_KEY
+```
 
 ## Similarity Methods
 

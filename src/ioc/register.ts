@@ -30,6 +30,9 @@ import {buildCollectionAddDataCommand} from "../collection-management/add-data/c
 import {
     buildCollectionDatabaseDescriptionCommand
 } from "../collection-management/database-description/command-line-interface/command-builder";
+import {
+    buildCollectionDatabaseInfoCommand
+} from "../collection-management/database-info/command-line-interface/command-builder";
 
 const commands = [
     buildPredictCommand(),
@@ -42,6 +45,7 @@ const commands = [
     buildCollectionInterruptSetupCommand(),
     buildCollectionAddDataCommand(),
     buildCollectionDatabaseDescriptionCommand(),
+    buildCollectionDatabaseInfoCommand(),
 ]
 
 export class Initializer {
