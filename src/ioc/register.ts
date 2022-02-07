@@ -20,7 +20,9 @@ import {
 import {
     buildCollectionCheckDataCommand
 } from "../collection-management/data-check/command-line-interface/command-builder";
-import {buildCollectionDeleteCommand} from "../collection-management/deletion/inserted-data/command-line-interface/command-builder";
+import {
+    buildCollectionDeleteCommand
+} from "../collection-management/deletion/inserted-data/command-line-interface/command-builder";
 import {buildCollectionSetupCommand} from "../collection-management/setup/command-line-interface/command-builder";
 import {
     buildCollectionInterruptSetupCommand
@@ -43,6 +45,15 @@ import {
     buildCollectionGetFieldsCommand
 } from "../collection-management/table-fields/command-line-interface/command-builder";
 import {buildVectorByIdCommand} from "../collection-management/vector/command-line-interface/command-builder";
+import {
+    buildCollectionDownloadCommand
+} from "../collection-management/vector/download/command-line-interface/command-builder";
+import {
+    buildCollectionDeleteDatabaseCommand
+} from "../collection-management/deletion/database/command-line-interface/command-builder";
+import {
+    buildCollectionDeleteEntityCommand
+} from "../collection-management/deletion/entity/command-line-interface/command-builder";
 
 const commands = [
     buildPredictCommand(),
@@ -62,6 +73,9 @@ const commands = [
     buildCollectionGetReportCommand(),
     buildCollectionGetFieldsCommand(),
     buildVectorByIdCommand(),
+    buildCollectionDownloadCommand(),
+    buildCollectionDeleteDatabaseCommand(),
+    buildCollectionDeleteEntityCommand(),
 ]
 
 export class Initializer {

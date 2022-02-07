@@ -129,6 +129,14 @@ npx jai-sdk get-vector-by-id \
     --key YOUR_JAY_API_KEY
 ```
 
+## Get Download Key (Url to Download Vector)
+
+```bash
+npx jai-sdk get-download-key \
+    --databaseName YOUR_COLLECTION_NAME_HERE \
+    --key YOUR_JAY_API_KEY
+```
+
 ## Get Fields
 
 ```bash
@@ -146,6 +154,26 @@ npx jai-sdk is-database-name-valid \
     [--verbose | -v] \
     --key YOUR_JAY_API_KEY
 ```
+
+## Delete Entity (Vectors) By Id
+
+```bash
+npx jai-sdk delete-entity \
+    --databaseName YOUR_COLLECTION_NAME_HERE \
+    --arrayOfIds IDS_COMMA_SEPARETED \
+    [--verbose | -v] \
+    --key YOUR_JAY_API_KEY
+```
+
+## Delete Database
+
+```bash
+npx jai-sdk delete-database \
+    --databaseName YOUR_COLLECTION_NAME_HERE \
+    [--verbose | -v] \
+    --key YOUR_JAY_API_KEY
+```
+
 
 
 ## Similarity Methods
