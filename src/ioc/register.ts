@@ -26,6 +26,7 @@ import {
     buildCollectionInterruptSetupCommand
 } from "../collection-management/interrupter/command-line-interface/command-builder";
 import {HttpJaiClientPatchInterface} from "../client/http-jai-client-patch.interface";
+import {buildCollectionAddDataCommand} from "../collection-management/add-data/command-line-interface/command-builder";
 
 const commands = [
     buildPredictCommand(),
@@ -36,6 +37,7 @@ const commands = [
     buildCollectionDeleteCommand(),
     buildCollectionSetupCommand(),
     buildCollectionInterruptSetupCommand(),
+    buildCollectionAddDataCommand(),
 ]
 
 export class Initializer {

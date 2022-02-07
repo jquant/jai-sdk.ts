@@ -7,12 +7,14 @@ import * as validUrl from 'valid-url'
 export class DataPatcher {
 
     constructor(
-        @inject("HttpJaiHttpJaiClientPatchInterface ") private readonly client: HttpJaiClientPatchInterface) {
+        @inject("HttpJaiClientPatchInterface") private readonly client: HttpJaiClientPatchInterface) {
     }
 
     /**
      * Check if a database name is valid.
      * @param databaseName Target Database.
+     * @param callbackUrl Callback URL that should be called once the processing finishes. It should expect the
+     * following pattern: {callback_url}/mycelia_status
      */
     async patch(databaseName: string, callbackUrl: string = ''): Promise<void> {
 

@@ -64,6 +64,18 @@ npx jai-sdk delete-inserted-data \
     --key YOUR_JAY_API_KEY
 ```
 
+## Add Data Patch
+
+```bash
+npx jai-sdk add-data \
+    --databaseName YOUR_COLLECTION_NAME_HERE \
+    [callback-url | -u] 'http://my-calback-url.com' \
+    [-v] \
+    --key YOUR_JAY_API_KEY
+```
+
+
+
 ## Similarity Methods
 
 ### Search By ID
