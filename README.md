@@ -155,6 +155,13 @@ npx jai-sdk is-database-name-valid \
     --key YOUR_JAY_API_KEY
 ```
 
+## Get Status
+
+```bash
+npx jai-sdk get-status \
+    --key YOUR_JAY_API_KEY
+```
+
 ## Delete Entity (Vectors) By Id
 
 ```bash

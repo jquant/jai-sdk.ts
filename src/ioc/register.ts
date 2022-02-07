@@ -54,6 +54,7 @@ import {
 import {
     buildCollectionDeleteEntityCommand
 } from "../collection-management/deletion/entity/command-line-interface/command-builder";
+import {buildGetStatusCommand} from "../api/status/command-line-interface/command-builder";
 
 const commands = [
     buildPredictCommand(),
@@ -76,6 +77,7 @@ const commands = [
     buildCollectionDownloadCommand(),
     buildCollectionDeleteDatabaseCommand(),
     buildCollectionDeleteEntityCommand(),
+    buildGetStatusCommand(),
 ]
 
 export class Initializer {
