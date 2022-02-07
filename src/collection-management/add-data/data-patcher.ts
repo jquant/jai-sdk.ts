@@ -1,6 +1,7 @@
 import "reflect-metadata"
 import {inject, injectable} from "tsyringe";
 import {HttpJaiClientPatchInterface} from "../../client/http-jai-client-patch.interface";
+import * as validUrl from 'valid-url'
 
 @injectable()
 export class DataPatcher {
@@ -18,8 +19,8 @@ export class DataPatcher {
         if (!databaseName)
             throw new Error('You must provide e databaseName');
 
-        // if(callbackUrl && !callbackUrl.match(/^(http(s?)\:\/\/|~/|/)?([a-zA-Z]{1}([\w\-]+\.)+([\w]{2,5}))(:[\d]{1,5})?/?(\w+\.[\w]{3,4})?((\?\w+=\w+)?(&\w+=\w+)*)?/)){
-
+        if (callbackUrl && !validUrl.isUri(callbackUrl))
+            throw new Error('You must provide e valid callback url');
 
         const encodedDatabaseName = encodeURIComponent(databaseName);
         const encodedCallbackUrl = encodeURIComponent(callbackUrl || '');
@@ -27,3 +28,4 @@ export class DataPatcher {
         return await this.client.patch(`data/${encodedDatabaseName}?callback_url=${encodedCallbackUrl}`, {});
     }
 }
+

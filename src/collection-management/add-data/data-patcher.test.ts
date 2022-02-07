@@ -57,32 +57,22 @@ describe('Patch Data Method', () => {
     test('should send the callback url', async () => {
 
         const {sut, client} = makeSut();
-        const callbackUrl = 'my-callback-url';
+        const callbackUrl = 'http://my-callback-url';
+        const expectedCallbackUrl = encodeURIComponent(callbackUrl);
 
         await sut.patch(dummyCollectionName, callbackUrl);
 
-        expect(client.urlCalled).toContain(`?callback_url=${callbackUrl}`);
+        expect(client.urlCalled).toContain(`?callback_url=${expectedCallbackUrl}`);
     });
 
-    test('should send an encoded callback url', async () => {
+    test('should throw on an invalid callback url', async () => {
 
-        const {sut, client} = makeSut();
-        const callbackUrl = 'U#$encoe%d_U&L with sp@aces';
-        const encodedCallbackUrl = encodeURIComponent(callbackUrl);
+        const {sut} = makeSut();
+        const callbackUrl = 'invalid url content';
 
-        await sut.patch(dummyCollectionName, callbackUrl);
-
-        expect(client.urlCalled).toContain(encodedCallbackUrl);
-    });
-
-    test('should not send an unencoded callback url', async () => {
-
-        const {sut, client} = makeSut();
-        const callbackUrl = 'U#$encoe%d_U&L with sp@aces';
-
-        await sut.patch(dummyCollectionName, callbackUrl);
-
-        expect(client.urlCalled).not.toContain(callbackUrl);
+        await expect(sut.patch(dummyCollectionName, callbackUrl))
+            .rejects
+            .toThrow();
     });
 
     test('should call server once', async () => {
