@@ -35,6 +35,9 @@ import {
 } from "../collection-management/database-info/command-line-interface/command-builder";
 import {buildCollectionGetFilterCommand} from "../collection-management/filters/command-line-interface/command-builder";
 import {buildCollectionGetIdsCommand} from "../collection-management/ids/command-line-interface/command-builder";
+import {
+    buildCollectionIsDatabaseNameValidCommand
+} from "../collection-management/name-validation/command-line-interface/command-builder";
 
 const commands = [
     buildPredictCommand(),
@@ -50,6 +53,7 @@ const commands = [
     buildCollectionDatabaseInfoCommand(),
     buildCollectionGetFilterCommand(),
     buildCollectionGetIdsCommand(),
+    buildCollectionIsDatabaseNameValidCommand(),
 ]
 
 export class Initializer {
