@@ -162,6 +162,14 @@ npx jai-sdk get-status \
     --key YOUR_JAY_API_KEY
 ```
 
+## Delete Status
+
+```bash
+npx jai-sdk delete-status \
+    --databaseName YOUR_COLLECTION_NAME_HERE \
+    --key YOUR_JAY_API_KEY
+```
+
 ## Delete Entity (Vectors) By Id
 
 ```bash
