@@ -11,6 +11,10 @@ export class DatabaseDeleter {
     ) {
     }
 
+    /**
+     * Delete everything relative to a specified database.
+     * @param databaseName Database to be deleted.
+     */
     async delete(databaseName: string): Promise<void> {
 
         if (!databaseName)

@@ -15,7 +15,11 @@ export class GetTableFields implements GetTableFieldsClient {
     ) {
     }
 
-    async fields(databaseName: string) {
+    /**
+     * Get the column names of a supervised/selfsupervised database.
+     * @param databaseName Target Database.
+     */
+    async fields(databaseName: string) : Promise<any> {
 
         if (!databaseName)
             throw new Error('You must provide e databaseName');

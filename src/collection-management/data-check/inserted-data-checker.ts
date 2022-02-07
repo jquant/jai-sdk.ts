@@ -3,6 +3,11 @@ import {inject, injectable} from "tsyringe";
 
 import {HttpJaiHttpJaiClientGetInterface} from "../../client/http-jai-client-get.interface";
 
+/**
+ * complete: get ALL IDs
+ * summarized: get groups of consecutive IDs.
+ * simple: get the number of IDs and their min and max IDs as well.
+ */
 export type CheckInsertedDataMode = "simple" | "summarized" | "complete";
 
 @injectable()

@@ -10,6 +10,11 @@ export class VectorGetter {
     ) {
     }
 
+    /**
+     * Get vectors according to the specified IDs.
+     * @param databaseName Target Database.
+     * @param ids List of IDs associated with the vectors we are interested in.
+     */
     async getById(databaseName: string, ids: Array<number>): Promise<any> {
 
         if (!databaseName)

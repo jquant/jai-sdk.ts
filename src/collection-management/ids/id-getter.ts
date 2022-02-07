@@ -12,7 +12,12 @@ export class IdGetter {
     ) {
     }
 
-    async getIds(databaseName: string, mode: CheckInsertedDataMode = "simple") {
+    /**
+     * Get IDs info of a given database. Returns a list of integers or strings depending on the mode parameter definition.
+     * @param databaseName Target Database.
+     * @param mode mode IdReport (optional)
+     */
+    async getIds(databaseName: string, mode: CheckInsertedDataMode = "simple") : Promise<any> {
 
         if (!databaseName)
             throw new Error('You must provide e databaseName');

@@ -11,7 +11,13 @@ export class SearchById {
     ) {
     }
 
-    async search(databaseName: string, ids: Array<number>, topK = 5): Promise<void> {
+    /**
+     * Perform ID similarity search in the vector representations of a database.
+     * @param databaseName Target Database.
+     * @param ids IDs to search for the most similar vectors.
+     * @param topK Number of similar vectors to return for each ID. Default is 5.
+     */
+    async search(databaseName: string, ids: Array<number>, topK = 5): Promise<any> {
 
         if (!databaseName)
             throw new Error('You must provide e databaseName');

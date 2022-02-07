@@ -10,6 +10,10 @@ export class DescribeDatabase {
     ) {
     }
 
+    /**
+     * Get description of a specific database in your Mycelia environment.
+     * @param databaseName Target Database.
+     */
     async describe(databaseName: string) {
 
         if (!databaseName)

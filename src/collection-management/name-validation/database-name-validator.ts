@@ -10,6 +10,10 @@ export class DatabaseNameValidator {
         @inject("HttpJaiClientGetInterface") private readonly client: HttpJaiHttpJaiClientGetInterface) {
     }
 
+    /**
+     * Check if a database name is valid.
+     * @param databaseName Target Database.
+     */
     async isDatabaseNameValid(databaseName: string): Promise<DatabaseNameValidationResult> {
 
         if (!databaseName)

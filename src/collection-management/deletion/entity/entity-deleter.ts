@@ -11,6 +11,11 @@ export class EntityDeleter {
     ) {
     }
 
+    /**
+     * Delete vectors from a given database according to the specified IDs. This is a dev method.
+     * @param databaseName Target Database.
+     * @param ids IDs to be removed from the database.
+     */
     async delete(databaseName: string, ids: Array<number>): Promise<void> {
 
         if (!databaseName)

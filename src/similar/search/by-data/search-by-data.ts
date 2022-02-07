@@ -15,6 +15,12 @@ export class SearchByData {
 
     private fieldCheckEnabled = true;
 
+    /**
+     * Performs data similarity search in the vector representations of a database.
+     * @param databaseName Target Database.
+     * @param criteria Data to process and search for the most similar vectors.
+     * @param topK Number of similar vectors to return for each ID. Default is 5.
+     */
     async search(databaseName: string, criteria: Array<any>, topK = 5): Promise<void> {
 
         if (!databaseName)

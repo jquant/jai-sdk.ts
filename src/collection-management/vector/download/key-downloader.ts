@@ -9,6 +9,10 @@ export class KeyDownloader {
         @inject("HttpJaiClientGetInterface") private readonly client: HttpJaiHttpJaiClientGetInterface) {
     }
 
+    /**
+     * Get the url for the download of the vector file.
+     * @param databaseName Target Database.
+     */
     async downloadKey(databaseName: string): Promise<string> {
 
         if (!databaseName)

@@ -10,6 +10,10 @@ export class FilterGetter {
     ) {
     }
 
+    /**
+     * Get the list of all existing filters in the database.
+     * @param databaseName Target Database.
+     */
     async getFilters(databaseName: string) : Promise<Array<string>> {
 
         if (!databaseName)

@@ -15,6 +15,12 @@ export class Predict {
 
     private fieldCheckEnabled = true;
 
+    /**
+     * Returns a prediction of the supervised model. Returns a list of dictionaries with keys "id" and "predict".
+     * @param databaseName Target Database.
+     * @param criteria Data to process and search for the most similar vectors.
+     * @param predictProbability
+     */
     async predict(databaseName: string, criteria: Array<any>, predictProbability = false) {
         if (!databaseName)
             throw new Error('You must provide e databaseName');
