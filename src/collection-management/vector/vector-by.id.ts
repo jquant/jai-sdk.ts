@@ -10,7 +10,7 @@ export class VectorGetter {
     ) {
     }
 
-    async getById(databaseName: string, ids: Array<number>): Promise<void> {
+    async getById(databaseName: string, ids: Array<number>): Promise<any> {
 
         if (!databaseName)
             throw new Error('You must provide e databaseName');
