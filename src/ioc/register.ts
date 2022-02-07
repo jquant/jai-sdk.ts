@@ -39,6 +39,9 @@ import {
     buildCollectionIsDatabaseNameValidCommand
 } from "../collection-management/name-validation/command-line-interface/command-builder";
 import {buildCollectionGetReportCommand} from "../collection-management/report/command-line-interface/command-builder";
+import {
+    buildCollectionGetFieldsCommand
+} from "../collection-management/table-fields/command-line-interface/command-builder";
 
 const commands = [
     buildPredictCommand(),
@@ -56,6 +59,7 @@ const commands = [
     buildCollectionGetIdsCommand(),
     buildCollectionIsDatabaseNameValidCommand(),
     buildCollectionGetReportCommand(),
+    buildCollectionGetFieldsCommand(),
 ]
 
 export class Initializer {

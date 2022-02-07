@@ -117,6 +117,14 @@ npx jai-sdk get-report \
     --databaseName YOUR_COLLECTION_NAME_HERE \
     [--verbose | -v] \
     --key YOUR_JAY_API_KEY
+
+## Get Fields
+
+```bash
+npx jai-sdk get-fields \
+    --databaseName YOUR_COLLECTION_NAME_HERE \
+    [--verbose | -v] \
+    --key YOUR_JAY_API_KEY
 ```
 
 ## Is Database Name Valid
