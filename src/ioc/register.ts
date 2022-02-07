@@ -42,6 +42,7 @@ import {buildCollectionGetReportCommand} from "../collection-management/report/c
 import {
     buildCollectionGetFieldsCommand
 } from "../collection-management/table-fields/command-line-interface/command-builder";
+import {buildVectorByIdCommand} from "../collection-management/vector/command-line-interface/command-builder";
 
 const commands = [
     buildPredictCommand(),
@@ -60,6 +61,7 @@ const commands = [
     buildCollectionIsDatabaseNameValidCommand(),
     buildCollectionGetReportCommand(),
     buildCollectionGetFieldsCommand(),
+    buildVectorByIdCommand(),
 ]
 
 export class Initializer {

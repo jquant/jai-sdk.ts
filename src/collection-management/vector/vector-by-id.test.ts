@@ -39,7 +39,7 @@ describe('Vector', () => {
             .toThrow(Error)
     });
 
-    test('should reject topK lesser than 1', async () => {
+    test('should reject an empty array id', async () => {
 
         const {sut} = makeSut();
 
@@ -71,24 +71,12 @@ describe('Vector', () => {
     test('should perform a request with the array id included and joint', async () => {
         const {sut, client} = makeSut();
         const value: Array<any> = [1];
-        const jointValue = value.join(',');
+        const jointValue = value.join('id=');
 
         await sut.getById(dummyCollectionName, value);
 
-        expect(client.urlCalled).toContain(`id=${jointValue}`);
+        expect(client.urlCalled).toContain(jointValue);
     });
-
-    test('should perform a request with the array id included, joint and encoded', async () => {
-        const {sut, client} = makeSut();
-        const value: Array<any> = [1];
-        const jointValue = value.join(',');
-        const encodedJointIds = encodeURIComponent(jointValue);
-
-        await sut.getById(dummyCollectionName, value);
-
-        expect(client.urlCalled).toContain(`id=${encodedJointIds}`);
-    });
-
 
     test('should encode collection name', async () => {
 

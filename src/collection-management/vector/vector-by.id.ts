@@ -6,7 +6,7 @@ import {HttpJaiClientGetInterface} from "../../client/http-jai-client-get.interf
 export class VectorGetter {
 
     constructor(
-        @inject("HttpJaiHttpJaiClientGetInterface") private readonly client: HttpJaiClientGetInterface
+        @inject("HttpJaiClientGetInterface") private readonly client: HttpJaiClientGetInterface
     ) {
     }
 
@@ -27,9 +27,8 @@ export class VectorGetter {
             throw new Error('All the ids must be a number');
 
         const encodedDatabaseName = encodeURIComponent(databaseName);
-        const joinedIds = ids.join(',');
-        const encodedJoinedIds = encodeURIComponent(joinedIds);
+        const joinedIds = ids.join('&id=');
 
-        return await this.client.get(`vector/${encodedDatabaseName}?id=${encodedJoinedIds}`);
+        return await this.client.get(`vector/${encodedDatabaseName}?id=${joinedIds}`);
     }
 }

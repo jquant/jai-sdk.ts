@@ -117,6 +117,17 @@ npx jai-sdk get-report \
     --databaseName YOUR_COLLECTION_NAME_HERE \
     [--verbose | -v] \
     --key YOUR_JAY_API_KEY
+```
+
+## Get Vector By Id
+
+```bash
+npx jai-sdk get-vector-by-id \
+    --databaseName YOUR_COLLECTION_NAME_HERE \
+    --arrayOfIds IDS_COMMA_SEPARETED \
+    [--verbose | -v] \
+    --key YOUR_JAY_API_KEY
+```
 
 ## Get Fields
 
