@@ -31,7 +31,7 @@ npx jai-sdk-ts  insert-data \
 ```bash
 npx jai-sdk check-inserted-data \
     --databaseName YOUR_COLLECTION_NAME_HERE \
-    [--mode | -m] [complete | summarized | simple] \
+    [--mode | -m] complete | summarized | simple \
     [--verbose | -v] \
     --key YOUR_JAY_API_KEY
 ```
@@ -99,6 +99,17 @@ npx jai-sdk get-database-info \
     [-v] \
     --key YOUR_JAY_API_KEY
 ```
+
+## Get Ids
+
+```bash
+npx jai-sdk get-ids \
+    --databaseName YOUR_COLLECTION_NAME_HERE \
+    [--mode | -m] complete | summarized | simple \
+    [--verbose | -v] \
+    --key YOUR_JAY_API_KEY
+```
+
 
 ## Similarity Methods
 
