@@ -1,8 +1,8 @@
 import "reflect-metadata"
 import {InsertedDataDeleter} from "./inserted-data-deleter";
-import {HttpJaiHttpJaiClientDeleteInterface} from "../../../client/http-jai-delete-client.interface";
+import {HttpJaiClientDeleteInterface} from "../../../client/http-jai-delete-client.interface";
 
-class DeleteClientSpy implements HttpJaiHttpJaiClientDeleteInterface {
+class DeleteClientSpy implements HttpJaiClientDeleteInterface {
     delete(url: string): Promise<void> {
 
         if (this.shouldThrow)

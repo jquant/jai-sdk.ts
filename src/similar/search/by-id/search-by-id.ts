@@ -1,13 +1,13 @@
 import "reflect-metadata"
 import {inject, injectable} from "tsyringe";
 
-import {HttpJaiHttpJaiClientPutInterface} from "../../../client/http-jai-client-put.interface";
+import {HttpJaiClientPutInterface} from "../../../client/http-jai-client-put.interface";
 
 @injectable()
 export class SearchById {
 
     constructor(
-        @inject("HttpJaiClientPutInterface") private readonly client: HttpJaiHttpJaiClientPutInterface
+        @inject("HttpJaiClientPutInterface") private readonly client: HttpJaiClientPutInterface
     ) {
     }
 

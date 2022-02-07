@@ -1,8 +1,8 @@
 import "reflect-metadata"
-import {HttpJaiHttpJaiClientPostInterface} from "../../client/http-jai-client-post-interface";
+import {HttpJaiClientPostInterface} from "../../client/http-jai-client-post-interface";
 import {InsertedDataInterrupter} from "./inserted-data-interrupter";
 
-class PostClientSpy implements HttpJaiHttpJaiClientPostInterface {
+class PostClientSpy implements HttpJaiClientPostInterface {
     post(url: string, body: any): Promise<any> {
         if (this.shouldThrow)
             throw new Error();

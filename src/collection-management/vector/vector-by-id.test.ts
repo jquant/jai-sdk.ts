@@ -1,11 +1,11 @@
 // noinspection DuplicatedCode
 
-import {HttpJaiHttpJaiClientGetInterface} from "../../client/http-jai-client-get.interface";
+import {HttpJaiClientGetInterface} from "../../client/http-jai-client-get.interface";
 import {VectorGetter} from "./vector-by.id";
 
 const dummyCollectionName = 'my-collection-name';
 
-class ClientSpy implements HttpJaiHttpJaiClientGetInterface {
+class ClientSpy implements HttpJaiClientGetInterface {
     async get(url: string): Promise<any> {
         this.urlCalled = url;
         this.calls += 1;

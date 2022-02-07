@@ -1,12 +1,12 @@
 import "reflect-metadata"
 import {inject, injectable} from "tsyringe";
-import {HttpJaiHttpJaiClientPostInterface} from "../../client/http-jai-client-post-interface";
+import {HttpJaiClientPostInterface} from "../../client/http-jai-client-post-interface";
 
 @injectable()
 export class Creator {
 
     constructor(
-        @inject("HttpJaiClientPostInterface") private readonly client: HttpJaiHttpJaiClientPostInterface
+        @inject("HttpJaiClientPostInterface") private readonly client: HttpJaiClientPostInterface
     ) {
     }
 

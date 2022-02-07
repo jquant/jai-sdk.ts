@@ -1,7 +1,7 @@
 import "reflect-metadata"
 import {inject, injectable} from "tsyringe";
 
-import {HttpJaiHttpJaiClientPutInterface} from "../../../client/http-jai-client-put.interface";
+import {HttpJaiClientPutInterface} from "../../../client/http-jai-client-put.interface";
 import {GetTableFieldsClient} from "../../../collection-management/table-fields/get-table-fields";
 
 @injectable()
@@ -9,7 +9,7 @@ export class SearchByData {
 
     constructor(
         @inject("GetTableFieldsClient") private readonly getTableFieldsClient: GetTableFieldsClient,
-        @inject("HttpJaiClientPutInterface") private readonly client: HttpJaiHttpJaiClientPutInterface,
+        @inject("HttpJaiClientPutInterface") private readonly client: HttpJaiClientPutInterface,
     ) {
     }
 

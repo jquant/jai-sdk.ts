@@ -1,11 +1,11 @@
 // noinspection DuplicatedCode
 
 import {SearchById} from "./search-by-id";
-import {HttpJaiHttpJaiClientPutInterface} from "../../../client/http-jai-client-put.interface";
+import {HttpJaiClientPutInterface} from "../../../client/http-jai-client-put.interface";
 
 const dummyCollectionName = 'my-collection-name';
 
-class ClientSpy implements HttpJaiHttpJaiClientPutInterface {
+class ClientSpy implements HttpJaiClientPutInterface {
 
     urlCalled = ''
     bodyCalled = null

@@ -1,12 +1,12 @@
 import "reflect-metadata"
 import {inject, injectable} from "tsyringe";
-import {HttpJaiHttpJaiClientGetInterface} from "../../client/http-jai-client-get.interface";
+import {HttpJaiClientGetInterface} from "../../client/http-jai-client-get.interface";
 
 @injectable()
 export class VectorGetter {
 
     constructor(
-        @inject("HttpJaiHttpJaiClientGetInterface") private readonly client: HttpJaiHttpJaiClientGetInterface
+        @inject("HttpJaiHttpJaiClientGetInterface") private readonly client: HttpJaiClientGetInterface
     ) {
     }
 

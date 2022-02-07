@@ -1,11 +1,11 @@
 // noinspection DuplicatedCode
 import "reflect-metadata"
-import {HttpJaiHttpJaiClientDeleteInterface} from "../../../client/http-jai-delete-client.interface";
+import {HttpJaiClientDeleteInterface} from "../../../client/http-jai-delete-client.interface";
 import {EntityDeleter} from "./entity-deleter";
 
 const dummyCollectionName = 'my-collection-name';
 
-class ClientSpy implements HttpJaiHttpJaiClientDeleteInterface {
+class ClientSpy implements HttpJaiClientDeleteInterface {
 
     urlCalled = ''
     bodyCalled = null

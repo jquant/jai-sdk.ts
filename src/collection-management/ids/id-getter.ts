@@ -1,14 +1,14 @@
 import "reflect-metadata"
 import {inject, injectable} from "tsyringe";
 
-import {HttpJaiHttpJaiClientGetInterface} from "../../client/http-jai-client-get.interface";
+import {HttpJaiClientGetInterface} from "../../client/http-jai-client-get.interface";
 import {CheckInsertedDataMode} from "../data-check/inserted-data-checker";
 
 @injectable()
 export class IdGetter {
 
     constructor(
-        @inject("HttpJaiClientGetInterface") private readonly client: HttpJaiHttpJaiClientGetInterface
+        @inject("HttpJaiClientGetInterface") private readonly client: HttpJaiClientGetInterface
     ) {
     }
 

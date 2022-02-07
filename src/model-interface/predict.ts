@@ -2,14 +2,14 @@ import "reflect-metadata"
 import {inject, injectable} from "tsyringe";
 
 import {GetTableFieldsClient} from "../collection-management/table-fields/get-table-fields";
-import {HttpJaiHttpJaiClientPutInterface} from "../client/http-jai-client-put.interface";
+import {HttpJaiClientPutInterface} from "../client/http-jai-client-put.interface";
 
 @injectable()
 export class Predict {
 
     constructor(
         @inject("GetTableFieldsClient") private readonly getTableFieldsClient: GetTableFieldsClient,
-        @inject("HttpJaiClientPutInterface") private readonly client: HttpJaiHttpJaiClientPutInterface,
+        @inject("HttpJaiClientPutInterface") private readonly client: HttpJaiClientPutInterface,
     ) {
     }
 

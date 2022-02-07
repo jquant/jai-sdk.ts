@@ -1,13 +1,13 @@
 import "reflect-metadata"
 import {inject, injectable} from "tsyringe";
-import {HttpJaiHttpJaiClientGetInterface} from "../../client/http-jai-client-get.interface";
+import {HttpJaiClientGetInterface} from "../../client/http-jai-client-get.interface";
 import {DatabaseNameValidationResult} from "./types";
 
 @injectable()
 export class DatabaseNameValidator {
 
     constructor(
-        @inject("HttpJaiClientGetInterface") private readonly client: HttpJaiHttpJaiClientGetInterface) {
+        @inject("HttpJaiClientGetInterface") private readonly client: HttpJaiClientGetInterface) {
     }
 
     /**

@@ -34,6 +34,11 @@ export class JaiHttpServiceImplementation implements HttpJaiClientInterface {
         const {data} = await axios.put(url, body);
         return data;
     }
+
+    async patch(url: string, body: any): Promise<any> {
+        const {data} = await axios.put(url, body);
+        return data;
+    }
 }
 
 

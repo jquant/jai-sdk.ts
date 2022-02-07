@@ -1,13 +1,13 @@
 import "reflect-metadata"
 import {inject, injectable} from "tsyringe";
 
-import {HttpJaiHttpJaiClientDeleteInterface} from "../../../client/http-jai-delete-client.interface";
+import {HttpJaiClientDeleteInterface} from "../../../client/http-jai-delete-client.interface";
 
 @injectable()
 export class DatabaseDeleter {
 
     constructor(
-        @inject("HttpJaiClientPutInterface") private readonly client: HttpJaiHttpJaiClientDeleteInterface
+        @inject("HttpJaiClientPutInterface") private readonly client: HttpJaiClientDeleteInterface
     ) {
     }
 

@@ -1,10 +1,10 @@
 import {container} from "tsyringe";
 import {JaiApiKeyAuthenticator} from "../authentication/jai-api-key-authenticator.interface";
 
-import {HttpJaiHttpJaiClientPutInterface} from "../client/http-jai-client-put.interface";
-import {HttpJaiHttpJaiClientGetInterface} from "../client/http-jai-client-get.interface";
-import {HttpJaiHttpJaiClientPostInterface} from "../client/http-jai-client-post-interface";
-import {HttpJaiHttpJaiClientDeleteInterface} from "../client/http-jai-delete-client.interface";
+import {HttpJaiClientPutInterface} from "../client/http-jai-client-put.interface";
+import {HttpJaiClientGetInterface} from "../client/http-jai-client-get.interface";
+import {HttpJaiClientPostInterface} from "../client/http-jai-client-post-interface";
+import {HttpJaiClientDeleteInterface} from "../client/http-jai-delete-client.interface";
 import {HttpJaiClientInterface} from "../client/http-jai-client.interface";
 
 import {JaiHttpServiceImplementation} from "../client/JaiHttpServiceImplementation";
@@ -25,6 +25,7 @@ import {buildCollectionSetupCommand} from "../collection-management/setup/comman
 import {
     buildCollectionInterruptSetupCommand
 } from "../collection-management/interrupter/command-line-interface/command-builder";
+import {HttpJaiClientPatchInterface} from "../client/http-jai-client-patch.interface";
 
 const commands = [
     buildPredictCommand(),
@@ -41,16 +42,19 @@ export class Initializer {
 
     static initializeInversionOfControl() {
 
-        container.register<HttpJaiHttpJaiClientPutInterface>("HttpJaiClientPutInterface",
+        container.register<HttpJaiClientPutInterface>("HttpJaiClientPutInterface",
             {useClass: JaiHttpServiceImplementation});
 
-        container.register<HttpJaiHttpJaiClientGetInterface>("HttpJaiClientGetInterface",
+        container.register<HttpJaiClientGetInterface>("HttpJaiClientGetInterface",
             {useClass: JaiHttpServiceImplementation});
 
-        container.register<HttpJaiHttpJaiClientPostInterface>("HttpJaiClientPostInterface",
+        container.register<HttpJaiClientPostInterface>("HttpJaiClientPostInterface",
             {useClass: JaiHttpServiceImplementation});
 
-        container.register<HttpJaiHttpJaiClientDeleteInterface>("HttpJaiClientDeleteInterface",
+        container.register<HttpJaiClientDeleteInterface>("HttpJaiClientDeleteInterface",
+            {useClass: JaiHttpServiceImplementation});
+
+        container.register<HttpJaiClientPatchInterface>("HttpJaiClientPatchInterface",
             {useClass: JaiHttpServiceImplementation});
 
         container.register<HttpJaiClientInterface>("HttpJaiClientInterface",

@@ -1,6 +1,6 @@
 import "reflect-metadata"
 import {inject, injectable} from "tsyringe";
-import {HttpJaiHttpJaiClientPostInterface} from "../../client/http-jai-client-post-interface";
+import {HttpJaiClientPostInterface} from "../../client/http-jai-client-post-interface";
 
 export type ImageHyperParams = {
     model_name: "torchvision" | "other";
@@ -45,7 +45,7 @@ export type SetupSettings = {
 @injectable()
 export class InsertedDataSetup {
     constructor(
-        @inject("HttpJaiClientPostInterface") private readonly client: HttpJaiHttpJaiClientPostInterface,
+        @inject("HttpJaiClientPostInterface") private readonly client: HttpJaiClientPostInterface,
     ) {
     }
 

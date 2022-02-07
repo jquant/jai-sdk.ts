@@ -1,8 +1,8 @@
 import "reflect-metadata"
-import {HttpJaiHttpJaiClientGetInterface} from "../../client/http-jai-client-get.interface";
+import {HttpJaiClientGetInterface} from "../../client/http-jai-client-get.interface";
 import {DatabaseNameValidator} from "./database-name-validator";
 
-class GetClientSpy implements HttpJaiHttpJaiClientGetInterface {
+class GetClientSpy implements HttpJaiClientGetInterface {
     get(url: string): Promise<any> {
         this.urlCalled = url;
         this.urlCalls++;

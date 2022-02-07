@@ -1,10 +1,10 @@
 import yargs from "yargs";
 
 import {container} from "tsyringe";
-import {HttpJaiHttpJaiClientPutInterface} from "../../client/http-jai-client-put.interface";
+import {HttpJaiClientPutInterface} from "../../client/http-jai-client-put.interface";
 import {JaiHttpServiceImplementation} from "../../client/JaiHttpServiceImplementation";
 
-container.register<HttpJaiHttpJaiClientPutInterface>("HttpJaiClientPutInterface", {useClass: JaiHttpServiceImplementation});
+container.register<HttpJaiClientPutInterface>("HttpJaiClientPutInterface", {useClass: JaiHttpServiceImplementation});
 
 export const buildRequestApiKeyCommand = () => {
     return {

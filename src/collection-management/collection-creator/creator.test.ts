@@ -1,7 +1,7 @@
 import {Creator} from "./creator";
-import {HttpJaiHttpJaiClientPostInterface} from "../../client/http-jai-client-post-interface";
+import {HttpJaiClientPostInterface} from "../../client/http-jai-client-post-interface";
 
-class PostDataClientSpy implements HttpJaiHttpJaiClientPostInterface {
+class PostDataClientSpy implements HttpJaiClientPostInterface {
     post(url: string, body: any): Promise<any> {
 
         if (this.shouldThrow)
