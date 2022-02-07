@@ -16,7 +16,13 @@ export class JaiHttpServiceImplementation implements HttpJaiClientInterface {
         return data;
     }
 
-    async delete(url: string): Promise<void> {
+    async delete(url: string, body: any): Promise<void> {
+
+        if (body) {
+            await axios.delete(url, {data: body});
+            return;
+        }
+
         await axios.delete(url);
     }
 

@@ -3,8 +3,8 @@
 import "reflect-metadata";
 import {container} from "tsyringe";
 import yargs from "yargs";
-import {YargsCommandSettings} from "../../../command-line-interface/builders/types";
-import {AuthenticatorArgumentParser} from "../../../command-line-interface/argument-parsers/authenticator-parser";
+import {YargsCommandSettings} from "../../../../command-line-interface/builders/types";
+import {AuthenticatorArgumentParser} from "../../../../command-line-interface/argument-parsers/authenticator-parser";
 import {InsertedDataDeleter} from "../inserted-data-deleter";
 
 export const buildCollectionDeleteCommand = (): YargsCommandSettings => {

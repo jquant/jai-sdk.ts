@@ -1,3 +1,3 @@
 export interface HttpJaiHttpJaiClientDeleteInterface {
-    delete(url: string): Promise<void>;
+    delete(url: string, body?: any): Promise<void>;
 }
