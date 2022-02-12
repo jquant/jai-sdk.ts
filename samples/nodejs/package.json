@@ -2,14 +2,19 @@
   "name": "jai-sdk-node-sample",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "start:watch": "NODE_ENV=development nodemon app.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.2",
-    "http": "^0.0.1-security"
+    "http": "^0.0.1-security",
+    "reflect-metadata": "^0.1.13"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
   }
 }

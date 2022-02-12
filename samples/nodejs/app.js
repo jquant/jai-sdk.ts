@@ -1,3 +1,7 @@
+const jai = require('jai-sdk-testing');
+
+// const { GetStatus } = jai;
+
 const express = require('express')
 const app = express()
 const port = 3000

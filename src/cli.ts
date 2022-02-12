@@ -35,4 +35,4 @@ yargsBuilder
         alias: 'k',
         description: 'api key'
     })
-    .parse()
+    .parse();
