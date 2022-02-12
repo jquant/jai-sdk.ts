@@ -16,6 +16,11 @@ export const Authenticate = (apiKey: string) => {
     authenticator.authenticate(apiKey);
 }
 
+export const AuthenticateFromEnvironmentVariable = () => {
+    const authenticator = container.resolve(AxiosHttpClientAuthenticator);
+    authenticator.authenticateFromEnvironmentVariable();
+}
+
 module.exports = {
     GetStatus,
     Authenticate,

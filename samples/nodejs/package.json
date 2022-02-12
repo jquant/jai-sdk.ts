@@ -11,8 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.2",
-    "http": "^0.0.1-security",
-    "reflect-metadata": "^0.1.13"
+    "http": "^0.0.1-security"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"
