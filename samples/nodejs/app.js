@@ -1,16 +1,25 @@
 const jai = require('jai-sdk-testing');
 
-const { GetStatus, Authenticate } = jai;
+const {
+    GetStatus,
+    Authenticate,
+    AuthenticateFromEnvironmentVariable, } = jai;
 
 const express = require('express')
 const app = express()
 const port = 3000
 
 
+app.get('/authenticate/from-env', (req, res) => {
+    AuthenticateFromEnvironmentVariable(req.params.key);
+    res.send('Authenticated Successfuly!');
+})
+
 app.get('/authenticate/:key', (req, res) => {
     Authenticate(req.params.key);
     res.send('Authenticated Successfuly!');
 })
+
 
 app.get('/get-status/:key', (req, res) => {
 

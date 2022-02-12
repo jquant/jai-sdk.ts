@@ -24,4 +24,5 @@ export const AuthenticateFromEnvironmentVariable = () => {
 module.exports = {
     GetStatus,
     Authenticate,
+    AuthenticateFromEnvironmentVariable,
 }
