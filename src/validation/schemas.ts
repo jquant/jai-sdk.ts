@@ -16,6 +16,7 @@ export const ApiKeyRequestSchema = Joi.object({
 
     company: Joi
         .string()
+        .optional()
         .max(256),
 
     email: Joi
