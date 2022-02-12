@@ -13,12 +13,20 @@ https://documenter.getpostman.com/view/11432617/UVJcmxB1#0053601f-0014-4754-b917
 npm i jai-sdk-ts
 ```
 
+## Getting your auth Key
+
+npx jai-sdk-ts get-auth-key \
+    --first-name "YOUR_FIRST_NAME" \
+    --last-name "YOUR_LAST_NAME" \
+    --email "YOUR_BEST_EMAIL_HERE" \
+    [--company-name "YOUR_COMPANY_NAME_HERE"]
+
 ## Collection Management
 
 ### Insert Data
 
 ```bash
-npx jai-sdk-ts  insert-data \
+npx jai-sdk-ts insert-data \
     --databaseName YOUR_COLLECTION_NAME_HERE \
     --data "$(cat ./data-file-body.json)" \
    [--filter-name | -f] 'your filter here' \
