@@ -1,4 +1,4 @@
-import {ApiKeyCreator} from "./api-key-creator";
+import {ApiKeyRequester} from "./api-key-requester";
 import {ApiKeyRequest} from "../../models/authentication/AuthenticationKeyUpdateRequest.interface";
 import {HttpJaiClientPutInterface} from "../../client/http-jai-client-put.interface";
 
@@ -16,7 +16,7 @@ class PutDataClientSpy implements HttpJaiClientPutInterface {
 
 const makeSut = () => {
     const client = new PutDataClientSpy();
-    const sut = new ApiKeyCreator(client);
+    const sut = new ApiKeyRequester(client);
     return {sut, client};
 }
 

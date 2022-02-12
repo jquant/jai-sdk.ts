@@ -5,7 +5,7 @@ import {ApiKeyRequestSchema} from "../../validation/schemas";
 import {HttpJaiClientPutInterface} from "../../client/http-jai-client-put.interface";
 
 @injectable()
-export class ApiKeyCreator {
+export class ApiKeyRequester {
 
     constructor(
         @inject("HttpJaiClientPutInterface") private readonly client: HttpJaiClientPutInterface

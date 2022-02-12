@@ -56,6 +56,7 @@ import {
 } from "../collection-management/deletion/entity/command-line-interface/command-builder";
 import {buildGetStatusCommand} from "../api/status/command-line-interface/command-builder";
 import {buildDeleteStatusCommand} from "../api/status/deletion/command-line-interface/command-builder";
+import {buildApiKeyCreatorCommand} from "../authentication/api-key/command-line-interface/command-builder";
 
 const commands = [
     buildPredictCommand(),
@@ -80,6 +81,7 @@ const commands = [
     buildCollectionDeleteEntityCommand(),
     buildGetStatusCommand(),
     buildDeleteStatusCommand(),
+    buildApiKeyCreatorCommand(),
 ]
 
 export class Initializer {

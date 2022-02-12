@@ -74,5 +74,18 @@ describe('AxiosHttpClientAuthenticator tests', () => {
             .toBe(validApiKey)
     });
 
+    test('should remove auth header on axios', () => {
+
+        const { sut } = makeSutInstance();
+
+        process.env.JAI_API_KEY = validApiKey;
+
+        sut.authenticateFromEnvironmentVariable();
+        sut.clearClientHeader();
+
+        expect(axios.defaults.headers.common['Auth'])
+            .toBeUndefined()
+    });
+
 
 })
