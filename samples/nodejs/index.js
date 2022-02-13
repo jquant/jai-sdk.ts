@@ -32,10 +32,13 @@ app.get('/get-status', (req, res) => {
     })
 })
 
-app.post('/insert-data', (req, res) => {
-    InsertData(req.body.databaseName, req.body.filterName, req.body.data).then(data => {
-        res.send(data);
-    })
+app.post('/insert-data', async (req, res) => {
+
+    console.log('received body', req.body);
+
+    const data = await InsertData(req.body.databaseName, req.body.filterName, req.body.data);
+
+    res.send(data)
 })
 
 app.get('/', (req, res) => {
