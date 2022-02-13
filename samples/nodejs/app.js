@@ -1,30 +1,24 @@
-const jai = require('jai-sdk-testing');
-
-const {
-    GetStatus,
-    Authenticate,
-    AuthenticateFromEnvironmentVariable, } = jai;
 
 const express = require('express')
 const app = express()
 const port = 3000
 
+require('dotenv').config()
 
-app.get('/authenticate/from-env', (req, res) => {
-    AuthenticateFromEnvironmentVariable(req.params.key);
-    res.send('Authenticated Successfuly!');
-})
+const jai = require('jai-sdk-testing');
 
-app.get('/authenticate/:key', (req, res) => {
-    Authenticate(req.params.key);
-    res.send('Authenticated Successfuly!');
-})
+const {
+    GetStatus,
+    Authenticate,
+    AuthenticateFromEnvironmentVariable,
+} = jai;
 
+if (process.env.JAI_API_KEY) {
+    AuthenticateFromEnvironmentVariable()
+    console.log(`JAI authenticated with env ${process.env.JAI_API_KEY.toString().substring(0, 4)}**************************${process.env.JAI_API_KEY.toString().substring(28)}`);
+}
 
-app.get('/get-status/:key', (req, res) => {
-
-    Authenticate(req.params.key);
-
+app.get('/get-status', (req, res) => {
     GetStatus().then(data => {
         res.send(data);
     })
