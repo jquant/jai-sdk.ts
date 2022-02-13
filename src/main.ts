@@ -4,27 +4,34 @@ import {container} from "tsyringe";
 import {StatusGetter} from "./api/status/status-getter";
 import {AxiosHttpClientAuthenticator} from "./authentication/authentication";
 import {Creator} from "./collection-management/collection-creator/creator";
+import {GetTableFields} from "./collection-management/table-fields/get-table-fields";
 
 Initializer.initializeInversionOfControl();
 
-export const GetStatus = async () => {
+const GetStatus = async () => {
     const getter = container.resolve(StatusGetter);
     return getter.getStatus();
 }
 
-export const Authenticate = (apiKey: string) => {
+const Authenticate = (apiKey: string) => {
     const authenticator = container.resolve(AxiosHttpClientAuthenticator);
     authenticator.authenticate(apiKey);
 }
 
-export const AuthenticateFromEnvironmentVariable = () => {
+const AuthenticateFromEnvironmentVariable = () => {
     const authenticator = container.resolve(AxiosHttpClientAuthenticator);
     authenticator.authenticateFromEnvironmentVariable();
 }
 
-export const InsertData = function (databaseName: string, filterName: string, data: any): Promise<any> {
+const InsertData = function (databaseName: string, filterName: string, data: any): Promise<any> {
     const creator = container.resolve(Creator);
     return creator.insert(databaseName, data, filterName);
+}
+
+const GetFields = (databaseName: string) => {
+    const getter = container.resolve(GetTableFields);
+    return getter.fields(databaseName);
+
 }
 
 module.exports = {
@@ -32,4 +39,5 @@ module.exports = {
     Authenticate,
     AuthenticateFromEnvironmentVariable,
     InsertData,
+    GetFields,
 }

@@ -43,7 +43,6 @@ app.post('/insert-data', async (req, res) => {
         console.error(error)
         res.status(500).send();
     }
-
 })
 
 app.get('/', (req, res) => {
