@@ -3,6 +3,7 @@ import {Initializer} from "./ioc/register";
 import {container} from "tsyringe";
 import {StatusGetter} from "./api/status/status-getter";
 import {AxiosHttpClientAuthenticator} from "./authentication/authentication";
+import {Creator} from "./collection-management/collection-creator/creator";
 
 Initializer.initializeInversionOfControl();
 
@@ -21,8 +22,14 @@ export const AuthenticateFromEnvironmentVariable = () => {
     authenticator.authenticateFromEnvironmentVariable();
 }
 
+export const InsertData = async function (databaseName: string, filterName: string, data: any): Promise<any> {
+    const creator = container.resolve(Creator);
+    return await creator.insert(databaseName, data, filterName);
+}
+
 module.exports = {
     GetStatus,
     Authenticate,
     AuthenticateFromEnvironmentVariable,
+    InsertData,
 }
