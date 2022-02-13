@@ -1,3 +1,4 @@
 module.exports = {
-    databaseName: 'iris_supervised'
+    databaseName: 'iris_supervised',
+    checkInsertedDataMode: 'simple'
 }

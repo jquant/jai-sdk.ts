@@ -12,6 +12,7 @@ const {
     insertData,
     getFields,
     isDatabaseNameValid,
+    checkInsertedData,
 } = require('jai-sdk-testing');
 
 const authMessage = () => `JAI authenticated with env ${process.env.JAI_API_KEY.toString().substring(0, 4)}**************************${process.env.JAI_API_KEY.toString().substring(28)}`;
@@ -63,6 +64,20 @@ app.get('/is-database-name-valid/:databaseName', async (req, res) => {
 
     try {
         const data = await isDatabaseNameValid(req.params.databaseName);
+
+        res.status(200)
+            .send(data);
+
+    } catch (error) {
+        console.error(error)
+        res.status(500).send();
+    }
+})
+
+app.get('/check-inserted-data/:databaseName/:mode', async (req, res) => {
+
+    try {
+        const data = await checkInsertedData(req.params.databaseName, req.params.mode);
 
         res.status(200)
             .send(data);
