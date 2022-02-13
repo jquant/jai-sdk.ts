@@ -13,6 +13,7 @@ const {
     getFields,
     isDatabaseNameValid,
     checkInsertedData,
+    addData,
 } = require('jai-sdk-testing');
 
 const authMessage = () => `JAI authenticated with env ${process.env.JAI_API_KEY.toString().substring(0, 4)}**************************${process.env.JAI_API_KEY.toString().substring(28)}`;
@@ -37,6 +38,19 @@ app.post('/insert-data', async (req, res) => {
 
     try {
         const data = await insertData(req.body.databaseName, req.body.filterName, req.body.data);
+
+        res.status(200).send(data);
+
+    } catch (error) {
+        console.error(error)
+        res.status(500).send();
+    }
+})
+
+app.post('/add-data', async (req, res) => {
+
+    try {
+        const data = await addData(req.body.databaseName, req.body.filterName, req.body.data);
 
         res.status(200).send(data);
 

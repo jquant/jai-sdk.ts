@@ -250,34 +250,34 @@ npx jai-sdk-testing predict \
 
 ```code
 
-const jai = require('jai-sdk-testing');
-
-const { GetStatus, Authenticate } = jai;
-
 const express = require('express')
 const app = express()
-const port = 3000
 
-app.get('/authenticate/:key', (req, res) => {
-    Authenticate(req.params.key);
-    res.send('Authenticated Successfuly!');
-})
+require('dotenv').config()
 
-app.get('/get-status/:key', (req, res) => {
+const {
+    getStatus,
+    authenticate,
+    authenticateFromEnvironmentVariable,
+    insertData,
+    getFields,
+    isDatabaseNameValid,
+    checkInsertedData,
+    addData,
+    ...
+} = require('jai-sdk-testing');
 
-    Authenticate(req.params.key);
+if (process.env.JAI_API_KEY) {
+    authenticateFromEnvironmentVariable()
+    console.debug(authMessage());
+}
 
-    GetStatus().then(data => {
+app.get('/get-status', (req, res) => {
+    getStatus().then(data => {
         res.send(data);
     })
 })
 
-app.get('/', (req, res) => {
-    res.send('Hello World!')
-})
-
-app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`)
-})
+...
 
 ```
