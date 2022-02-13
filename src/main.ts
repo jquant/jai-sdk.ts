@@ -22,9 +22,9 @@ export const AuthenticateFromEnvironmentVariable = () => {
     authenticator.authenticateFromEnvironmentVariable();
 }
 
-export const InsertData = async function (databaseName: string, filterName: string, data: any): Promise<any> {
+export const InsertData = function (databaseName: string, filterName: string, data: any): Promise<any> {
     const creator = container.resolve(Creator);
-    return await creator.insert(databaseName, data, filterName);
+    return creator.insert(databaseName, data, filterName);
 }
 
 module.exports = {

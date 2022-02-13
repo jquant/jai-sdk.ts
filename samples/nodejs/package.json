@@ -5,6 +5,8 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
+    "test": "mocha",
+    "test:watch": "mocha  --timeout 15000 --watch",
     "start:watch": "NODE_ENV=development nodemon app.js"
   },
   "author": "",
@@ -15,6 +17,8 @@
     "http": "^0.0.1-security"
   },
   "devDependencies": {
-    "nodemon": "^2.0.15"
+    "mocha": "^9.2.0",
+    "nodemon": "^2.0.15",
+    "supertest": "^6.2.2"
   }
 }
