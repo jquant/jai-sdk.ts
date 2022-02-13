@@ -14,38 +14,29 @@ export const getStatus = async () => {
     return getter.getStatus();
 }
 
-const authenticate = (apiKey: string) => {
+export const authenticate = (apiKey: string) => {
     const authenticator = container.resolve(AxiosHttpClientAuthenticator);
     authenticator.authenticate(apiKey);
 }
 
-const authenticateFromEnvironmentVariable = () => {
+export const authenticateFromEnvironmentVariable = () => {
     const authenticator = container.resolve(AxiosHttpClientAuthenticator);
     authenticator.authenticateFromEnvironmentVariable();
 }
 
-const insertData = function (databaseName: string, filterName: string, data: any): Promise<any> {
+export const insertData = function (databaseName: string, filterName: string, data: any): Promise<any> {
     const creator = container.resolve(Creator);
     return creator.insert(databaseName, data, filterName);
 }
 
-const getFields = (databaseName: string) => {
+export const getFields = (databaseName: string) => {
     const getter = container.resolve(GetTableFields);
     return getter.fields(databaseName);
 }
 
 
-const IsDatabaseNameValid = (databaseName: string) => {
+export const isDatabaseNameValid = (databaseName: string) => {
     const validator = container.resolve(DatabaseNameValidator);
     return validator.isDatabaseNameValid(databaseName);
 }
 
-
-module.exports = {
-    getStatus,
-    authenticate,
-    authenticateFromEnvironmentVariable,
-    insertData,
-    getFields,
-    IsDatabaseNameValid,
-}
