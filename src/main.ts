@@ -24,7 +24,7 @@ export const AuthenticateFromEnvironmentVariable = () => {
 
 export const InsertData = function (databaseName: string, filterName: string, data: any): Promise<any> {
     const creator = container.resolve(Creator);
-    return creator.insert(databaseName,  filterName, data);
+    return creator.insert(databaseName, data, filterName);
 }
 
 module.exports = {
