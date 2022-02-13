@@ -9,7 +9,7 @@ import {DatabaseNameValidator} from "./collection-management/name-validation/dat
 
 Initializer.initializeInversionOfControl();
 
-const getStatus = async () => {
+export const getStatus = async () => {
     const getter = container.resolve(StatusGetter);
     return getter.getStatus();
 }

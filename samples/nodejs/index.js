@@ -5,6 +5,8 @@ app.use(express.json())
 
 require('dotenv').config()
 
+const jai = require('jai-sdk-testing');
+
 const {
     getStatus,
     authenticate,
@@ -12,7 +14,9 @@ const {
     insertData,
     getFields,
 
-} = require('jai-sdk-testing');
+
+} = jai;
+
 
 const authMessage = () => `JAI authenticated with env ${process.env.JAI_API_KEY.toString().substring(0, 4)}**************************${process.env.JAI_API_KEY.toString().substring(28)}`;
 
