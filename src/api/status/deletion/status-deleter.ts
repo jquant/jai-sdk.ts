@@ -11,11 +11,6 @@ export class StatusDeleter {
     ) {
     }
 
-    /**
-     * Delete vectors from a given database according to the specified IDs. This is a dev method.
-     * @param databaseName Target Database.
-     * @param ids IDs to be removed from the database.
-     */
     async delete(databaseName: string): Promise<void> {
 
         if (!databaseName)

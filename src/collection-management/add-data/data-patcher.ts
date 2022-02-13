@@ -11,7 +11,7 @@ export class DataPatcher {
     }
 
     /**
-     * Check if a database name is valid.
+     * Includes additional data to an existing database.
      * @param databaseName Target Database.
      * @param callbackUrl Callback URL that should be called once the processing finishes. It should expect the
      * following pattern: {callback_url}/mycelia_status

@@ -11,6 +11,16 @@ import {InsertedDataSetup, SetupSettings} from "./collection-management/setup/in
 import {InsertedDataInterrupter} from "./collection-management/interrupter/inserted-data-interrupter";
 import {InsertedDataDeleter} from "./collection-management/deletion/inserted-data/inserted-data-deleter";
 import {DataPatcher} from "./collection-management/add-data/data-patcher";
+import {DatabaseDescriptor} from "./collection-management/database-description/database-descriptor";
+import {GetDatabaseInfo} from "./collection-management/database-info/get-database-info";
+import {DatabaseInfo, mode} from "./collection-management/database-info/types";
+import {IdGetter} from "./collection-management/ids/id-getter";
+import {ReportGetter} from "./collection-management/report/report-getter";
+import {VectorGetter} from "./collection-management/vector/vector-by.id";
+import {KeyDownloader} from "./collection-management/vector/download/key-downloader";
+import {StatusDeleter} from "./api/status/deletion/status-deleter";
+import {EntityDeleter} from "./collection-management/deletion/entity/entity-deleter";
+import {DatabaseDeleter} from "./collection-management/deletion/database/database-deleter";
 
 Initializer.initializeInversionOfControl();
 
@@ -24,6 +34,10 @@ export const authenticate = (apiKey: string) => {
     instance.authenticate(apiKey);
 }
 
+
+/**
+ * Authenticates from JAI_API_KEY environment variable (NodeJS only)
+ */
 export const authenticateFromEnvironmentVariable = () => {
     const instance = container.resolve(AxiosHttpClientAuthenticator);
     instance.authenticateFromEnvironmentVariable();
@@ -34,11 +48,19 @@ export const insertData = function (databaseName: string, filterName: string, da
     return instance.insert(databaseName, data, filterName);
 }
 
+/**
+ * Get the column names of a supervised/selfsupervised database.
+ * @param databaseName Target Database.
+ */
 export const getFields = (databaseName: string) => {
     const instance = container.resolve(GetTableFields);
     return instance.fields(databaseName);
 }
 
+/**
+ * Check if a database name is valid.
+ * @param databaseName Target Database.
+ */
 export const isDatabaseNameValid = (databaseName: string) => {
     const instance = container.resolve(DatabaseNameValidator);
     return instance.isDatabaseNameValid(databaseName);
@@ -66,7 +88,7 @@ export const deleteInsertedData = (databaseName: string) => {
 }
 
 /**
- * Check if a database name is valid.
+ * Includes additional data to an existing database.
  * @param databaseName Target Database.
  * @param callbackUrl Callback URL that should be called once the processing finishes. It should expect the
  * following pattern: {callback_url}/mycelia_status
@@ -74,4 +96,76 @@ export const deleteInsertedData = (databaseName: string) => {
 export const addData = (databaseName: string, callbackUrl: string = '') => {
     const instance = container.resolve(DataPatcher);
     return instance.patch(databaseName, callbackUrl)
+}
+
+/**
+ * Get description of a specific database in your Mycelia environment.
+ * @param databaseName Target Database.
+ */
+export const getDatabaseDescription = (databaseName: string) => {
+    const instance = container.resolve(DatabaseDescriptor);
+    return instance.describe(databaseName)
+}
+
+/**
+ * Get information of all databases in your Mycelia environment.
+ * @param mode
+ */
+export const getDatabaseInfo = (mode: mode): Promise<DatabaseInfo> => {
+    const instance = container.resolve(GetDatabaseInfo);
+    return instance.getInfo(mode)
+}
+
+/**
+ * Get IDs info of a given database. Returns a list of integers or strings depending on the mode parameter definition.
+ * @param databaseName Target Database.
+ * @param mode mode IdReport (optional)
+ */
+export const getIds = (databaseName: string, mode: CheckInsertedDataMode = "simple"): Promise<any> => {
+    const instance = container.resolve(IdGetter);
+    return instance.getIds(databaseName, mode)
+}
+
+export const getReport = (databaseName: string): Promise<any> => {
+    const instance = container.resolve(ReportGetter);
+    return instance.getReport(databaseName)
+}
+
+/**
+ * Get vectors according to the specified IDs.
+ * @param databaseName Target Database.
+ * @param ids List of IDs associated with the vectors we are interested in.
+ */
+export const getVectorId = (databaseName: string, ids: Array<number>): Promise<any> => {
+    const instance = container.resolve(VectorGetter);
+    return instance.getById(databaseName, ids);
+}
+
+export const getDownloadKey = (databaseName: string): Promise<any> => {
+    const instance = container.resolve(KeyDownloader);
+    return instance.downloadKey(databaseName);
+}
+
+export const deleteStatus = (databaseName: string): Promise<any> => {
+    const instance = container.resolve(StatusDeleter);
+    return instance.delete(databaseName);
+}
+
+/**
+ * Delete vectors from a given database according to the specified IDs. This is a dev method.
+ * @param databaseName Target Database.
+ * @param ids IDs to be removed from the database.
+ */
+export const deleteEntity = (databaseName: string, ids: Array<number>): Promise<any> => {
+    const instance = container.resolve(EntityDeleter);
+    return instance.delete(databaseName, ids);
+}
+
+/**
+ * Delete everything relative to a specified database.
+ * @param databaseName Database to be deleted.
+ */
+export const deleteDatabase = (databaseName: string): Promise<any> => {
+    const instance = container.resolve(DatabaseDeleter);
+    return instance.delete(databaseName);
 }

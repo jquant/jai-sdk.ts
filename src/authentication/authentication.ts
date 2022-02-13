@@ -27,6 +27,9 @@ export class AxiosHttpClientAuthenticator implements JaiApiKeyAuthenticator {
         delete axios.defaults.headers.common.Auth;
     }
 
+    /**
+     * Authenticates from JAI_API_KEY environment variable (NodeJS only)
+     */
     authenticateFromEnvironmentVariable() {
 
         const {JAI_API_KEY} = process.env;
