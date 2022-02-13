@@ -34,11 +34,16 @@ app.get('/get-status', (req, res) => {
 
 app.post('/insert-data', async (req, res) => {
 
-    console.log('received body', req.body);
+    try {
+        const data = await InsertData(req.body.databaseName, req.body.filterName, req.body.data);
 
-    const data = await InsertData(req.body.databaseName, req.body.filterName, req.body.data);
+        res.status(200).send(data);
 
-    res.send(data)
+    } catch (error) {
+        console.error(error)
+        res.status(500).send();
+    }
+
 })
 
 app.get('/', (req, res) => {

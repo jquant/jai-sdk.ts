@@ -2,7 +2,7 @@ const supertest = require("supertest");
 const app = require("../index");
 
 describe("GET /insert-data", function () {
-    it("it should has status code 200", function (done) {
+    it("it should has status code 200", async function () {
 
         var payload = {
             "databaseName": "iris_supervised2",
@@ -26,13 +26,10 @@ describe("GET /insert-data", function () {
                 }]
         };
 
-        supertest(app)
+        await supertest(app)
             .post("/insert-data")
             .send(payload)
-            .expect(200)
-            .end(function (err, res) {
-                if (err) done(err);
-                done();
-            });
+            .expect(200);
+
     });
 });
