@@ -8,36 +8,37 @@ import {GetTableFields} from "./collection-management/table-fields/get-table-fie
 
 Initializer.initializeInversionOfControl();
 
-const GetStatus = async () => {
+const getStatus = async () => {
     const getter = container.resolve(StatusGetter);
     return getter.getStatus();
 }
 
-const Authenticate = (apiKey: string) => {
+const authenticate = (apiKey: string) => {
     const authenticator = container.resolve(AxiosHttpClientAuthenticator);
     authenticator.authenticate(apiKey);
 }
 
-const AuthenticateFromEnvironmentVariable = () => {
+const authenticateFromEnvironmentVariable = () => {
     const authenticator = container.resolve(AxiosHttpClientAuthenticator);
     authenticator.authenticateFromEnvironmentVariable();
 }
 
-const InsertData = function (databaseName: string, filterName: string, data: any): Promise<any> {
+const insertData = function (databaseName: string, filterName: string, data: any): Promise<any> {
     const creator = container.resolve(Creator);
     return creator.insert(databaseName, data, filterName);
 }
 
-const GetFields = (databaseName: string) => {
+const getFields = (databaseName: string) => {
     const getter = container.resolve(GetTableFields);
     return getter.fields(databaseName);
-
 }
 
 module.exports = {
-    GetStatus,
-    Authenticate,
-    AuthenticateFromEnvironmentVariable,
-    InsertData,
-    GetFields,
+    jaiClient: {
+        getStatus,
+        authenticate,
+        authenticateFromEnvironmentVariable,
+        insertData,
+        getFields,
+    }
 }

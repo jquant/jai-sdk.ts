@@ -12,6 +12,7 @@ const {
     Authenticate,
     AuthenticateFromEnvironmentVariable,
     InsertData,
+    GetFields,
 } = jai;
 
 const authMessage = () => `JAI authenticated with env ${process.env.JAI_API_KEY.toString().substring(0, 4)}**************************${process.env.JAI_API_KEY.toString().substring(28)}`;
@@ -38,6 +39,20 @@ app.post('/insert-data', async (req, res) => {
         const data = await InsertData(req.body.databaseName, req.body.filterName, req.body.data);
 
         res.status(200).send(data);
+
+    } catch (error) {
+        console.error(error)
+        res.status(500).send();
+    }
+})
+
+app.get('/get-fields/:databaseName', async (req, res) => {
+
+    try {
+        const data = await GetFields(req.params.databaseName);
+
+        res.status(200)
+            .send(data);
 
     } catch (error) {
         console.error(error)
