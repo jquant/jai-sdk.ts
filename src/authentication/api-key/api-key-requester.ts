@@ -14,7 +14,7 @@ export class ApiKeyRequester {
 
     async requestApiKey(request: ApiKeyRequest) {
         await ApiKeyRequestSchema.validateAsync(request);
-        await this.client.put('auth', request);
+        await this.client.put('clone/auth', request);
     }
 
 }

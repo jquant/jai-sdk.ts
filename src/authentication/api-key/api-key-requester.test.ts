@@ -81,7 +81,7 @@ describe('Api Key Creator', () => {
 
         await sut.requestApiKey(requestDummy);
 
-        expect(client.url).toBe('auth');
+        expect(client.url).toBe('clone/auth');
     });
 
 })
