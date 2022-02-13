@@ -5,6 +5,7 @@ import {StatusGetter} from "./api/status/status-getter";
 import {AxiosHttpClientAuthenticator} from "./authentication/authentication";
 import {Creator} from "./collection-management/collection-creator/creator";
 import {GetTableFields} from "./collection-management/table-fields/get-table-fields";
+import {DatabaseNameValidator} from "./collection-management/name-validation/database-name-validator";
 
 Initializer.initializeInversionOfControl();
 
@@ -33,10 +34,18 @@ const getFields = (databaseName: string) => {
     return getter.fields(databaseName);
 }
 
+
+const isDatabaseNameValid = (databaseName: string) => {
+    const validator = container.resolve(DatabaseNameValidator);
+    return validator.isDatabaseNameValid(databaseName);
+}
+
+
 module.exports = {
     getStatus,
     authenticate,
     authenticateFromEnvironmentVariable,
     insertData,
     getFields,
+    isDatabaseNameValid,
 }
