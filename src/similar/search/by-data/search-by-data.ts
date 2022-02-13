@@ -21,7 +21,7 @@ export class SearchByData {
      * @param criteria Data to process and search for the most similar vectors.
      * @param topK Number of similar vectors to return for each ID. Default is 5.
      */
-    async search(databaseName: string, criteria: Array<any>, topK = 5): Promise<void> {
+    async search(databaseName: string, criteria: Array<any>, topK = 5): Promise<any> {
 
         if (!databaseName)
             throw new Error('You must provide e databaseName');

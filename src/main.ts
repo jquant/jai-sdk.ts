@@ -21,6 +21,9 @@ import {KeyDownloader} from "./collection-management/vector/download/key-downloa
 import {StatusDeleter} from "./api/status/deletion/status-deleter";
 import {EntityDeleter} from "./collection-management/deletion/entity/entity-deleter";
 import {DatabaseDeleter} from "./collection-management/deletion/database/database-deleter";
+import {SearchById} from "./similar/search/by-id/search-by-id";
+import {SearchByData} from "./similar/search/by-data/search-by-data";
+import {Predict} from "./model-interface/predict";
 
 Initializer.initializeInversionOfControl();
 
@@ -168,4 +171,37 @@ export const deleteEntity = (databaseName: string, ids: Array<number>): Promise<
 export const deleteDatabase = (databaseName: string): Promise<any> => {
     const instance = container.resolve(DatabaseDeleter);
     return instance.delete(databaseName);
+}
+
+/**
+ * Perform ID similarity search in the vector representations of a database.
+ * @param databaseName Target Database.
+ * @param ids IDs to search for the most similar vectors.
+ * @param topK Number of similar vectors to return for each ID. Default is 5.
+ */
+export const similaritySearchById = (databaseName: string, ids: Array<number>, topK = 5): Promise<any> => {
+    const instance = container.resolve(SearchById);
+    return instance.search(databaseName, ids, topK);
+}
+
+/**
+ * Performs data similarity search in the vector representations of a database.
+ * @param databaseName Target Database.
+ * @param criteria Data to process and search for the most similar vectors.
+ * @param topK Number of similar vectors to return for each ID. Default is 5.
+ */
+export const similaritySearchByData = (databaseName: string, criteria: Array<any>, topK = 5): Promise<any> => {
+    const instance = container.resolve(SearchByData);
+    return instance.search(databaseName, criteria, topK);
+}
+
+/**
+ * Returns a prediction of the supervised model. Returns a list of dictionaries with keys "id" and "predict".
+ * @param databaseName Target Database.
+ * @param criteria Data to process and search for the most similar vectors.
+ * @param predictProbability
+ */
+export const predict = (databaseName: string, criteria: Array<any>, predictProbability = false): Promise<any> => {
+    const instance = container.resolve(Predict);
+    return instance.predict(databaseName, criteria, predictProbability);
 }
