@@ -5,20 +5,12 @@ app.use(express.json())
 
 require('dotenv').config()
 
-const jai = require('jai-sdk-testing');
-
-const {
-    GetStatus,
-    Authenticate,
-    AuthenticateFromEnvironmentVariable,
-    InsertData,
-    GetFields,
-} = jai;
+const { jaiClient } = require('jai-sdk-testing');
 
 const authMessage = () => `JAI authenticated with env ${process.env.JAI_API_KEY.toString().substring(0, 4)}**************************${process.env.JAI_API_KEY.toString().substring(28)}`;
 
 if (process.env.JAI_API_KEY) {
-    AuthenticateFromEnvironmentVariable()
+    jaiClient.authenticateFromEnvironmentVariable()
     console.debug(authMessage());
 }
 
@@ -49,7 +41,7 @@ app.post('/insert-data', async (req, res) => {
 app.get('/get-fields/:databaseName', async (req, res) => {
 
     try {
-        const data = await GetFields(req.params.databaseName);
+        const data = await jaiClient.getFields(req.params.databaseName);
 
         res.status(200)
             .send(data);

@@ -34,11 +34,9 @@ const getFields = (databaseName: string) => {
 }
 
 module.exports = {
-    jaiClient: {
-        getStatus,
-        authenticate,
-        authenticateFromEnvironmentVariable,
-        insertData,
-        getFields,
-    }
+    getStatus,
+    authenticate,
+    authenticateFromEnvironmentVariable,
+    insertData,
+    getFields,
 }
