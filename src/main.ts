@@ -35,7 +35,7 @@ const getFields = (databaseName: string) => {
 }
 
 
-const isDatabaseNameValid = (databaseName: string) => {
+const IsDatabaseNameValid = (databaseName: string) => {
     const validator = container.resolve(DatabaseNameValidator);
     return validator.isDatabaseNameValid(databaseName);
 }
@@ -47,5 +47,5 @@ module.exports = {
     authenticateFromEnvironmentVariable,
     insertData,
     getFields,
-    isDatabaseNameValid,
+    IsDatabaseNameValid,
 }
