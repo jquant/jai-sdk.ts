@@ -28,7 +28,7 @@ app.get('/authenticate/:key', (req, res) => {
     res.send('Authenticated Successfuly!');
 })
 
-app.get('/get-status', (res) => {
+app.get('/get-status', (req, res) => {
     GetStatus().then(data => {
         res.send(data);
     })
@@ -40,7 +40,7 @@ app.post('/insert-data', (req, res) => {
     })
 })
 
-app.get('/', (res) => {
+app.get('/', (req, res) => {
     res.send(authMessage());
 })
 
