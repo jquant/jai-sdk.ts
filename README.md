@@ -33,7 +33,7 @@ npx jai-sdk-ts insert-data \
     --data "$(cat ./data-file-body.json)" \
    [--filter-name | -f] 'your filter here' \
    [--verbose | -v] \
-    --key YOUR_JAY_API_KEY 
+    --key YOUR_JAI_API_KEY 
 ```
 
 ## Check Inserted Data
@@ -43,7 +43,7 @@ npx jai-sdk check-inserted-data \
     --databaseName YOUR_COLLECTION_NAME_HERE \
     [--mode | -m] complete | summarized | simple \
     [--verbose | -v] \
-    --key YOUR_JAY_API_KEY
+    --key YOUR_JAI_API_KEY
 ```
 
 ## Setup Inserted Data
@@ -55,7 +55,7 @@ npx jai-sdk setup-inserted-data \
     [--quick-test | t] [true | false] \
     [--overwrite | o] [true | false] \
     [--verbose | -v] \
-    --key YOUR_JAY_API_KEY
+    --key YOUR_JAI_API_KEY
 ```
 
 ## Interrupt Data Setup
@@ -63,7 +63,7 @@ npx jai-sdk setup-inserted-data \
 ```bash
 npx jai-sdk interrupt-data-setup \
     --databaseName YOUR_COLLECTION_NAME_HERE \
-    --key YOUR_JAY_API_KEY
+    --key YOUR_JAI_API_KEY
 ```
 
 ## Delete Raw Inserted Data
@@ -71,7 +71,7 @@ npx jai-sdk interrupt-data-setup \
 ```bash
 npx jai-sdk delete-inserted-data \
     --databaseName YOUR_COLLECTION_NAME_HERE \
-    --key YOUR_JAY_API_KEY
+    --key YOUR_JAI_API_KEY
 ```
 
 ## Get Filters
@@ -79,7 +79,7 @@ npx jai-sdk delete-inserted-data \
 ```bash
 npx jai-sdk get-filters \
     --databaseName YOUR_COLLECTION_NAME_HERE \
-    --key YOUR_JAY_API_KEY
+    --key YOUR_JAI_API_KEY
 ```
 
 ## Add Data Patch
@@ -89,7 +89,7 @@ npx jai-sdk add-data \
     --databaseName YOUR_COLLECTION_NAME_HERE \
     [callback-url | -u] 'http://my-calback-url.com' \
     [-v] \
-    --key YOUR_JAY_API_KEY
+    --key YOUR_JAI_API_KEY
 ```
 
 ## Get Database Description
@@ -98,7 +98,7 @@ npx jai-sdk add-data \
 npx jai-sdk get-database-description\
     --databaseName YOUR_COLLECTION_NAME_HERE \
     [-v] \
-    --key YOUR_JAY_API_KEY
+    --key YOUR_JAI_API_KEY
 ```
 
 ## Get Database Info
@@ -107,7 +107,7 @@ npx jai-sdk get-database-description\
 npx jai-sdk get-database-info \
     [--mode | -m] [complete | complete | names] \
     [-v] \
-    --key YOUR_JAY_API_KEY
+    --key YOUR_JAI_API_KEY
 ```
 
 ## Get Ids
@@ -117,7 +117,7 @@ npx jai-sdk get-ids \
     --databaseName YOUR_COLLECTION_NAME_HERE \
     [--mode | -m] complete | summarized | simple \
     [--verbose | -v] \
-    --key YOUR_JAY_API_KEY
+    --key YOUR_JAI_API_KEY
 ```
 
 ## Get Ids
@@ -126,7 +126,7 @@ npx jai-sdk get-ids \
 npx jai-sdk get-report \
     --databaseName YOUR_COLLECTION_NAME_HERE \
     [--verbose | -v] \
-    --key YOUR_JAY_API_KEY
+    --key YOUR_JAI_API_KEY
 ```
 
 ## Get Vector By Id
@@ -136,7 +136,7 @@ npx jai-sdk get-vector-by-id \
     --databaseName YOUR_COLLECTION_NAME_HERE \
     --arrayOfIds IDS_COMMA_SEPARETED \
     [--verbose | -v] \
-    --key YOUR_JAY_API_KEY
+    --key YOUR_JAI_API_KEY
 ```
 
 ## Get Download Key (Url to Download Vector)
@@ -144,7 +144,7 @@ npx jai-sdk get-vector-by-id \
 ```bash
 npx jai-sdk get-download-key \
     --databaseName YOUR_COLLECTION_NAME_HERE \
-    --key YOUR_JAY_API_KEY
+    --key YOUR_JAI_API_KEY
 ```
 
 ## Get Fields
@@ -153,7 +153,7 @@ npx jai-sdk get-download-key \
 npx jai-sdk get-fields \
     --databaseName YOUR_COLLECTION_NAME_HERE \
     [--verbose | -v] \
-    --key YOUR_JAY_API_KEY
+    --key YOUR_JAI_API_KEY
 ```
 
 ## Is Database Name Valid
@@ -162,14 +162,14 @@ npx jai-sdk get-fields \
 npx jai-sdk is-database-name-valid \
     --databaseName YOUR_COLLECTION_NAME_HERE \
     [--verbose | -v] \
-    --key YOUR_JAY_API_KEY
+    --key YOUR_JAI_API_KEY
 ```
 
 ## Get Status
 
 ```bash
 npx jai-sdk get-status \
-    --key YOUR_JAY_API_KEY
+    --key YOUR_JAI_API_KEY
 ```
 
 ## Delete Status
@@ -177,7 +177,7 @@ npx jai-sdk get-status \
 ```bash
 npx jai-sdk delete-status \
     --databaseName YOUR_COLLECTION_NAME_HERE \
-    --key YOUR_JAY_API_KEY
+    --key YOUR_JAI_API_KEY
 ```
 
 ## Delete Entity (Vectors) By Id
@@ -187,7 +187,7 @@ npx jai-sdk delete-entity \
     --databaseName YOUR_COLLECTION_NAME_HERE \
     --arrayOfIds IDS_COMMA_SEPARETED \
     [--verbose | -v] \
-    --key YOUR_JAY_API_KEY
+    --key YOUR_JAI_API_KEY
 ```
 
 ## Delete Database
@@ -196,7 +196,7 @@ npx jai-sdk delete-entity \
 npx jai-sdk delete-database \
     --databaseName YOUR_COLLECTION_NAME_HERE \
     [--verbose | -v] \
-    --key YOUR_JAY_API_KEY
+    --key YOUR_JAI_API_KEY
 ```
 
 
@@ -210,7 +210,7 @@ npx jai-sdk-ts similarity-search-by-id \
     --databaseName YOUR_COLLECTION_NAME_HERE \
     --arrayOfIds IDS_COMMA_SEPARETED \
    [--verbose | -v] \
-    --key YOUR_JAY_API_KEY
+    --key YOUR_JAI_API_KEY
 ```
 
 ### Search By Data
@@ -220,7 +220,7 @@ npx jai-sdk-ts similarity-search-by-data \
     --databaseName YOUR_COLLECTION_NAME_HERE \
     --data "$(cat ./data-file-body.json)" \
    [--verbose | -v] \
-    --key YOUR_JAY_API_KEY
+    --key YOUR_JAI_API_KEY
 ```
 
 #### data-file-body.json content
@@ -243,7 +243,7 @@ npx jai-sdk-testing predict \
     --data "$(cat ./data-file-body.json)" \
     [--predict-probability | -p] true \
    [--verbose | -v] \
-    --key YOUR_JAY_API_KEY
+    --key YOUR_JAI_API_KEY
 ```
 
 # NodeJS / Javascript Implementation
