@@ -1,9 +1,14 @@
-import {AuthenticatorArgumentParser} from "./authenticator-parser";
-import {JaiApiKeyAuthenticator} from "../../authentication/jai-api-key-authenticator.interface";
+import { AuthenticatorArgumentParser } from "./authenticator-parser";
+import { JaiApiKeyAuthenticator } from "../../authentication/jai-api-key-authenticator.interface";
 
 describe('Argument Parser Tests', () => {
 
     class AuthenticatorSpy implements JaiApiKeyAuthenticator {
+
+        clearClientHeader(): void {
+            throw new Error("Method not implemented.");
+        }
+
         fromEnvironmentCount = 0
         fromApiKeyCount = 0;
         apiKeyProvided = ''
@@ -27,13 +32,13 @@ describe('Argument Parser Tests', () => {
         const authenticatorSpy = new AuthenticatorSpy()
         const sut = new AuthenticatorArgumentParser(authenticatorSpy);
 
-        return {authenticatorSpy, sut};
+        return { authenticatorSpy, sut };
     }
 
     test('should call environment authentication', () => {
 
         const args = {};
-        const {sut, authenticatorSpy} = makeSut()
+        const { sut, authenticatorSpy } = makeSut()
 
         sut.authenticateFromCommandArgs(args);
 
@@ -43,8 +48,8 @@ describe('Argument Parser Tests', () => {
 
     test('should call api key authentication', () => {
 
-        const args = {key: 'my-key'};
-        const {sut, authenticatorSpy} = makeSut()
+        const args = { key: 'my-key' };
+        const { sut, authenticatorSpy } = makeSut()
 
         sut.authenticateFromCommandArgs(args);
 
@@ -54,8 +59,8 @@ describe('Argument Parser Tests', () => {
 
     test('should match api key authentication', () => {
 
-        const args = {key: 'my-key'};
-        const {sut, authenticatorSpy} = makeSut()
+        const args = { key: 'my-key' };
+        const { sut, authenticatorSpy } = makeSut()
 
         sut.authenticateFromCommandArgs(args);
 
@@ -65,8 +70,8 @@ describe('Argument Parser Tests', () => {
 
     test('should pass the authenticator exception through', () => {
 
-        const args = {key: 'my-key'};
-        const {sut, authenticatorSpy} = makeSut()
+        const args = { key: 'my-key' };
+        const { sut, authenticatorSpy } = makeSut()
 
         authenticatorSpy.shouldThrow = true;
 
