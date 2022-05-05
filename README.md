@@ -17,17 +17,23 @@ npm i jai-sdk-ts
 
 ## Getting your auth Key
 
+```bash
 npx jai-sdk-ts get-auth-key \
     --first-name "YOUR_FIRST_NAME" \
     --last-name "YOUR_LAST_NAME" \
     --email "YOUR_BEST_EMAIL_HERE" \
     [--company-name "YOUR_COMPANY_NAME_HERE"]
+```
 
 ## Environment Management
-### Listing Environments
 
+### Listing Environments
+Get the names of all environments in the namespace.
+
+```bash
 npx jai-sdk-ts get-environments \
     --key YOUR_JAI_API_KEY
+```
 
 ## Collection Management
 
