@@ -23,6 +23,12 @@ npx jai-sdk-ts get-auth-key \
     --email "YOUR_BEST_EMAIL_HERE" \
     [--company-name "YOUR_COMPANY_NAME_HERE"]
 
+## Environment Management
+### Listing Environments
+
+npx jai-sdk-ts get-environments \
+    --key YOUR_JAI_API_KEY
+
 ## Collection Management
 
 ### Insert Data
