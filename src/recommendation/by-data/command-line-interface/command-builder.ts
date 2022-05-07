@@ -7,8 +7,8 @@ import {AuthenticatorArgumentParser} from "../../../command-line-interface/argum
 
 export const buildRecommendationByDataCommand = (): YargsCommandSettings => {
     return {
-        command: 'similarity-search-by-data [databaseName] [data]',
-        description: 'search by data an array of data',
+        command: 'recommendation-search-by-data [databaseName] [data]',
+        description: 'Perform ID recommendation search in the vector representations of a database.',
         builder: (yargs: yargs.Argv) => {
             return yargs
                 .positional('databaseName', {

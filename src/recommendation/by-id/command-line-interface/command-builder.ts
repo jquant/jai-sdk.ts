@@ -8,14 +8,21 @@ import {AuthenticatorArgumentParser} from "../../../command-line-interface/argum
 export const buildRecommendationByIdCommand = (): YargsCommandSettings => {
     return {
         command: 'recommendation-by-id [databaseName] [arrayOfIds]',
-        description: 'search by similarity an array of ids',
+        description: 'Perform ID recommendation search in the vector representations of a database.',
         builder: (yargs: yargs.Argv) => {
             return yargs
                 .positional('databaseName', {
-                    describe: 'Collection Name'
+                    describe: 'Collection Name',
+                    description: 'Database name to perform recommendation search operation.'
                 })
                 .positional('arrayOfIds', {
-                    describe: 'Array of Ids'
+                    describe: 'Array of Ids',
+                    description: 'IDs to search for the recommendation.'
+                })
+                .option('topk', {
+                    alias: 'k',
+                    type: "number",
+                    description: 'Number of similar recommendations to return for each ID. Default is 5.'
                 });
         },
 
@@ -31,8 +38,9 @@ export const buildRecommendationByIdCommand = (): YargsCommandSettings => {
 
             const databaseName: string = <string>argv.databaseName;
             const arrayOfIds: Array<any> = JSON.parse(`[${argv.arrayOfIds}]`);
+            const topK: number = <number>argv.topk;
 
-            const result = await searchById.search(databaseName, arrayOfIds);
+            const result = await searchById.search(databaseName, arrayOfIds, topK);
 
             const stringParsedResponse = JSON.stringify(result);
 
