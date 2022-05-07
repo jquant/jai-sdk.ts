@@ -35,6 +35,11 @@ yargsBuilder
         alias: 'k',
         description: 'api key'
     })
+    .option('environment', {
+        type: 'string',
+        alias: 'e',
+        description: 'JAI environment name or key'
+    })
     .option('dry-run', {
         type: 'boolean',
     })

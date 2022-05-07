@@ -12,12 +12,18 @@ export class AuthenticatorArgumentParser {
 
     public authenticateFromCommandArgs(args: any): void {
 
-        const {key} = args;
+        const {key, environment, verbose} = args;
+
+        if(verbose)
+            console.log('authentication settings' , {key, environment})
 
         if (!key)
             this.authenticator.authenticateFromEnvironmentVariable();
 
         this.authenticator.authenticate(key)
+
+        if(environment)
+            this.authenticator.setEnvironment(environment);
     }
 }
 
