@@ -60,6 +60,7 @@ import {buildApiKeyCreatorCommand} from "../authentication/api-key/command-line-
 import {
     buildGetEnvironmentsStatusCommand
 } from "../environment-management/environment-listing/command-line-interface/command-builder";
+import {buildRecommendationByIdCommand} from "../recommendation/by-id/command-line-interface/command-builder";
 
 const commands = [
     buildPredictCommand(),
@@ -86,6 +87,7 @@ const commands = [
     buildDeleteStatusCommand(),
     buildApiKeyCreatorCommand(),
     buildGetEnvironmentsStatusCommand(),
+    buildRecommendationByIdCommand(),
 ]
 
 export class Initializer {
