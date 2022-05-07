@@ -35,4 +35,7 @@ yargsBuilder
         alias: 'k',
         description: 'api key'
     })
+    .option('dry-run', {
+        type: 'boolean',
+    })
     .parse();

@@ -20,8 +20,8 @@ export const buildRecommendationByIdCommand = (): YargsCommandSettings => {
                     description: 'IDs to search for the recommendation.'
                 })
                 .option('topk', {
-                    alias: 'k',
                     type: "number",
+                    default: 5,
                     description: 'Number of similar recommendations to return for each ID. Default is 5.'
                 });
         },
@@ -33,14 +33,20 @@ export const buildRecommendationByIdCommand = (): YargsCommandSettings => {
 
             auth.authenticateFromCommandArgs(argv);
 
-            const searchById = container
+            const recommendService = container
                 .resolve(RecommendationById);
 
             const databaseName: string = <string>argv.databaseName;
             const arrayOfIds: Array<any> = JSON.parse(`[${argv.arrayOfIds}]`);
             const topK: number = <number>argv.topk;
 
-            const result = await searchById.search(databaseName, arrayOfIds, topK);
+            if (argv.verbose)
+                console.log({databaseName, arrayOfIds, topK});
+
+            if (argv['dry-run'])
+                return;
+
+            const result = await recommendService.recommend(databaseName, arrayOfIds, topK);
 
             const stringParsedResponse = JSON.stringify(result);
 

@@ -16,6 +16,11 @@ export const buildSearchByIdCommand = (): YargsCommandSettings => {
                 })
                 .positional('arrayOfIds', {
                     describe: 'Array of Ids'
+                })
+                .option('topk', {
+                    type: "number",
+                    default: 5,
+                    description: 'Number of similar recommendations to return for each ID. Default is 5.'
                 });
         },
 
@@ -31,8 +36,15 @@ export const buildSearchByIdCommand = (): YargsCommandSettings => {
 
             const databaseName: string = <string>argv.databaseName;
             const arrayOfIds: Array<any> = JSON.parse(`[${argv.arrayOfIds}]`);
+            const topK: number = <number>argv.topk;
 
-            const result = await searchById.search(databaseName, arrayOfIds);
+            if (argv.verbose)
+                console.log({databaseName, arrayOfIds, topK});
+
+            if (argv['dry-run'])
+                return;
+
+            const result = await searchById.search(databaseName, arrayOfIds, topK);
 
             const stringParsedResponse = JSON.stringify(result);
 

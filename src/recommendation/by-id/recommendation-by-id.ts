@@ -16,7 +16,7 @@ export class RecommendationById {
      * @param ids IDs to search for the most similar vectors.
      * @param topK Number of similar vectors to return for each ID. Default is 5.
      */
-    async search(databaseName: string, ids: Array<number>, topK = 5): Promise<any> {
+    async recommend(databaseName: string, ids: Array<number>, topK = 5): Promise<any> {
 
         if (!databaseName)
             throw new Error('You must provide e databaseName');
@@ -38,3 +38,4 @@ export class RecommendationById {
         return await this.client.put(`recommendation/id/${encodedDatabaseName}?top_k=${topK}`, ids);
     }
 }
+

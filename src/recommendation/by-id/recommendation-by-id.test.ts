@@ -41,7 +41,7 @@ describe('recommendation - search by id', () => {
 
         const {sut} = makeSut();
 
-        await expect(sut.search('', []))
+        await expect(sut.recommend('', []))
             .rejects
             .toThrow(Error)
 
@@ -51,7 +51,7 @@ describe('recommendation - search by id', () => {
 
         const {sut} = makeSut();
 
-        await expect(sut.search('', [], 0))
+        await expect(sut.recommend('', [], 0))
             .rejects
             .toThrow(Error)
     });
@@ -60,7 +60,7 @@ describe('recommendation - search by id', () => {
 
         const {sut} = makeSut();
 
-        await expect(sut.search('', [], -10))
+        await expect(sut.recommend('', [], -10))
             .rejects
             .toThrow(Error)
     });
@@ -70,7 +70,7 @@ describe('recommendation - search by id', () => {
         const {sut} = makeSut();
         const value: Array<any> = ['home'];
 
-        await expect(sut.search(dummyCollectionName, value))
+        await expect(sut.recommend(dummyCollectionName, value))
             .rejects
             .toThrow(Error)
     });
@@ -80,7 +80,7 @@ describe('recommendation - search by id', () => {
         const {sut} = makeSut();
         const value: Array<any> = [null];
 
-        await expect(sut.search(dummyCollectionName, value))
+        await expect(sut.recommend(dummyCollectionName, value))
             .rejects
             .toThrow(Error)
     });
@@ -90,7 +90,7 @@ describe('recommendation - search by id', () => {
         const value: Array<any> = [1, 2, 3];
         const topK = 123;
 
-        await sut.search(dummyCollectionName, value, topK);
+        await sut.recommend(dummyCollectionName, value, topK);
 
         expect(client.urlCalled).toBe(`recommendation/id/${dummyCollectionName}?top_k=${topK}`);
     });
@@ -101,7 +101,7 @@ describe('recommendation - search by id', () => {
         const unencoded = 'mY_1 Unenc&%oded collection Nam3';
         const expected = encodeURIComponent(unencoded);
 
-        await sut.search(unencoded, [0]);
+        await sut.recommend(unencoded, [0]);
 
         expect(client.urlCalled).toContain(expected);
     });
@@ -111,7 +111,7 @@ describe('recommendation - search by id', () => {
         const value: Array<any> = [1, 2, 3];
         const topK = 123;
 
-        await sut.search(dummyCollectionName, value, topK);
+        await sut.recommend(dummyCollectionName, value, topK);
 
         expect(client.bodyCalled).toBe(value);
     });
@@ -122,7 +122,7 @@ describe('recommendation - search by id', () => {
         const original: Array<any> = [1, 2, 3];
         const topK = 123;
 
-        await sut.search(dummyCollectionName, value, topK);
+        await sut.recommend(dummyCollectionName, value, topK);
 
         expect(new Set(client.bodyCalled)).toEqual(new Set(original));
     });
@@ -131,7 +131,7 @@ describe('recommendation - search by id', () => {
         const {sut, client} = makeSut();
         const value: Array<any> = [1, 2, 3];
 
-        await sut.search(dummyCollectionName, value);
+        await sut.recommend(dummyCollectionName, value);
 
         expect(client.calls).toBe(1);
     });
@@ -140,7 +140,7 @@ describe('recommendation - search by id', () => {
         const {sut, client} = makeSut();
         const value: Array<any> = [1, 2, 3];
 
-        const received = await sut.search(dummyCollectionName, value);
+        const received = await sut.recommend(dummyCollectionName, value);
 
         expect(received).toEqual(client.putDummyResult);
     });
@@ -151,7 +151,7 @@ describe('recommendation - search by id', () => {
 
         client.shouldThrow = true;
 
-        await expect(sut.search(dummyCollectionName, value))
+        await expect(sut.recommend(dummyCollectionName, value))
             .rejects
             .toThrow();
     });

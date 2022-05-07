@@ -16,6 +16,11 @@ export const buildRecommendationByDataCommand = (): YargsCommandSettings => {
                 })
                 .positional('data', {
                     describe: 'Data to compare similarity'
+                })
+                .option('topk', {
+                    type: "number",
+                    default: 5,
+                    description: 'Number of similar recommendations to return for each ID. Default is 5.'
                 });
         },
 
@@ -30,12 +35,15 @@ export const buildRecommendationByDataCommand = (): YargsCommandSettings => {
 
             const databaseName: string = <string>argv.databaseName;
             const data: Array<any> = JSON.parse(<string>argv.data);
+            const topK: number = <number>argv.topk;
 
-            if (argv.verbose) {
-                console.log({databaseName, data})
-            }
+            if (argv.verbose)
+                console.log({databaseName, data, topK});
 
-            const result = await instance.search(databaseName, data);
+            if (argv['dry-run'])
+                return;
+
+            const result = await instance.search(databaseName, data, topK);
 
             const stringParsedResponse = JSON.stringify(result);
 
