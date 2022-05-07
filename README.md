@@ -211,8 +211,6 @@ npx jai-sdk delete-database \
     --key YOUR_JAI_API_KEY
 ```
 
-
-
 ## Similarity Methods
 
 ### Search By ID
@@ -221,6 +219,7 @@ npx jai-sdk delete-database \
 npx jai-sdk-ts similarity-search-by-id \
     --databaseName YOUR_COLLECTION_NAME_HERE \
     --arrayOfIds IDS_COMMA_SEPARETED \
+   [--topk 10] \
    [--verbose | -v] \
     --key YOUR_JAI_API_KEY
 ```
@@ -231,6 +230,7 @@ npx jai-sdk-ts similarity-search-by-id \
 npx jai-sdk-ts similarity-search-by-data \
     --databaseName YOUR_COLLECTION_NAME_HERE \
     --data "$(cat ./data-file-body.json)" \
+   [--topk 10] \
    [--verbose | -v] \
     --key YOUR_JAI_API_KEY
 ```
@@ -267,6 +267,7 @@ npx jai-sdk-testing predict \
 npx jai-sdk-ts recommendation-search-by-id \
     --databaseName YOUR_COLLECTION_NAME_HERE \
     --arrayOfIds IDS_COMMA_SEPARETED \
+   [--topk 10] \
    [--verbose | -v] \
     --key YOUR_JAI_API_KEY
 ```
@@ -277,6 +278,7 @@ npx jai-sdk-ts recommendation-search-by-id \
 npx jai-sdk-ts recommendation-search-by-data \
     --databaseName YOUR_COLLECTION_NAME_HERE \
     --data "$(cat ./data-file-body.json)" \
+   [--topk 10] \
    [--verbose | -v] \
     --key YOUR_JAI_API_KEY
 ```
