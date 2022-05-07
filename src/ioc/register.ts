@@ -61,6 +61,7 @@ import {
     buildGetEnvironmentsStatusCommand
 } from "../environment-management/environment-listing/command-line-interface/command-builder";
 import {buildRecommendationByIdCommand} from "../recommendation/by-id/command-line-interface/command-builder";
+import {buildRecommendationByDataCommand} from "../recommendation/by-data/command-line-interface/command-builder";
 
 const commands = [
     buildPredictCommand(),
@@ -88,6 +89,7 @@ const commands = [
     buildApiKeyCreatorCommand(),
     buildGetEnvironmentsStatusCommand(),
     buildRecommendationByIdCommand(),
+    buildRecommendationByDataCommand(),
 ]
 
 export class Initializer {

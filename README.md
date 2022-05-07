@@ -258,6 +258,42 @@ npx jai-sdk-testing predict \
     --key YOUR_JAI_API_KEY
 ```
 
+
+## Recommendation Methods
+
+### Recommendation By ID
+
+```bash
+npx jai-sdk-ts recommendation-search-by-id \
+    --databaseName YOUR_COLLECTION_NAME_HERE \
+    --arrayOfIds IDS_COMMA_SEPARETED \
+   [--verbose | -v] \
+    --key YOUR_JAI_API_KEY
+```
+
+### Recommendation By Data
+
+```bash
+npx jai-sdk-ts recommendation-search-by-data \
+    --databaseName YOUR_COLLECTION_NAME_HERE \
+    --data "$(cat ./data-file-body.json)" \
+   [--verbose | -v] \
+    --key YOUR_JAI_API_KEY
+```
+
+#### data-file-body.json content
+
+```bash
+[{
+  "id": 0,
+  "sepal length (cm)": 0.1,
+  "sepal width (cm)": 1.2,
+  "petal length (cm)": 0.3,
+  "petal width (cm)": 2.4
+}]
+```
+
+
 # NodeJS / Javascript Implementation
 
 ```code
