@@ -63,7 +63,7 @@ const makeDummySearchCriteria = () => [{
     'firstname': 'John Doe'
 }];
 
-describe('similarity - search by data', () => {
+describe('recommendation - search by data', () => {
 
     test('should reject an empty collection name', async () => {
 
