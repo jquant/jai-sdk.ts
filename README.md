@@ -143,7 +143,7 @@ npx jai-sdk get-ids \
     --key YOUR_JAI_API_KEY
 ```
 
-## Get Ids
+## Get Report
 
 ```bash
 npx jai-sdk get-report \

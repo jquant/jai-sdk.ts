@@ -1,7 +1,8 @@
 import axios from "axios";
 import {JaiApiKeyAuthenticator} from "./jai-api-key-authenticator.interface";
+import {JaiAEnvironmentAuthenticator} from "./jai-environment-authenticator.interface";
 
-export class AxiosHttpClientAuthenticator implements JaiApiKeyAuthenticator {
+export class AxiosHttpClientAuthenticator implements JaiApiKeyAuthenticator, JaiAEnvironmentAuthenticator {
 
     apiKey: string = '';
     environment: string = '';

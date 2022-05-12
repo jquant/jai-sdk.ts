@@ -16,7 +16,7 @@
   "types": "./dist/tsc/main.d.ts",
   "browser": "./dist/esbuild/browser.js",
   "bin": {
-    "my-cli-tool": "./dist/esbuild/cli.js"
+    "jai-sdk": "./dist/esbuild/cli.js"
   },
   "scripts": {
     "cli": "ts-node src/cli.ts",
