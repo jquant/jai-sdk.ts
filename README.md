@@ -13,13 +13,13 @@ https://documenter.getpostman.com/view/11432617/UVJcmxB1#0053601f-0014-4754-b917
 ## Getting Started
 
 ```bash
-npm i jai-sdk-ts
+npm i jai-sdk
 ```
 
 ## Getting your auth Key
 
 ```bash
-npx jai-sdk-ts get-auth-key \
+npx jai-sdk get-auth-key \
     --first-name "YOUR_FIRST_NAME" \
     --last-name "YOUR_LAST_NAME" \
     --email "YOUR_BEST_EMAIL_HERE" \
@@ -33,7 +33,7 @@ npx jai-sdk-ts get-auth-key \
 Get the names of all environments in the namespace.
 
 ```bash
-npx jai-sdk-ts get-environments \
+npx jai-sdk get-environments \
     --key YOUR_JAI_API_KEY
 ```
 
@@ -42,7 +42,7 @@ npx jai-sdk-ts get-environments \
 ### Insert Data
 
 ```bash
-npx jai-sdk-ts insert-data \
+npx jai-sdk insert-data \
    --databaseName YOUR_COLLECTION_NAME_HERE \
    --data "$(cat ./data-file-body.json)" \
    [--filter-name | -f] 'your filter here' \
@@ -238,7 +238,7 @@ npx jai-sdk delete-database \
 ### Search By ID
 
 ```bash
-npx jai-sdk-ts similarity-search-by-id \
+npx jai-sdk similarity-search-by-id \
     --databaseName YOUR_COLLECTION_NAME_HERE \
     --arrayOfIds IDS_COMMA_SEPARETED \
     [--topk 10] \
@@ -250,7 +250,7 @@ npx jai-sdk-ts similarity-search-by-id \
 ### Search By Data
 
 ```bash
-npx jai-sdk-ts similarity-search-by-data \
+npx jai-sdk similarity-search-by-data \
     --databaseName YOUR_COLLECTION_NAME_HERE \
     --data "$(cat ./data-file-body.json)" \
     [--topk 10] \
@@ -274,7 +274,7 @@ npx jai-sdk-ts similarity-search-by-data \
 ## Prediction
 
 ```bash
-npx jai-sdk-testing predict \
+npx jai-sdk predict \
     --databaseName YOUR_COLLECTION_NAME_HERE \
     --data "$(cat ./data-file-body.json)" \
    [--predict-probability | -p] true \
@@ -288,7 +288,7 @@ npx jai-sdk-testing predict \
 ### Recommendation By ID
 
 ```bash
-npx jai-sdk-ts recommendation-search-by-id \
+npx jai-sdk recommendation-search-by-id \
    --databaseName YOUR_COLLECTION_NAME_HERE \
    --arrayOfIds IDS_COMMA_SEPARETED \
    [--topk 10] \
@@ -300,7 +300,7 @@ npx jai-sdk-ts recommendation-search-by-id \
 ### Recommendation By Data
 
 ```bash
-npx jai-sdk-ts recommendation-search-by-data \
+npx jai-sdk recommendation-search-by-data \
    --databaseName YOUR_COLLECTION_NAME_HERE \
    --data "$(cat ./data-file-body.json)" \
    [--topk 10] \
@@ -341,7 +341,7 @@ const {
     checkInsertedData,
     addData,
     ...
-} = require('jai-sdk-testing');
+} = require('jai-sdk');
 
 if (process.env.JAI_API_KEY) {
     authenticateFromEnvironmentVariable()
