@@ -45,6 +45,8 @@ export const buildCollectionCreateCommand = (): YargsCommandSettings => {
 
             const result = await instance.insert(databaseName, data, filterName);
 
+            console.log(result)
+
             const stringParsedResponse = JSON.stringify(result);
 
             console.log(stringParsedResponse);
