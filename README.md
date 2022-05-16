@@ -1,12 +1,12 @@
 # JAI Javascript SDK
 
-### Our Docs
-
-https://jai-sdk.readthedocs.io/en/latest/
-
 ### Our REST API
 
 https://documenter.getpostman.com/view/11432617/UVJcmxB1#0053601f-0014-4754-b917-347783ec4866
+
+### Our Docs (For Python Developers)
+
+https://jai-sdk.readthedocs.io/en/latest/
 
 # CLI (Command Line Interface)
 
