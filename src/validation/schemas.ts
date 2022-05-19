@@ -22,5 +22,6 @@ export const ApiKeyRequestSchema = Joi.object({
     email: Joi
         .string()
         .required()
-        .email()
+        .email({tlds: {allow: false}})
+
 })
