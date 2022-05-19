@@ -1,28 +1,26 @@
-// noinspection DuplicatedCode
-
 import "reflect-metadata";
 import {container} from "tsyringe";
 import yargs from "yargs";
+import {RecommendationByData} from "../recommendation-by-data";
 import {YargsCommandSettings} from "../../../command-line-interface/builders/types";
 import {AuthenticatorArgumentParser} from "../../../command-line-interface/argument-parsers/authenticator-parser";
-import {Creator} from "../creator";
 
-export const buildCollectionCreateCommand = (): YargsCommandSettings => {
+export const buildRecommendationByDataCommand = (): YargsCommandSettings => {
     return {
-        command: 'insert-data [databaseName] [data]',
-        description: 'creates a new collection',
+        command: 'recommendation-search-by-data [databaseName] [data]',
+        description: 'Perform ID recommendation search in the vector representations of a database.',
         builder: (yargs: yargs.Argv) => {
             return yargs
                 .positional('databaseName', {
-                    describe: 'Database name to perform the insertion in'
+                    describe: 'Collection Name'
                 })
                 .positional('data', {
-                    describe: 'Table data to be inserted as JSON'
+                    describe: 'Data to compare similarity'
                 })
-                .option('filter-name', {
-                    type: 'string',
-                    alias: 'f',
-                    description: 'Column name used as filter'
+                .option('topk', {
+                    type: "number",
+                    default: 5,
+                    description: 'Number of similar recommendations to return for each ID. Default is 5.'
                 });
         },
 
@@ -33,19 +31,19 @@ export const buildCollectionCreateCommand = (): YargsCommandSettings => {
 
             auth.authenticateFromCommandArgs(argv);
 
-            const instance = container.resolve(Creator);
+            const instance = container.resolve(RecommendationByData);
 
             const databaseName: string = <string>argv.databaseName;
-            const filterName: string = <string>argv['filter-name'];
             const data: Array<any> = JSON.parse(<string>argv.data);
+            const topK: number = <number>argv.topk;
 
-            if (argv.verbose) {
-                console.log({databaseName, data, filterName})
-            }
+            if (argv.verbose)
+                console.log({databaseName, data, topK});
 
-            const result = await instance.insert(databaseName, data, filterName);
+            if (argv['dry-run'])
+                return;
 
-            console.log(result)
+            const result = await instance.search(databaseName, data, topK);
 
             const stringParsedResponse = JSON.stringify(result);
 

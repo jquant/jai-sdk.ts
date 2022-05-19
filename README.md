@@ -1,10 +1,11 @@
-
 # JAI Javascript SDK
 
 ### Our Docs
+
 https://jai-sdk.readthedocs.io/en/latest/
 
 ### Our REST API
+
 https://documenter.getpostman.com/view/11432617/UVJcmxB1#0053601f-0014-4754-b917-347783ec4866
 
 # CLI (Command Line Interface)
@@ -12,28 +13,42 @@ https://documenter.getpostman.com/view/11432617/UVJcmxB1#0053601f-0014-4754-b917
 ## Getting Started
 
 ```bash
-npm i jai-sdk-ts
+npm i jai-sdk
 ```
 
 ## Getting your auth Key
 
-npx jai-sdk-ts get-auth-key \
+```bash
+npx jai-sdk get-auth-key \
     --first-name "YOUR_FIRST_NAME" \
     --last-name "YOUR_LAST_NAME" \
     --email "YOUR_BEST_EMAIL_HERE" \
     [--company-name "YOUR_COMPANY_NAME_HERE"]
+```
+
+## Environment Management
+
+### Listing Environments
+
+Get the names of all environments in the namespace.
+
+```bash
+npx jai-sdk get-environments \
+    --key YOUR_JAI_API_KEY
+```
 
 ## Collection Management
 
 ### Insert Data
 
 ```bash
-npx jai-sdk-ts insert-data \
-    --databaseName YOUR_COLLECTION_NAME_HERE \
-    --data "$(cat ./data-file-body.json)" \
+npx jai-sdk insert-data \
+   --databaseName YOUR_COLLECTION_NAME_HERE \
+   --data "$(cat ./data-file-body.json)" \
    [--filter-name | -f] 'your filter here' \
+   [--environment | -e] YOUR_JAI_ENVIRONMENT_NAME_OR_KEY \
    [--verbose | -v] \
-    --key YOUR_JAI_API_KEY 
+   --key YOUR_JAI_API_KEY 
 ```
 
 ## Check Inserted Data
@@ -42,6 +57,7 @@ npx jai-sdk-ts insert-data \
 npx jai-sdk check-inserted-data \
     --databaseName YOUR_COLLECTION_NAME_HERE \
     [--mode | -m] complete | summarized | simple \
+    [--environment | -e] YOUR_JAI_ENVIRONMENT_NAME_OR_KEY \
     [--verbose | -v] \
     --key YOUR_JAI_API_KEY
 ```
@@ -54,6 +70,7 @@ npx jai-sdk setup-inserted-data \
     --settings "$(cat ./your-settings-file.json)" \
     [--quick-test | t] [true | false] \
     [--overwrite | o] [true | false] \
+    [--environment | -e] YOUR_JAI_ENVIRONMENT_NAME_OR_KEY \
     [--verbose | -v] \
     --key YOUR_JAI_API_KEY
 ```
@@ -63,7 +80,8 @@ npx jai-sdk setup-inserted-data \
 ```bash
 npx jai-sdk interrupt-data-setup \
     --databaseName YOUR_COLLECTION_NAME_HERE \
-    --key YOUR_JAI_API_KEY
+    --key YOUR_JAI_API_KEY \
+    [--environment | -e] YOUR_JAI_ENVIRONMENT_NAME_OR_KEY \
 ```
 
 ## Delete Raw Inserted Data
@@ -79,7 +97,8 @@ npx jai-sdk delete-inserted-data \
 ```bash
 npx jai-sdk get-filters \
     --databaseName YOUR_COLLECTION_NAME_HERE \
-    --key YOUR_JAI_API_KEY
+    --key YOUR_JAI_API_KEY \
+    [--environment | -e] YOUR_JAI_ENVIRONMENT_NAME_OR_KEY \
 ```
 
 ## Add Data Patch
@@ -88,7 +107,8 @@ npx jai-sdk get-filters \
 npx jai-sdk add-data \
     --databaseName YOUR_COLLECTION_NAME_HERE \
     [callback-url | -u] 'http://my-calback-url.com' \
-    [-v] \
+    [--verbose | -v] \
+    [--environment | -e] YOUR_JAI_ENVIRONMENT_NAME_OR_KEY \
     --key YOUR_JAI_API_KEY
 ```
 
@@ -97,7 +117,8 @@ npx jai-sdk add-data \
 ```bash
 npx jai-sdk get-database-description\
     --databaseName YOUR_COLLECTION_NAME_HERE \
-    [-v] \
+    [--verbose | -v] \
+    [--environment | -e] YOUR_JAI_ENVIRONMENT_NAME_OR_KEY \
     --key YOUR_JAI_API_KEY
 ```
 
@@ -106,7 +127,8 @@ npx jai-sdk get-database-description\
 ```bash
 npx jai-sdk get-database-info \
     [--mode | -m] [complete | complete | names] \
-    [-v] \
+    [--verbose | -v] \
+    [--environment | -e] YOUR_JAI_ENVIRONMENT_NAME_OR_KEY \
     --key YOUR_JAI_API_KEY
 ```
 
@@ -117,15 +139,17 @@ npx jai-sdk get-ids \
     --databaseName YOUR_COLLECTION_NAME_HERE \
     [--mode | -m] complete | summarized | simple \
     [--verbose | -v] \
+    [--environment | -e] YOUR_JAI_ENVIRONMENT_NAME_OR_KEY \
     --key YOUR_JAI_API_KEY
 ```
 
-## Get Ids
+## Get Report
 
 ```bash
 npx jai-sdk get-report \
     --databaseName YOUR_COLLECTION_NAME_HERE \
     [--verbose | -v] \
+    [--environment | -e] YOUR_JAI_ENVIRONMENT_NAME_OR_KEY \
     --key YOUR_JAI_API_KEY
 ```
 
@@ -136,6 +160,7 @@ npx jai-sdk get-vector-by-id \
     --databaseName YOUR_COLLECTION_NAME_HERE \
     --arrayOfIds IDS_COMMA_SEPARETED \
     [--verbose | -v] \
+    [--environment | -e] YOUR_JAI_ENVIRONMENT_NAME_OR_KEY \
     --key YOUR_JAI_API_KEY
 ```
 
@@ -144,6 +169,8 @@ npx jai-sdk get-vector-by-id \
 ```bash
 npx jai-sdk get-download-key \
     --databaseName YOUR_COLLECTION_NAME_HERE \
+    [--verbose | -v] \
+    [--environment | -e] YOUR_JAI_ENVIRONMENT_NAME_OR_KEY \
     --key YOUR_JAI_API_KEY
 ```
 
@@ -153,6 +180,7 @@ npx jai-sdk get-download-key \
 npx jai-sdk get-fields \
     --databaseName YOUR_COLLECTION_NAME_HERE \
     [--verbose | -v] \
+    [--environment | -e] YOUR_JAI_ENVIRONMENT_NAME_OR_KEY \
     --key YOUR_JAI_API_KEY
 ```
 
@@ -162,6 +190,7 @@ npx jai-sdk get-fields \
 npx jai-sdk is-database-name-valid \
     --databaseName YOUR_COLLECTION_NAME_HERE \
     [--verbose | -v] \
+    [--environment | -e] YOUR_JAI_ENVIRONMENT_NAME_OR_KEY \
     --key YOUR_JAI_API_KEY
 ```
 
@@ -169,6 +198,7 @@ npx jai-sdk is-database-name-valid \
 
 ```bash
 npx jai-sdk get-status \
+    [--environment | -e] YOUR_JAI_ENVIRONMENT_NAME_OR_KEY \
     --key YOUR_JAI_API_KEY
 ```
 
@@ -177,6 +207,8 @@ npx jai-sdk get-status \
 ```bash
 npx jai-sdk delete-status \
     --databaseName YOUR_COLLECTION_NAME_HERE \
+    [--verbose | -v] \
+    [--environment | -e] YOUR_JAI_ENVIRONMENT_NAME_OR_KEY \
     --key YOUR_JAI_API_KEY
 ```
 
@@ -187,6 +219,7 @@ npx jai-sdk delete-entity \
     --databaseName YOUR_COLLECTION_NAME_HERE \
     --arrayOfIds IDS_COMMA_SEPARETED \
     [--verbose | -v] \
+    [--environment | -e] YOUR_JAI_ENVIRONMENT_NAME_OR_KEY \
     --key YOUR_JAI_API_KEY
 ```
 
@@ -196,30 +229,33 @@ npx jai-sdk delete-entity \
 npx jai-sdk delete-database \
     --databaseName YOUR_COLLECTION_NAME_HERE \
     [--verbose | -v] \
+    [--environment | -e] YOUR_JAI_ENVIRONMENT_NAME_OR_KEY \
     --key YOUR_JAI_API_KEY
 ```
-
-
 
 ## Similarity Methods
 
 ### Search By ID
 
 ```bash
-npx jai-sdk-ts similarity-search-by-id \
+npx jai-sdk similarity-search-by-id \
     --databaseName YOUR_COLLECTION_NAME_HERE \
     --arrayOfIds IDS_COMMA_SEPARETED \
-   [--verbose | -v] \
+    [--topk 10] \
+    [--verbose | -v] \
+    [--environment | -e] YOUR_JAI_ENVIRONMENT_NAME_OR_KEY \
     --key YOUR_JAI_API_KEY
 ```
 
 ### Search By Data
 
 ```bash
-npx jai-sdk-ts similarity-search-by-data \
+npx jai-sdk similarity-search-by-data \
     --databaseName YOUR_COLLECTION_NAME_HERE \
     --data "$(cat ./data-file-body.json)" \
-   [--verbose | -v] \
+    [--topk 10] \
+    [--verbose | -v] \
+    [--environment | -e] YOUR_JAI_ENVIRONMENT_NAME_OR_KEY \
     --key YOUR_JAI_API_KEY
 ```
 
@@ -238,12 +274,51 @@ npx jai-sdk-ts similarity-search-by-data \
 ## Prediction
 
 ```bash
-npx jai-sdk-testing predict \
+npx jai-sdk predict \
     --databaseName YOUR_COLLECTION_NAME_HERE \
     --data "$(cat ./data-file-body.json)" \
-    [--predict-probability | -p] true \
+   [--predict-probability | -p] true \
+   [--environment | -e] YOUR_JAI_ENVIRONMENT_NAME_OR_KEY \
    [--verbose | -v] \
     --key YOUR_JAI_API_KEY
+```
+
+## Recommendation Methods
+
+### Recommendation By ID
+
+```bash
+npx jai-sdk recommendation-search-by-id \
+   --databaseName YOUR_COLLECTION_NAME_HERE \
+   --arrayOfIds IDS_COMMA_SEPARETED \
+   [--topk 10] \
+   [--environment | -e] YOUR_JAI_ENVIRONMENT_NAME_OR_KEY \
+   [--verbose | -v] \
+   --key YOUR_JAI_API_KEY
+```
+
+### Recommendation By Data
+
+```bash
+npx jai-sdk recommendation-search-by-data \
+   --databaseName YOUR_COLLECTION_NAME_HERE \
+   --data "$(cat ./data-file-body.json)" \
+   [--topk 10] \
+   [--environment | -e] YOUR_JAI_ENVIRONMENT_NAME_OR_KEY \
+   [--verbose | -v] \
+   --key YOUR_JAI_API_KEY
+```
+
+#### data-file-body.json content
+
+```bash
+[{
+  "id": 0,
+  "sepal length (cm)": 0.1,
+  "sepal width (cm)": 1.2,
+  "petal length (cm)": 0.3,
+  "petal width (cm)": 2.4
+}]
 ```
 
 # NodeJS / Javascript Implementation
@@ -259,16 +334,22 @@ const {
     getStatus,
     authenticate,
     authenticateFromEnvironmentVariable,
+    jaiEnvironmentFromEnvironmentVariable,
     insertData,
     getFields,
     isDatabaseNameValid,
     checkInsertedData,
     addData,
     ...
-} = require('jai-sdk-testing');
+} = require('jai-sdk');
 
 if (process.env.JAI_API_KEY) {
     authenticateFromEnvironmentVariable()
+    console.debug(authMessage());
+}
+
+if (process.env.JAI_ENVIRONMENT_NAME) {
+    jaiEnvironmentFromEnvironmentVariable()
     console.debug(authMessage());
 }
 

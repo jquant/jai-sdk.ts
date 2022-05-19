@@ -46,6 +46,14 @@ export const authenticateFromEnvironmentVariable = () => {
     instance.authenticateFromEnvironmentVariable();
 }
 
+/**
+ * Authenticates from JAI_ENVIRONMENT_NAME environment variable (NodeJS only)
+ */
+export const jaiEnvironmentFromEnvironmentVariable = () => {
+    const instance = container.resolve(AxiosHttpClientAuthenticator);
+    instance.jaiEnvironmentFromEnvironmentVariable();
+}
+
 export const insertData = function (databaseName: string, filterName: string, data: any): Promise<any> {
     const instance = container.resolve(Creator);
     return instance.insert(databaseName, data, filterName);

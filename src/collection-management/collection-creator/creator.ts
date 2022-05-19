@@ -10,7 +10,7 @@ export class Creator {
     ) {
     }
 
-    async insert(databaseName: string, data: Array<any>, filterName:string = '') {
+    async insert(databaseName: string, data: Array<any>, filterName: string = '') {
 
         if (!databaseName)
             throw new Error('You must provide e databaseName');
@@ -23,10 +23,13 @@ export class Creator {
 
         this.throwIfAnyRequiredFieldsAreNotPresent(data);
 
-        const encodedFilterName = encodeURIComponent(filterName);
-        const encodedDatabaseName= encodeURIComponent(databaseName);
+        let url = `data/${encodeURIComponent(databaseName)}`;
 
-        return await this.client.post(`data/${encodedDatabaseName}?filter_name=${encodedFilterName}`, data);
+        if (filterName) {
+            url += `?filter_name=${encodeURIComponent(filterName)}`;
+        }
+
+        return await this.client.post(url, data);
     }
 
     private throwIfAnyRequiredFieldsAreNotPresent(data: Array<any>) {

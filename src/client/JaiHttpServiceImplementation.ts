@@ -27,7 +27,8 @@ export class JaiHttpServiceImplementation implements HttpJaiClientInterface {
     }
 
     async post(url: string, body: any): Promise<any> {
-        return await axios.post(url, body);
+        const {data} =  await axios.post(url, body);
+        return data;
     }
 
     async put(url: string, body: any): Promise<any> {
@@ -36,7 +37,7 @@ export class JaiHttpServiceImplementation implements HttpJaiClientInterface {
     }
 
     async patch(url: string, body: any): Promise<any> {
-        const {data} = await axios.put(url, body);
+        const {data} = await axios.patch(url, body);
         return data;
     }
 }

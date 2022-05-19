@@ -1,21 +1,23 @@
 import "reflect-metadata";
 import {container} from "tsyringe";
 import yargs from "yargs";
-import {SearchById} from "../search-by-id";
-import {AuthenticatorArgumentParser} from "../../../../command-line-interface/argument-parsers/authenticator-parser";
-import {YargsCommandSettings} from "../../../../command-line-interface/builders/types";
+import {RecommendationById} from "../recommendation-by-id";
+import {YargsCommandSettings} from "../../../command-line-interface/builders/types";
+import {AuthenticatorArgumentParser} from "../../../command-line-interface/argument-parsers/authenticator-parser";
 
-export const buildSearchByIdCommand = (): YargsCommandSettings => {
+export const buildRecommendationByIdCommand = (): YargsCommandSettings => {
     return {
-        command: 'similarity-search-by-id [databaseName] [arrayOfIds]',
-        description: 'search by similarity an array of ids',
+        command: 'recommendation-by-id [databaseName] [arrayOfIds]',
+        description: 'Perform ID recommendation search in the vector representations of a database.',
         builder: (yargs: yargs.Argv) => {
             return yargs
                 .positional('databaseName', {
-                    describe: 'Collection Name'
+                    describe: 'Collection Name',
+                    description: 'Database name to perform recommendation search operation.'
                 })
                 .positional('arrayOfIds', {
-                    describe: 'Array of Ids'
+                    describe: 'Array of Ids',
+                    description: 'IDs to search for the recommendation.'
                 })
                 .option('topk', {
                     type: "number",
@@ -31,8 +33,8 @@ export const buildSearchByIdCommand = (): YargsCommandSettings => {
 
             auth.authenticateFromCommandArgs(argv);
 
-            const searchById = container
-                .resolve(SearchById);
+            const recommendService = container
+                .resolve(RecommendationById);
 
             const databaseName: string = <string>argv.databaseName;
             const arrayOfIds: Array<any> = JSON.parse(`[${argv.arrayOfIds}]`);
@@ -44,7 +46,7 @@ export const buildSearchByIdCommand = (): YargsCommandSettings => {
             if (argv['dry-run'])
                 return;
 
-            const result = await searchById.search(databaseName, arrayOfIds, topK);
+            const result = await recommendService.recommend(databaseName, arrayOfIds, topK);
 
             const stringParsedResponse = JSON.stringify(result);
 
