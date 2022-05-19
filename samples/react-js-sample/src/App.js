@@ -17,7 +17,7 @@ function App() {
 
 
   function executeSimilaritySearch() {
-    // authenticate(REACT_APP_JAI_SDK_KEY);
+    authenticate(REACT_APP_JAI_SDK_KEY);
     // similaritySearchById("productImages", [10000], 10).then(data => {
     //   console.log(data);
     // })
