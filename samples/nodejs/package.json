@@ -7,7 +7,7 @@
     "start": "node app.js",
     "test": "mocha",
     "test:watch": "mocha  --timeout 15000 --watch",
-    "start:watch": "NODE_ENV=development nodemon app.js"
+    "start:watch": "NODE_ENV=development PORT=3031 nodemon app.js"
   },
   "author": "",
   "license": "ISC",

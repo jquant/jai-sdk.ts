@@ -14,12 +14,19 @@ const {
     isDatabaseNameValid,
     checkInsertedData,
     addData,
+} = require('jai-sdk');
 
-} = require('jai-sdk-testing');
+const { JAI_API_KEY } = process.env;
 
-const authMessage = () => `JAI authenticated with env ${process.env.JAI_API_KEY.toString().substring(0, 4)}**************************${process.env.JAI_API_KEY.toString().substring(28)}`;
+const authMessage = () => {
 
-if (process.env.JAI_API_KEY) {
+    const start = JAI_API_KEY.toString().substring(0, 4);
+    const end = JAI_API_KEY.toString().substring(28);
+
+    `JAI authenticated with env ${start}**************************${end}`;
+}
+
+if (JAI_API_KEY) {
     authenticateFromEnvironmentVariable()
     console.debug(authMessage());
 }
