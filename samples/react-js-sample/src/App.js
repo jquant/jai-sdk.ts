@@ -1,6 +1,6 @@
 import logo from './logo.png';
 import './App.css';
-// import { authenticate, similaritySearchById } from 'jai-sdk';
+// import { authenticate } from 'jai-sdk';
 
 const { REACT_APP_JAI_SDK_KEY } = process.env;
 
