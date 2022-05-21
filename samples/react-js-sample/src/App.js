@@ -1,6 +1,6 @@
 import logo from './logo.png';
 import './App.css';
-import { authenticate } from 'jai-sdk';
+import { authenticate, similaritySearchById } from 'jai-sdk';
 
 const { REACT_APP_JAI_SDK_KEY } = process.env;
 
@@ -18,9 +18,10 @@ function App() {
   function executeSimilaritySearch() {
 
     authenticate(REACT_APP_JAI_SDK_KEY);
-    // similaritySearchById("productImages", [10000], 10).then(data => {
-    //   console.log(data);
-    // })
+
+    similaritySearchById("productImages", [10000], 10).then(data => {
+      console.log(data);
+    })
   }
 
   return (
