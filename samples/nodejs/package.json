@@ -14,7 +14,8 @@
   "dependencies": {
     "dotenv": "^16.0.0",
     "express": "^4.17.2",
-    "http": "^0.0.1-security"
+    "http": "^0.0.1-security",
+    "jai-sdk": "^0.42.0"
   },
   "devDependencies": {
     "jest": "^27.5.1",
