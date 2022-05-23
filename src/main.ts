@@ -27,16 +27,15 @@ import {Predict} from "./model-interface/predict";
 
 Initializer.initializeInversionOfControl();
 
-export const getStatus = async () => {
-    const getter = container.resolve(StatusGetter);
-    return getter.getStatus();
-}
-
 export const authenticate = (apiKey: string) => {
     const instance = container.resolve(AxiosHttpClientAuthenticator);
     instance.authenticate(apiKey);
 }
 
+export const getStatus = async () => {
+    const getter = container.resolve(StatusGetter);
+    return getter.getStatus();
+}
 
 /**
  * Authenticates from JAI_API_KEY environment variable (NodeJS only)
@@ -213,3 +212,6 @@ export const predict = (databaseName: string, criteria: Array<any>, predictProba
     const instance = container.resolve(Predict);
     return instance.predict(databaseName, criteria, predictProbability);
 }
+
+
+console.log('Main Initialized')

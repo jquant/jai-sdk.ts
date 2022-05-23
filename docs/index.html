@@ -1,0 +1,251 @@
+<!DOCTYPE html><html class="default"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>jai-sdk</title><meta name="description" content="Documentation for jai-sdk"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/style.css"/><link rel="stylesheet" href="assets/highlight.css"/><script async src="assets/search.js" id="search-script"></script></head><body><script>document.body.classList.add(localStorage.getItem("tsd-theme") || "os")</script><header><div class="tsd-page-toolbar"><div class="container"><div class="table-wrap"><div class="table-cell" id="tsd-search" data-base="."><div class="field"><label for="tsd-search-field" class="tsd-widget search no-caption">Search</label><input type="text" id="tsd-search-field"/></div><ul class="results"><li class="state loading">Preparing search index...</li><li class="state failure">The search index is not available</li></ul><a href="index.html" class="title">jai-sdk</a></div><div class="table-cell" id="tsd-widgets"><div id="tsd-filter"><a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a><div class="tsd-filter-group"><div class="tsd-select" id="tsd-filter-visibility"><span class="tsd-select-label">All</span><ul class="tsd-select-list"><li data-value="public">Public</li><li data-value="protected">Public/Protected</li><li data-value="private" class="selected">All</li></ul></div> <input type="checkbox" id="tsd-filter-inherited" checked/><label class="tsd-widget" for="tsd-filter-inherited">Inherited</label><input type="checkbox" id="tsd-filter-externals" checked/><label class="tsd-widget" for="tsd-filter-externals">Externals</label></div></div><a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a></div></div></div></div><div class="tsd-page-title"><div class="container"><h1>jai-sdk </h1></div></div></header><div class="container container-main"><div class="row"><div class="col-8 col-content"><div class="tsd-panel tsd-typography">
+<a href="#jai-javascript-sdk" id="jai-javascript-sdk" style="color: inherit; text-decoration: none;">
+  <h1>JAI Javascript SDK</h1>
+</a>
+
+<a href="#our-rest-api" id="our-rest-api" style="color: inherit; text-decoration: none;">
+  <h3>Our REST API</h3>
+</a>
+<p><a href="https://documenter.getpostman.com/view/11432617/UVJcmxB1#0053601f-0014-4754-b917-347783ec4866">https://documenter.getpostman.com/view/11432617/UVJcmxB1#0053601f-0014-4754-b917-347783ec4866</a></p>
+
+<a href="#our-docs-for-python-developers" id="our-docs-for-python-developers" style="color: inherit; text-decoration: none;">
+  <h3>Our Docs (For Python Developers)</h3>
+</a>
+<p><a href="https://jai-sdk.readthedocs.io/en/latest/">https://jai-sdk.readthedocs.io/en/latest/</a></p>
+
+<a href="#cli-command-line-interface" id="cli-command-line-interface" style="color: inherit; text-decoration: none;">
+  <h1>CLI (Command Line Interface)</h1>
+</a>
+
+<a href="#getting-started" id="getting-started" style="color: inherit; text-decoration: none;">
+  <h2>Getting Started</h2>
+</a>
+<pre><code class="language-bash"><span class="hl-0">npm i jai-sdk</span>
+</code></pre>
+
+<a href="#getting-your-auth-key" id="getting-your-auth-key" style="color: inherit; text-decoration: none;">
+  <h2>Getting your auth Key</h2>
+</a>
+<pre><code class="language-bash"><span class="hl-0">npx jai-sdk get-auth-key \</span><br/><span class="hl-0">    --first-name </span><span class="hl-1">&quot;YOUR_FIRST_NAME&quot;</span><span class="hl-0"> \</span><br/><span class="hl-0">    --last-name </span><span class="hl-1">&quot;YOUR_LAST_NAME&quot;</span><span class="hl-0"> \</span><br/><span class="hl-0">    --email </span><span class="hl-1">&quot;YOUR_BEST_EMAIL_HERE&quot;</span><span class="hl-0"> \</span><br/><span class="hl-0">    [--company-name </span><span class="hl-1">&quot;YOUR_COMPANY_NAME_HERE&quot;</span><span class="hl-0">]</span>
+</code></pre>
+
+<a href="#environment-management" id="environment-management" style="color: inherit; text-decoration: none;">
+  <h2>Environment Management</h2>
+</a>
+
+<a href="#listing-environments" id="listing-environments" style="color: inherit; text-decoration: none;">
+  <h3>Listing Environments</h3>
+</a>
+<p>Get the names of all environments in the namespace.</p>
+<pre><code class="language-bash"><span class="hl-0">npx jai-sdk get-environments \</span><br/><span class="hl-0">    --key YOUR_JAI_API_KEY</span>
+</code></pre>
+
+<a href="#collection-management" id="collection-management" style="color: inherit; text-decoration: none;">
+  <h2>Collection Management</h2>
+</a>
+
+<a href="#insert-data" id="insert-data" style="color: inherit; text-decoration: none;">
+  <h3>Insert Data</h3>
+</a>
+<pre><code class="language-bash"><span class="hl-0">npx jai-sdk insert-data \</span><br/><span class="hl-0">   --databaseName YOUR_COLLECTION_NAME_HERE \</span><br/><span class="hl-0">   --data </span><span class="hl-1">&quot;$(cat ./data-file-body.json)&quot;</span><span class="hl-0"> \</span><br/><span class="hl-0">   [--filter-name | -f] </span><span class="hl-1">&#39;your filter here&#39;</span><span class="hl-0"> \</span><br/><span class="hl-0">   [--environment | -e] YOUR_JAI_ENVIRONMENT_NAME_OR_KEY \</span><br/><span class="hl-0">   [--verbose | -v] \</span><br/><span class="hl-0">   --key YOUR_JAI_API_KEY </span>
+</code></pre>
+
+<a href="#check-inserted-data" id="check-inserted-data" style="color: inherit; text-decoration: none;">
+  <h2>Check Inserted Data</h2>
+</a>
+<pre><code class="language-bash"><span class="hl-0">npx jai-sdk check-inserted-data \</span><br/><span class="hl-0">    --databaseName YOUR_COLLECTION_NAME_HERE \</span><br/><span class="hl-0">    [--mode | -m] </span><span class="hl-2">complete</span><span class="hl-0"> | summarized | simple \</span><br/><span class="hl-0">    [--environment | -e] YOUR_JAI_ENVIRONMENT_NAME_OR_KEY \</span><br/><span class="hl-0">    [--verbose | -v] \</span><br/><span class="hl-0">    --key YOUR_JAI_API_KEY</span>
+</code></pre>
+
+<a href="#setup-inserted-data" id="setup-inserted-data" style="color: inherit; text-decoration: none;">
+  <h2>Setup Inserted Data</h2>
+</a>
+<pre><code class="language-bash"><span class="hl-0">npx jai-sdk setup-inserted-data \</span><br/><span class="hl-0">    --databaseName YOUR_COLLECTION_NAME_HERE \</span><br/><span class="hl-0">    --settings </span><span class="hl-1">&quot;$(cat ./your-settings-file.json)&quot;</span><span class="hl-0"> \</span><br/><span class="hl-0">    [--quick-test | t] [true | false] \</span><br/><span class="hl-0">    [--overwrite | o] [true | false] \</span><br/><span class="hl-0">    [--environment | -e] YOUR_JAI_ENVIRONMENT_NAME_OR_KEY \</span><br/><span class="hl-0">    [--verbose | -v] \</span><br/><span class="hl-0">    --key YOUR_JAI_API_KEY</span>
+</code></pre>
+
+<a href="#interrupt-data-setup" id="interrupt-data-setup" style="color: inherit; text-decoration: none;">
+  <h2>Interrupt Data Setup</h2>
+</a>
+<pre><code class="language-bash"><span class="hl-0">npx jai-sdk interrupt-data-setup \</span><br/><span class="hl-0">    --databaseName YOUR_COLLECTION_NAME_HERE \</span><br/><span class="hl-0">    --key YOUR_JAI_API_KEY \</span><br/><span class="hl-0">    [--environment | -e] YOUR_JAI_ENVIRONMENT_NAME_OR_KEY \</span>
+</code></pre>
+
+<a href="#delete-raw-inserted-data" id="delete-raw-inserted-data" style="color: inherit; text-decoration: none;">
+  <h2>Delete Raw Inserted Data</h2>
+</a>
+<pre><code class="language-bash"><span class="hl-0">npx jai-sdk delete-inserted-data \</span><br/><span class="hl-0">    --databaseName YOUR_COLLECTION_NAME_HERE \</span><br/><span class="hl-0">    --key YOUR_JAI_API_KEY</span>
+</code></pre>
+
+<a href="#get-filters" id="get-filters" style="color: inherit; text-decoration: none;">
+  <h2>Get Filters</h2>
+</a>
+<pre><code class="language-bash"><span class="hl-0">npx jai-sdk get-filters \</span><br/><span class="hl-0">    --databaseName YOUR_COLLECTION_NAME_HERE \</span><br/><span class="hl-0">    --key YOUR_JAI_API_KEY \</span><br/><span class="hl-0">    [--environment | -e] YOUR_JAI_ENVIRONMENT_NAME_OR_KEY \</span>
+</code></pre>
+
+<a href="#add-data-patch" id="add-data-patch" style="color: inherit; text-decoration: none;">
+  <h2>Add Data Patch</h2>
+</a>
+<pre><code class="language-bash"><span class="hl-0">npx jai-sdk add-data \</span><br/><span class="hl-0">    --databaseName YOUR_COLLECTION_NAME_HERE \</span><br/><span class="hl-0">    [callback-url | -u] </span><span class="hl-1">&#39;http://my-calback-url.com&#39;</span><span class="hl-0"> \</span><br/><span class="hl-0">    [--verbose | -v] \</span><br/><span class="hl-0">    [--environment | -e] YOUR_JAI_ENVIRONMENT_NAME_OR_KEY \</span><br/><span class="hl-0">    --key YOUR_JAI_API_KEY</span>
+</code></pre>
+
+<a href="#get-database-description" id="get-database-description" style="color: inherit; text-decoration: none;">
+  <h2>Get Database Description</h2>
+</a>
+<pre><code class="language-bash"><span class="hl-0">npx jai-sdk get-database-description\</span><br/><span class="hl-0">    --databaseName YOUR_COLLECTION_NAME_HERE \</span><br/><span class="hl-0">    [--verbose | -v] \</span><br/><span class="hl-0">    [--environment | -e] YOUR_JAI_ENVIRONMENT_NAME_OR_KEY \</span><br/><span class="hl-0">    --key YOUR_JAI_API_KEY</span>
+</code></pre>
+
+<a href="#get-database-info" id="get-database-info" style="color: inherit; text-decoration: none;">
+  <h2>Get Database Info</h2>
+</a>
+<pre><code class="language-bash"><span class="hl-0">npx jai-sdk get-database-info \</span><br/><span class="hl-0">    [--mode | -m] [complete | </span><span class="hl-2">complete</span><span class="hl-0"> | names] \</span><br/><span class="hl-0">    [--verbose | -v] \</span><br/><span class="hl-0">    [--environment | -e] YOUR_JAI_ENVIRONMENT_NAME_OR_KEY \</span><br/><span class="hl-0">    --key YOUR_JAI_API_KEY</span>
+</code></pre>
+
+<a href="#get-ids" id="get-ids" style="color: inherit; text-decoration: none;">
+  <h2>Get Ids</h2>
+</a>
+<pre><code class="language-bash"><span class="hl-0">npx jai-sdk get-ids \</span><br/><span class="hl-0">    --databaseName YOUR_COLLECTION_NAME_HERE \</span><br/><span class="hl-0">    [--mode | -m] </span><span class="hl-2">complete</span><span class="hl-0"> | summarized | simple \</span><br/><span class="hl-0">    [--verbose | -v] \</span><br/><span class="hl-0">    [--environment | -e] YOUR_JAI_ENVIRONMENT_NAME_OR_KEY \</span><br/><span class="hl-0">    --key YOUR_JAI_API_KEY</span>
+</code></pre>
+
+<a href="#get-report" id="get-report" style="color: inherit; text-decoration: none;">
+  <h2>Get Report</h2>
+</a>
+<pre><code class="language-bash"><span class="hl-0">npx jai-sdk get-report \</span><br/><span class="hl-0">    --databaseName YOUR_COLLECTION_NAME_HERE \</span><br/><span class="hl-0">    [--verbose | -v] \</span><br/><span class="hl-0">    [--environment | -e] YOUR_JAI_ENVIRONMENT_NAME_OR_KEY \</span><br/><span class="hl-0">    --key YOUR_JAI_API_KEY</span>
+</code></pre>
+
+<a href="#get-vector-by-id" id="get-vector-by-id" style="color: inherit; text-decoration: none;">
+  <h2>Get Vector By Id</h2>
+</a>
+<pre><code class="language-bash"><span class="hl-0">npx jai-sdk get-vector-by-id \</span><br/><span class="hl-0">    --databaseName YOUR_COLLECTION_NAME_HERE \</span><br/><span class="hl-0">    --arrayOfIds IDS_COMMA_SEPARETED \</span><br/><span class="hl-0">    [--verbose | -v] \</span><br/><span class="hl-0">    [--environment | -e] YOUR_JAI_ENVIRONMENT_NAME_OR_KEY \</span><br/><span class="hl-0">    --key YOUR_JAI_API_KEY</span>
+</code></pre>
+
+<a href="#get-download-key-url-to-download-vector" id="get-download-key-url-to-download-vector" style="color: inherit; text-decoration: none;">
+  <h2>Get Download Key (Url to Download Vector)</h2>
+</a>
+<pre><code class="language-bash"><span class="hl-0">npx jai-sdk get-download-key \</span><br/><span class="hl-0">    --databaseName YOUR_COLLECTION_NAME_HERE \</span><br/><span class="hl-0">    [--verbose | -v] \</span><br/><span class="hl-0">    [--environment | -e] YOUR_JAI_ENVIRONMENT_NAME_OR_KEY \</span><br/><span class="hl-0">    --key YOUR_JAI_API_KEY</span>
+</code></pre>
+
+<a href="#get-fields" id="get-fields" style="color: inherit; text-decoration: none;">
+  <h2>Get Fields</h2>
+</a>
+<pre><code class="language-bash"><span class="hl-0">npx jai-sdk get-fields \</span><br/><span class="hl-0">    --databaseName YOUR_COLLECTION_NAME_HERE \</span><br/><span class="hl-0">    [--verbose | -v] \</span><br/><span class="hl-0">    [--environment | -e] YOUR_JAI_ENVIRONMENT_NAME_OR_KEY \</span><br/><span class="hl-0">    --key YOUR_JAI_API_KEY</span>
+</code></pre>
+
+<a href="#is-database-name-valid" id="is-database-name-valid" style="color: inherit; text-decoration: none;">
+  <h2>Is Database Name Valid</h2>
+</a>
+<pre><code class="language-bash"><span class="hl-0">npx jai-sdk is-database-name-valid \</span><br/><span class="hl-0">    --databaseName YOUR_COLLECTION_NAME_HERE \</span><br/><span class="hl-0">    [--verbose | -v] \</span><br/><span class="hl-0">    [--environment | -e] YOUR_JAI_ENVIRONMENT_NAME_OR_KEY \</span><br/><span class="hl-0">    --key YOUR_JAI_API_KEY</span>
+</code></pre>
+
+<a href="#get-status" id="get-status" style="color: inherit; text-decoration: none;">
+  <h2>Get Status</h2>
+</a>
+<pre><code class="language-bash"><span class="hl-0">npx jai-sdk get-status \</span><br/><span class="hl-0">    [--environment | -e] YOUR_JAI_ENVIRONMENT_NAME_OR_KEY \</span><br/><span class="hl-0">    --key YOUR_JAI_API_KEY</span>
+</code></pre>
+
+<a href="#delete-status" id="delete-status" style="color: inherit; text-decoration: none;">
+  <h2>Delete Status</h2>
+</a>
+<pre><code class="language-bash"><span class="hl-0">npx jai-sdk delete-status \</span><br/><span class="hl-0">    --databaseName YOUR_COLLECTION_NAME_HERE \</span><br/><span class="hl-0">    [--verbose | -v] \</span><br/><span class="hl-0">    [--environment | -e] YOUR_JAI_ENVIRONMENT_NAME_OR_KEY \</span><br/><span class="hl-0">    --key YOUR_JAI_API_KEY</span>
+</code></pre>
+
+<a href="#delete-entity-vectors-by-id" id="delete-entity-vectors-by-id" style="color: inherit; text-decoration: none;">
+  <h2>Delete Entity (Vectors) By Id</h2>
+</a>
+<pre><code class="language-bash"><span class="hl-0">npx jai-sdk delete-entity \</span><br/><span class="hl-0">    --databaseName YOUR_COLLECTION_NAME_HERE \</span><br/><span class="hl-0">    --arrayOfIds IDS_COMMA_SEPARETED \</span><br/><span class="hl-0">    [--verbose | -v] \</span><br/><span class="hl-0">    [--environment | -e] YOUR_JAI_ENVIRONMENT_NAME_OR_KEY \</span><br/><span class="hl-0">    --key YOUR_JAI_API_KEY</span>
+</code></pre>
+
+<a href="#delete-database" id="delete-database" style="color: inherit; text-decoration: none;">
+  <h2>Delete Database</h2>
+</a>
+<pre><code class="language-bash"><span class="hl-0">npx jai-sdk delete-database \</span><br/><span class="hl-0">    --databaseName YOUR_COLLECTION_NAME_HERE \</span><br/><span class="hl-0">    [--verbose | -v] \</span><br/><span class="hl-0">    [--environment | -e] YOUR_JAI_ENVIRONMENT_NAME_OR_KEY \</span><br/><span class="hl-0">    --key YOUR_JAI_API_KEY</span>
+</code></pre>
+
+<a href="#similarity-methods" id="similarity-methods" style="color: inherit; text-decoration: none;">
+  <h2>Similarity Methods</h2>
+</a>
+
+<a href="#search-by-id" id="search-by-id" style="color: inherit; text-decoration: none;">
+  <h3>Search By ID</h3>
+</a>
+<pre><code class="language-bash"><span class="hl-0">npx jai-sdk similarity-search-by-id \</span><br/><span class="hl-0">    --databaseName YOUR_COLLECTION_NAME_HERE \</span><br/><span class="hl-0">    --arrayOfIds IDS_COMMA_SEPARETED \</span><br/><span class="hl-0">    [--topk 10] \</span><br/><span class="hl-0">    [--verbose | -v] \</span><br/><span class="hl-0">    [--environment | -e] YOUR_JAI_ENVIRONMENT_NAME_OR_KEY \</span><br/><span class="hl-0">    --key YOUR_JAI_API_KEY</span>
+</code></pre>
+
+<a href="#search-by-data" id="search-by-data" style="color: inherit; text-decoration: none;">
+  <h3>Search By Data</h3>
+</a>
+<pre><code class="language-bash"><span class="hl-0">npx jai-sdk similarity-search-by-data \</span><br/><span class="hl-0">    --databaseName YOUR_COLLECTION_NAME_HERE \</span><br/><span class="hl-0">    --data </span><span class="hl-1">&quot;$(cat ./data-file-body.json)&quot;</span><span class="hl-0"> \</span><br/><span class="hl-0">    [--topk 10] \</span><br/><span class="hl-0">    [--verbose | -v] \</span><br/><span class="hl-0">    [--environment | -e] YOUR_JAI_ENVIRONMENT_NAME_OR_KEY \</span><br/><span class="hl-0">    --key YOUR_JAI_API_KEY</span>
+</code></pre>
+
+<a href="#data-file-bodyjson-content" id="data-file-bodyjson-content" style="color: inherit; text-decoration: none;">
+  <h4>data-file-body.json content</h4>
+</a>
+<pre><code class="language-bash"><span class="hl-0">[{</span><br/><span class="hl-0">  </span><span class="hl-1">&quot;id&quot;</span><span class="hl-0">: 0,</span><br/><span class="hl-0">  </span><span class="hl-1">&quot;sepal length (cm)&quot;</span><span class="hl-0">: 0.1,</span><br/><span class="hl-0">  </span><span class="hl-1">&quot;sepal width (cm)&quot;</span><span class="hl-0">: 1.2,</span><br/><span class="hl-0">  </span><span class="hl-1">&quot;petal length (cm)&quot;</span><span class="hl-0">: 0.3,</span><br/><span class="hl-0">  </span><span class="hl-1">&quot;petal width (cm)&quot;</span><span class="hl-0">: 2.4</span><br/><span class="hl-0">}]</span>
+</code></pre>
+
+<a href="#prediction" id="prediction" style="color: inherit; text-decoration: none;">
+  <h2>Prediction</h2>
+</a>
+<pre><code class="language-bash"><span class="hl-0">npx jai-sdk predict \</span><br/><span class="hl-0">    --databaseName YOUR_COLLECTION_NAME_HERE \</span><br/><span class="hl-0">    --data </span><span class="hl-1">&quot;$(cat ./data-file-body.json)&quot;</span><span class="hl-0"> \</span><br/><span class="hl-0">   [--predict-probability | -p] </span><span class="hl-2">true</span><span class="hl-0"> \</span><br/><span class="hl-0">   [--environment | -e] YOUR_JAI_ENVIRONMENT_NAME_OR_KEY \</span><br/><span class="hl-0">   [--verbose | -v] \</span><br/><span class="hl-0">    --key YOUR_JAI_API_KEY</span>
+</code></pre>
+
+<a href="#recommendation-methods" id="recommendation-methods" style="color: inherit; text-decoration: none;">
+  <h2>Recommendation Methods</h2>
+</a>
+
+<a href="#recommendation-by-id" id="recommendation-by-id" style="color: inherit; text-decoration: none;">
+  <h3>Recommendation By ID</h3>
+</a>
+<pre><code class="language-bash"><span class="hl-0">npx jai-sdk recommendation-search-by-id \</span><br/><span class="hl-0">   --databaseName YOUR_COLLECTION_NAME_HERE \</span><br/><span class="hl-0">   --arrayOfIds IDS_COMMA_SEPARETED \</span><br/><span class="hl-0">   [--topk 10] \</span><br/><span class="hl-0">   [--environment | -e] YOUR_JAI_ENVIRONMENT_NAME_OR_KEY \</span><br/><span class="hl-0">   [--verbose | -v] \</span><br/><span class="hl-0">   --key YOUR_JAI_API_KEY</span>
+</code></pre>
+
+<a href="#recommendation-by-data" id="recommendation-by-data" style="color: inherit; text-decoration: none;">
+  <h3>Recommendation By Data</h3>
+</a>
+<pre><code class="language-bash"><span class="hl-0">npx jai-sdk recommendation-search-by-data \</span><br/><span class="hl-0">   --databaseName YOUR_COLLECTION_NAME_HERE \</span><br/><span class="hl-0">   --data </span><span class="hl-1">&quot;$(cat ./data-file-body.json)&quot;</span><span class="hl-0"> \</span><br/><span class="hl-0">   [--topk 10] \</span><br/><span class="hl-0">   [--environment | -e] YOUR_JAI_ENVIRONMENT_NAME_OR_KEY \</span><br/><span class="hl-0">   [--verbose | -v] \</span><br/><span class="hl-0">   --key YOUR_JAI_API_KEY</span>
+</code></pre>
+
+<a href="#data-file-bodyjson-content-1" id="data-file-bodyjson-content-1" style="color: inherit; text-decoration: none;">
+  <h4>data-file-body.json content</h4>
+</a>
+<pre><code class="language-bash"><span class="hl-0">[{</span><br/><span class="hl-0">  </span><span class="hl-1">&quot;id&quot;</span><span class="hl-0">: 0,</span><br/><span class="hl-0">  </span><span class="hl-1">&quot;sepal length (cm)&quot;</span><span class="hl-0">: 0.1,</span><br/><span class="hl-0">  </span><span class="hl-1">&quot;sepal width (cm)&quot;</span><span class="hl-0">: 1.2,</span><br/><span class="hl-0">  </span><span class="hl-1">&quot;petal length (cm)&quot;</span><span class="hl-0">: 0.3,</span><br/><span class="hl-0">  </span><span class="hl-1">&quot;petal width (cm)&quot;</span><span class="hl-0">: 2.4</span><br/><span class="hl-0">}]</span>
+</code></pre>
+
+<a href="#nodejs--javascript-implementation" id="nodejs--javascript-implementation" style="color: inherit; text-decoration: none;">
+  <h1>NodeJS / Javascript Implementation</h1>
+</a>
+<pre><code class="language-code">
+const express = require(&#39;express&#39;)
+const app = express()
+
+require(&#39;dotenv&#39;).config()
+
+const {
+    getStatus,
+    authenticate,
+    authenticateFromEnvironmentVariable,
+    jaiEnvironmentFromEnvironmentVariable,
+    insertData,
+    getFields,
+    isDatabaseNameValid,
+    checkInsertedData,
+    addData,
+    ...
+} = require(&#39;jai-sdk&#39;);
+
+if (process.env.JAI_API_KEY) {
+    authenticateFromEnvironmentVariable()
+    console.debug(authMessage());
+}
+
+if (process.env.JAI_ENVIRONMENT_NAME) {
+    jaiEnvironmentFromEnvironmentVariable()
+    console.debug(authMessage());
+}
+
+app.get(&#39;/get-status&#39;, (req, res) =&gt; {
+    getStatus().then(data =&gt; {
+        res.send(data);
+    })
+})
+
+...
+</code></pre>
+</div></div><div class="col-4 col-menu menu-sticky-wrap menu-highlight"><nav class="tsd-navigation primary"><ul><li class="current"><a href="modules.html">Exports</a></li></ul></nav><nav class="tsd-navigation secondary menu-sticky"><ul><li class="tsd-kind-function"><a href="modules.html#addData" class="tsd-kind-icon">add<wbr/>Data</a></li><li class="tsd-kind-function"><a href="modules.html#authenticate" class="tsd-kind-icon">authenticate</a></li><li class="tsd-kind-function"><a href="modules.html#authenticateFromEnvironmentVariable" class="tsd-kind-icon">authenticate<wbr/>From<wbr/>Environment<wbr/>Variable</a></li><li class="tsd-kind-function"><a href="modules.html#checkInsertedData" class="tsd-kind-icon">check<wbr/>Inserted<wbr/>Data</a></li><li class="tsd-kind-function"><a href="modules.html#deleteDatabase" class="tsd-kind-icon">delete<wbr/>Database</a></li><li class="tsd-kind-function"><a href="modules.html#deleteEntity" class="tsd-kind-icon">delete<wbr/>Entity</a></li><li class="tsd-kind-function"><a href="modules.html#deleteInsertedData" class="tsd-kind-icon">delete<wbr/>Inserted<wbr/>Data</a></li><li class="tsd-kind-function"><a href="modules.html#deleteStatus" class="tsd-kind-icon">delete<wbr/>Status</a></li><li class="tsd-kind-function"><a href="modules.html#getDatabaseDescription" class="tsd-kind-icon">get<wbr/>Database<wbr/>Description</a></li><li class="tsd-kind-function"><a href="modules.html#getDatabaseInfo" class="tsd-kind-icon">get<wbr/>Database<wbr/>Info</a></li><li class="tsd-kind-function"><a href="modules.html#getDownloadKey" class="tsd-kind-icon">get<wbr/>Download<wbr/>Key</a></li><li class="tsd-kind-function"><a href="modules.html#getFields" class="tsd-kind-icon">get<wbr/>Fields</a></li><li class="tsd-kind-function"><a href="modules.html#getIds" class="tsd-kind-icon">get<wbr/>Ids</a></li><li class="tsd-kind-function"><a href="modules.html#getReport" class="tsd-kind-icon">get<wbr/>Report</a></li><li class="tsd-kind-function"><a href="modules.html#getStatus" class="tsd-kind-icon">get<wbr/>Status</a></li><li class="tsd-kind-function"><a href="modules.html#getVectorId" class="tsd-kind-icon">get<wbr/>Vector<wbr/>Id</a></li><li class="tsd-kind-function"><a href="modules.html#insertData" class="tsd-kind-icon">insert<wbr/>Data</a></li><li class="tsd-kind-function"><a href="modules.html#interruptDataSetup" class="tsd-kind-icon">interrupt<wbr/>Data<wbr/>Setup</a></li><li class="tsd-kind-function"><a href="modules.html#isDatabaseNameValid" class="tsd-kind-icon">is<wbr/>Database<wbr/>Name<wbr/>Valid</a></li><li class="tsd-kind-function"><a href="modules.html#jaiEnvironmentFromEnvironmentVariable" class="tsd-kind-icon">jai<wbr/>Environment<wbr/>From<wbr/>Environment<wbr/>Variable</a></li><li class="tsd-kind-function"><a href="modules.html#predict" class="tsd-kind-icon">predict</a></li><li class="tsd-kind-function"><a href="modules.html#setupInsertedData" class="tsd-kind-icon">setup<wbr/>Inserted<wbr/>Data</a></li><li class="tsd-kind-function"><a href="modules.html#similaritySearchByData" class="tsd-kind-icon">similarity<wbr/>Search<wbr/>By<wbr/>Data</a></li><li class="tsd-kind-function"><a href="modules.html#similaritySearchById" class="tsd-kind-icon">similarity<wbr/>Search<wbr/>By<wbr/>Id</a></li></ul></nav></div></div></div><footer class="with-border-bottom"><div class="container"><h2>Settings</h2><p>Theme <select id="theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></p></div></footer><div class="container tsd-generator"><p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></div><div class="overlay"></div><script src="assets/main.js"></script></body></html>
