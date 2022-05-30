@@ -24,12 +24,35 @@ import {DatabaseDeleter} from "./collection-management/deletion/database/databas
 import {SearchById} from "./similar/search/by-id/search-by-id";
 import {SearchByData} from "./similar/search/by-data/search-by-data";
 import {Predict} from "./model-interface/predict";
+import {EnvironmentLister} from "./environment-management/environment-listing/environment-list";
+import {Environment} from "./environment-management/environment";
 
 Initializer.initializeInversionOfControl();
 
-export const authenticate = (apiKey: string) => {
+/**
+ * Authenticates the api key to further requests
+ * @param apiKey your JAI api key
+ */
+export const authenticate = (apiKey: string): void => {
     const instance = container.resolve(AxiosHttpClientAuthenticator);
     instance.authenticate(apiKey);
+}
+
+/**
+ * Sets the environment key as default for further requests
+ * @param environment your JAI environment key or name
+ */
+export const setEnvironment = (environment: string): void => {
+    const instance = container.resolve(AxiosHttpClientAuthenticator);
+    instance.setEnvironment(environment);
+}
+
+/**
+ * Returns all available environments for your JAI api key
+ */
+export const getEnvironments = (): Promise<Environment[]> => {
+    const instance = container.resolve(EnvironmentLister);
+    return instance.list();
 }
 
 export const getStatus = async () => {
