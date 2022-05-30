@@ -34,6 +34,11 @@ export const authenticate = (apiKey: string) => {
     instance.authenticate(apiKey);
 }
 
+export const setEnvironment = (environment: string) => {
+    const instance = container.resolve(AxiosHttpClientAuthenticator);
+    instance.setEnvironment(environment);
+}
+
 export const getEnvironments = () : Promise<Environment[]> => {
     const instance = container.resolve(EnvironmentLister);
     return instance.list();
