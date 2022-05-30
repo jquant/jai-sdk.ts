@@ -24,12 +24,19 @@ import {DatabaseDeleter} from "./collection-management/deletion/database/databas
 import {SearchById} from "./similar/search/by-id/search-by-id";
 import {SearchByData} from "./similar/search/by-data/search-by-data";
 import {Predict} from "./model-interface/predict";
+import {EnvironmentLister} from "./environment-management/environment-listing/environment-list";
+import {Environment} from "./environment-management/environment";
 
 Initializer.initializeInversionOfControl();
 
 export const authenticate = (apiKey: string) => {
     const instance = container.resolve(AxiosHttpClientAuthenticator);
     instance.authenticate(apiKey);
+}
+
+export const getEnvironments = () : Promise<Environment[]> => {
+    const instance = container.resolve(EnvironmentLister);
+    return instance.list();
 }
 
 export const getStatus = async () => {
