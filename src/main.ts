@@ -29,17 +29,28 @@ import {Environment} from "./environment-management/environment";
 
 Initializer.initializeInversionOfControl();
 
-export const authenticate = (apiKey: string) => {
+/**
+ * Authenticates the api key to further requests
+ * @param apiKey your JAI api key
+ */
+export const authenticate = (apiKey: string): void => {
     const instance = container.resolve(AxiosHttpClientAuthenticator);
     instance.authenticate(apiKey);
 }
 
-export const setEnvironment = (environment: string) => {
+/**
+ * Sets the environment key as default for further requests
+ * @param environment your JAI environment key or name
+ */
+export const setEnvironment = (environment: string): void => {
     const instance = container.resolve(AxiosHttpClientAuthenticator);
     instance.setEnvironment(environment);
 }
 
-export const getEnvironments = () : Promise<Environment[]> => {
+/**
+ * Returns all available environments for your JAI api key
+ */
+export const getEnvironments = (): Promise<Environment[]> => {
     const instance = container.resolve(EnvironmentLister);
     return instance.list();
 }
