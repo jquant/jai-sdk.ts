@@ -1,10 +1,36 @@
+import * as React from "react";
+import { useState, useEffect } from "react";
+
 import logo from './logo.png';
 import './App.css';
-import { authenticate, similaritySearchById } from 'jai-sdk';
+import { authenticate, similaritySearchById, getEnvironments } from 'jai-sdk';
 
 const { REACT_APP_JAI_SDK_KEY } = process.env;
 
 function App() {
+
+  const [loaded, setLoaded] = useState(false);
+  const [environments, setEnvironments] = useState([]);
+  const [selectedEnvironment, setSelectedEnvironment] = useState('');
+
+  useEffect(() => {
+
+    if (!REACT_APP_JAI_SDK_KEY)
+      return;
+
+    if (loaded)
+      return;
+
+    setLoaded(true);
+
+    authenticate(REACT_APP_JAI_SDK_KEY);
+
+    getEnvironments().then(data => {
+      console.log(data)
+      setEnvironments(data);
+    })
+
+  }, []);
 
   function getApiKey() {
     if (!REACT_APP_JAI_SDK_KEY)
@@ -15,10 +41,15 @@ function App() {
     return `${start}***********************${end}`;
   }
 
+  function showEnvironments() {
+    return (<ul>
+      {environments.map(item => (
+        <li key={(item.key || item.id)}>{item.name}</li>
+      ))}
+    </ul>)
+  }
+
   function executeSimilaritySearch() {
-
-    authenticate(REACT_APP_JAI_SDK_KEY);
-
     similaritySearchById("productImages", [10000], 10).then(data => {
       console.log(data);
     })
@@ -36,9 +67,12 @@ function App() {
           More About JAI
         </a>
         <div>
-          <button onClick={executeSimilaritySearch}>
+
+          {showEnvironments()}
+
+          {/* <button onClick={executeSimilaritySearch}>
             Similar By ID
-          </button>
+          </button> */}
         </div>
 
       </header>
