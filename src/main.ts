@@ -144,7 +144,7 @@ export const getDatabaseDescription = (databaseName: string) => {
  * Get information of all databases in your Mycelia environment.
  * @param mode
  */
-export const getDatabaseInfo = (mode: mode): Promise<DatabaseInfo> => {
+export const getDatabaseInfo = (mode: mode): Promise<string[] | DatabaseInfo[]> => {
     const instance = container.resolve(GetDatabaseInfo);
     return instance.getInfo(mode)
 }
