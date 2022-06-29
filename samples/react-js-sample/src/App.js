@@ -1,85 +1,111 @@
 import * as React from "react";
-import { useState, useEffect } from "react";
+import {useState, useEffect} from "react";
 
 import logo from './logo.png';
 import './App.css';
-import { authenticate, similaritySearchById, getEnvironments } from 'jai-sdk';
+import {authenticate, similaritySearchById, getEnvironments, setEnvironment, getDatabaseInfo} from 'jai-sdk';
 
-const { REACT_APP_JAI_SDK_KEY } = process.env;
+const {REACT_APP_JAI_SDK_KEY} = process.env;
 
 function App() {
 
-  const [loaded, setLoaded] = useState(false);
-  const [environments, setEnvironments] = useState([]);
-  const [selectedEnvironment, setSelectedEnvironment] = useState('');
+    const [loaded, setLoaded] = useState(false);
+    const [environments, setEnvironments] = useState([]);
+    const [collections, setCollections] = useState([]);
+    const [selectedEnvironment, setSelectedEnvironment] = useState('');
 
-  useEffect(() => {
+    useEffect(() => {
 
-    if (!REACT_APP_JAI_SDK_KEY)
-      return;
+        if (!REACT_APP_JAI_SDK_KEY)
+            return;
 
-    if (loaded)
-      return;
+        if (loaded)
+            return;
 
-    setLoaded(true);
+        setLoaded(true);
 
-    authenticate(REACT_APP_JAI_SDK_KEY);
+        authenticate(REACT_APP_JAI_SDK_KEY);
 
-    getEnvironments().then(data => {
-      console.log(data)
-      setEnvironments(data);
-    })
+        getEnvironments().then(data => {
+            console.log(data)
+            setEnvironments(data);
+        })
 
-  }, []);
+    }, [REACT_APP_JAI_SDK_KEY]);
 
-  function getApiKey() {
-    if (!REACT_APP_JAI_SDK_KEY)
-      return "Please, set the REACT_APP_JAI_SDK_KEY in your env.local file";
+    useEffect(() => {
 
-    const start = REACT_APP_JAI_SDK_KEY.substring(0, 4);
-    const end = REACT_APP_JAI_SDK_KEY.substring(28, 32);
-    return `${start}***********************${end}`;
-  }
+        if (!selectedEnvironment)
+            return;
 
-  function showEnvironments() {
-    return (<ul>
-      {environments.map(item => (
-        <li key={(item.key || item.id)}>{item.name}</li>
-      ))}
-    </ul>)
-  }
+        setEnvironment(selectedEnvironment)
 
-  function executeSimilaritySearch() {
-    similaritySearchById("productImages", [10000], 10).then(data => {
-      console.log(data);
-    })
-  }
+        getDatabaseInfo("names").then(collections => {
+            setCollections(collections.sort());
+        })
 
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Your API KEY</p>
-        <small>
-          {getApiKey()}
-        </small>
-        <a className="App-link" href="https://getjai.com/" target="_blank" rel="noopener noreferrer">
-          More About JAI
-        </a>
-        <div>
+    }, [selectedEnvironment]);
 
-          {showEnvironments()}
+    function getApiKey() {
+        if (!REACT_APP_JAI_SDK_KEY)
+            return "Please, set the REACT_APP_JAI_SDK_KEY in your env.local file";
 
-          {/* <button onClick={executeSimilaritySearch}>
-            Similar By ID
-          </button> */}
+        const start = REACT_APP_JAI_SDK_KEY.substring(0, 4);
+        const end = REACT_APP_JAI_SDK_KEY.substring(28, 32);
+        return `${start}***********************${end}`;
+    }
+
+    function showEnvironments() {
+        return (
+            <select onChange={e => setSelectedEnvironment(e.target.value)}>
+                <option>Please, select one</option>
+                {environments.map(({key, name}) => (
+                    <option key={name} value={(key || name)}>{name}</option>
+                ))}
+            </select>
+        )
+    }
+
+    function showCollectionNames() {
+        return (
+            <select>
+                <option>Please, select one</option>
+                {collections.map(item => (
+                    <option key={item}>{item}</option>
+                ))}
+            </select>
+        )
+    }
+
+    return (
+        <div className="App">
+            <header className="App-header">
+                <img src={logo} className="App-logo" alt="logo"/>
+                <p>Your API KEY</p>
+                <small>
+                    Key: {getApiKey()}
+                </small>
+                <div>
+                    {environments &&
+                        <p>
+                            Environments: {showEnvironments()}
+                        </p>
+                    }
+
+                    {collections &&
+                        <p>
+                            Collections:{showCollectionNames()}
+                        </p>
+                    }
+                </div>
+
+                <a className="App-link" href="https://getjai.com/" target="_blank" rel="noopener noreferrer">
+                    More About JAI
+                </a>
+
+            </header>
         </div>
-
-      </header>
-
-
-    </div>
-  );
+    );
 }
 
 export default App;
