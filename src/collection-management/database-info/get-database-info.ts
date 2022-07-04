@@ -15,7 +15,7 @@ export class GetDatabaseInfo {
      * Get information of all databases in your Mycelia environment.
      * @param mode
      */
-    async getInfo(mode: mode = 'complete'): Promise<DatabaseInfo> {
+    async getInfo(mode: mode = 'complete'): Promise<string[] | DatabaseInfo[]> {
 
         if (!mode)
             throw new Error('mode cannot be null');
