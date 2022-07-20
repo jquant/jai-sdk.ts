@@ -11,7 +11,7 @@ import {InsertedDataSetup, SetupSettings} from "./collection-management/setup/in
 import {InsertedDataInterrupter} from "./collection-management/interrupter/inserted-data-interrupter";
 import {InsertedDataDeleter} from "./collection-management/deletion/inserted-data/inserted-data-deleter";
 import {DataPatcher} from "./collection-management/add-data/data-patcher";
-import {DatabaseDescriptor} from "./collection-management/database-description/database-descriptor";
+import {DatabaseDescriber} from "./collection-management/database-description/database-describer";
 import {GetDatabaseInfo} from "./collection-management/database-info/get-database-info";
 import {DatabaseInfo, mode} from "./collection-management/database-info/types";
 import {IdGetter} from "./collection-management/ids/id-getter";
@@ -137,7 +137,7 @@ export const addData = (databaseName: string, callbackUrl: string = '') => {
  * @param databaseName Target Database.
  */
 export const getDatabaseDescription = (databaseName: string) : Promise<DatabaseDescription> => {
-    const instance = container.resolve(DatabaseDescriptor);
+    const instance = container.resolve(DatabaseDescriber);
     return instance.describe(databaseName)
 }
 

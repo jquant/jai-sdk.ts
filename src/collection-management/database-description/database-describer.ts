@@ -4,7 +4,7 @@ import {HttpJaiClientGetInterface} from "../../client/http-jai-client-get.interf
 import {DatabaseDescription} from "./types";
 
 @injectable()
-export class DatabaseDescriptor {
+export class DatabaseDescriber {
 
     constructor(
         @inject("HttpJaiClientGetInterface") private readonly client: HttpJaiClientGetInterface
