@@ -26,6 +26,7 @@ import {SearchByData} from "./similar/search/by-data/search-by-data";
 import {Predict} from "./model-interface/predict";
 import {EnvironmentLister} from "./environment-management/environment-listing/environment-list";
 import {Environment} from "./environment-management/environment";
+import {DatabaseDescription} from "./collection-management/database-description/types";
 
 Initializer.initializeInversionOfControl();
 
@@ -135,7 +136,7 @@ export const addData = (databaseName: string, callbackUrl: string = '') => {
  * Get description of a specific database in your Mycelia environment.
  * @param databaseName Target Database.
  */
-export const getDatabaseDescription = (databaseName: string) => {
+export const getDatabaseDescription = (databaseName: string) : Promise<DatabaseDescription> => {
     const instance = container.resolve(DatabaseDescriptor);
     return instance.describe(databaseName)
 }
