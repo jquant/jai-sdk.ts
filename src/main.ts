@@ -27,6 +27,8 @@ import {Predict} from "./model-interface/predict";
 import {EnvironmentLister} from "./environment-management/environment-listing/environment-list";
 import {Environment} from "./environment-management/environment";
 import {DatabaseDescription} from "./collection-management/database-description/types";
+import {RecommendationById} from "./recommendation/by-id/recommendation-by-id";
+import {RecommendationByData} from "./recommendation/by-data/recommendation-by-data";
 
 Initializer.initializeInversionOfControl();
 
@@ -237,5 +239,26 @@ export const predict = (databaseName: string, criteria: Array<any>, predictProba
     return instance.predict(databaseName, criteria, predictProbability);
 }
 
+/**
+ * Perform ID recommendation search in the vector representations of a database.
+ * @param databaseName Target Database.
+ * @param ids IDs to search for recommended vectors.
+ * @param topK Number of similar vectors to return for each ID. Default is 5.
+ */
+export const recommendationById = (databaseName: string, ids: Array<number>, topK = 5): Promise<any> => {
+    const instance = container.resolve(RecommendationById);
+    return instance.recommend(databaseName, ids, topK);
+}
+
+/**
+ * Performs data recommendation search in the vector representations of a database.
+ * @param databaseName Target Database.
+ * @param criteria Data to process and search for recommended vectors.
+ * @param topK Number of similar vectors to return for each ID. Default is 5.
+ */
+export const recommendationByData = (databaseName: string, criteria: Array<any>, topK = 5): Promise<any> => {
+    const instance = container.resolve(RecommendationByData);
+    return instance.search(databaseName, criteria, topK);
+}
 
 console.log('Main Initialized')
