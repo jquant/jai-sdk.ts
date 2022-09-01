@@ -5,9 +5,16 @@ class HttpGetClientSpy implements HttpJaiClientGetInterface {
 
     urlCalled = ''
     mockedData = {
-        'id' : 'number',
-        'name' : 'string',
+        'fields' : [{
+            'name' : 'string',
+            'type' : 'string',
+        }],
     }
+
+    extractedFields (){
+        const {fields} = this.mockedData;
+        return fields;
+    };
 
     get(url: string): Promise<any> {
         this.urlCalled = url
@@ -56,14 +63,14 @@ describe('get table fields', () => {
         await expect(client.urlCalled).toBe(`fields/${databaseName}`)
     })
 
-    test('should return the raw received data', async () => {
+    test('should return the fields received data', async () => {
 
         const {sut, client} = makeSut();
         const databaseName: any = 'my-collection'
 
        const data = await sut.fields(databaseName);
 
-        await expect(data).toBe(client.mockedData)
+        await expect(data).toBe(client.extractedFields())
     })
 
 })
