@@ -24,6 +24,7 @@ export class GetTableFields implements GetTableFieldsClient {
         if (!databaseName)
             throw new Error('You must provide e databaseName');
 
-        return await this.client.get(`fields/${databaseName}`);
+        const {fields} = await this.client.get(`fields/${databaseName}`);
+        return fields;
     }
 }
