@@ -1,6 +1,6 @@
 {
   "name": "jai-sdk",
-  "version": "0.47.0",
+  "version": "0.51.0",
   "description": "JAI is the easiest way for developers to build, publish and integrate AI solutions",
   "author": "Felipe Gouveia <felipegouveiae@gmail.com>",
   "repository": "https://github.com/jquant/jai-sdk.ts",
@@ -51,6 +51,7 @@
   "dependencies": {
     "@types/yargs": "^17.0.8",
     "axios": "^0.24.0",
+    "es6-promise": "^4.2.8",
     "form-data": "^4.0.0",
     "import": "^0.0.6",
     "joi": "^17.5.0",

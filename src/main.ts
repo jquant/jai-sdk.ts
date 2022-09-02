@@ -11,7 +11,7 @@ import {InsertedDataSetup, SetupSettings} from "./collection-management/setup/in
 import {InsertedDataInterrupter} from "./collection-management/interrupter/inserted-data-interrupter";
 import {InsertedDataDeleter} from "./collection-management/deletion/inserted-data/inserted-data-deleter";
 import {DataPatcher} from "./collection-management/add-data/data-patcher";
-import {DatabaseDescriptor} from "./collection-management/database-description/database-descriptor";
+import {DatabaseDescriber} from "./collection-management/database-description/database-describer";
 import {GetDatabaseInfo} from "./collection-management/database-info/get-database-info";
 import {DatabaseInfo, mode} from "./collection-management/database-info/types";
 import {IdGetter} from "./collection-management/ids/id-getter";
@@ -26,6 +26,9 @@ import {SearchByData} from "./similar/search/by-data/search-by-data";
 import {Predict} from "./model-interface/predict";
 import {EnvironmentLister} from "./environment-management/environment-listing/environment-list";
 import {Environment} from "./environment-management/environment";
+import {DatabaseDescription} from "./collection-management/database-description/types";
+import {RecommendationById} from "./recommendation/by-id/recommendation-by-id";
+import {RecommendationByData} from "./recommendation/by-data/recommendation-by-data";
 
 Initializer.initializeInversionOfControl();
 
@@ -135,8 +138,8 @@ export const addData = (databaseName: string, callbackUrl: string = '') => {
  * Get description of a specific database in your Mycelia environment.
  * @param databaseName Target Database.
  */
-export const getDatabaseDescription = (databaseName: string) => {
-    const instance = container.resolve(DatabaseDescriptor);
+export const getDatabaseDescription = (databaseName: string) : Promise<DatabaseDescription> => {
+    const instance = container.resolve(DatabaseDescriber);
     return instance.describe(databaseName)
 }
 
@@ -236,5 +239,26 @@ export const predict = (databaseName: string, criteria: Array<any>, predictProba
     return instance.predict(databaseName, criteria, predictProbability);
 }
 
+/**
+ * Perform ID recommendation search in the vector representations of a database.
+ * @param databaseName Target Database.
+ * @param ids IDs to search for recommended vectors.
+ * @param topK Number of similar vectors to return for each ID. Default is 5.
+ */
+export const recommendationById = (databaseName: string, ids: Array<number>, topK = 5): Promise<any> => {
+    const instance = container.resolve(RecommendationById);
+    return instance.recommend(databaseName, ids, topK);
+}
+
+/**
+ * Performs data recommendation search in the vector representations of a database.
+ * @param databaseName Target Database.
+ * @param criteria Data to process and search for recommended vectors.
+ * @param topK Number of similar vectors to return for each ID. Default is 5.
+ */
+export const recommendationByData = (databaseName: string, criteria: Array<any>, topK = 5): Promise<any> => {
+    const instance = container.resolve(RecommendationByData);
+    return instance.search(databaseName, criteria, topK);
+}
 
 console.log('Main Initialized')

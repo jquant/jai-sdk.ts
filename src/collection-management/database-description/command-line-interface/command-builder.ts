@@ -5,7 +5,7 @@ import {container} from "tsyringe";
 import yargs from "yargs";
 import {YargsCommandSettings} from "../../../command-line-interface/builders/types";
 import {AuthenticatorArgumentParser} from "../../../command-line-interface/argument-parsers/authenticator-parser";
-import {DatabaseDescriptor} from "../database-descriptor";
+import {DatabaseDescriber} from "../database-describer";
 
 export const buildCollectionDatabaseDescriptionCommand = (): YargsCommandSettings => {
     return {
@@ -25,7 +25,7 @@ export const buildCollectionDatabaseDescriptionCommand = (): YargsCommandSetting
 
             auth.authenticateFromCommandArgs(argv);
 
-            const instance = container.resolve(DatabaseDescriptor);
+            const instance = container.resolve(DatabaseDescriber);
 
             const databaseName = <string>argv.databaseName;
 
