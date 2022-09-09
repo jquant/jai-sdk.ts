@@ -1,17 +1,37 @@
 import {GetTableFields} from "./get-table-fields";
 import {HttpJaiClientGetInterface} from "../../client/http-jai-client-get.interface";
+import {JaiGetFieldsNotSupportedException} from "../../exceptions/JaiGetFieldsNotSupportedException";
+
+const arrayResult = [{
+    'fields': [{
+        'name': 'string',
+        'type': 'string',
+    }],
+}];
+
+const objectResult = {
+    'fields': [{
+        'name': 'string',
+        'type': 'string',
+    }],
+};
 
 class HttpGetClientSpy implements HttpJaiClientGetInterface {
-
     urlCalled = ''
-    mockedData = {
-        'id' : 'number',
-        'name' : 'string',
-    }
+
+    resultMock: any;
 
     get(url: string): Promise<any> {
         this.urlCalled = url
-        return Promise.resolve(this.mockedData);
+        return Promise.resolve(this.resultMock);
+    }
+
+    makeResultAsArray() {
+        this.resultMock = arrayResult;
+    }
+
+    makeResultAsObject() {
+        this.resultMock = objectResult;
     }
 }
 
@@ -49,6 +69,7 @@ describe('get table fields', () => {
     test('should call the expected url', async () => {
 
         const {sut, client} = makeSut();
+        client.makeResultAsArray();
         const databaseName: any = 'my-collection'
 
         await sut.fields(databaseName);
@@ -56,14 +77,36 @@ describe('get table fields', () => {
         await expect(client.urlCalled).toBe(`fields/${databaseName}`)
     })
 
-    test('should return the raw received data', async () => {
+    test('should return the fields from received array data', async () => {
 
         const {sut, client} = makeSut();
+        client.makeResultAsArray();
         const databaseName: any = 'my-collection'
 
-       const data = await sut.fields(databaseName);
+        const data = await sut.fields(databaseName);
 
-        await expect(data).toBe(client.mockedData)
+        await expect(data).toBe(arrayResult[0].fields);
+    })
+
+    test('should return the fields from received object data', async () => {
+
+        const {sut, client} = makeSut();
+        client.makeResultAsObject();
+        const databaseName: any = 'my-collection'
+
+        const data = await sut.fields(databaseName);
+
+        await expect(data).toBe(objectResult.fields);
+    })
+
+    test(`should throw ${JaiGetFieldsNotSupportedException.name}`, async () => {
+
+        const {sut} = makeSut();
+        const databaseName: any = 'my-collection'
+
+        await expect(sut.fields(databaseName))
+            .rejects
+            .toThrow()
     })
 
 })

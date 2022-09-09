@@ -48,13 +48,13 @@ export class Predict {
     }
 
     private async throwIfAnyUnknownField(databaseName: string, criteria: any[]) {
-        const collectionFields = await this.getTableFieldsClient.fields(databaseName);
-        const collectionKeys = Object.keys(collectionFields);
+        const collectionFields : Array<any> = await this.getTableFieldsClient.fields(databaseName);
+        const collectionValues = Object.values(collectionFields);
 
         criteria.forEach(item => {
             Object.keys(item).forEach(key => {
-                if (collectionKeys.every(x => x !== key))
-                    throw new Error(`Field ${key} could not be found in table fields`);
+                if (!collectionFields.some(x => key.includes(x.name)))
+                    throw new Error(`Field ${key} could not be found in table fields. Collection Fields: ${JSON.stringify(collectionValues)}`);
             })
         })
     }
